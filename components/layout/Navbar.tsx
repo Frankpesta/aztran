@@ -10,6 +10,7 @@ import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useUiStore } from "@/store/uiStore";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { COMPANY_LEGAL_NAME } from "@/lib/brand";
 
 const LINKS: readonly { href: string; label: string }[] = [
   { href: "/about", label: "About" },
@@ -61,9 +62,15 @@ export function Navbar(): ReactElement {
       >
         <Link
           href="/"
-          className="font-display text-lg tracking-[0.28em] text-[var(--color-white)] transition-[letter-spacing,opacity] duration-500 hover:tracking-[0.32em] hover:opacity-95 md:text-xl"
+          className="group flex flex-col leading-tight transition-opacity duration-300 hover:opacity-95"
         >
-          AZTRAN GLOBAL
+          <span className="font-display text-[10px] uppercase tracking-[0.2em] text-[var(--color-white)] sm:text-[11px] sm:tracking-[0.24em] md:text-sm md:tracking-[0.28em]">
+            Aztran Global Investments
+          </span>
+          <span className="font-body text-[9px] font-semibold uppercase tracking-[0.26em] text-[color-mix(in_srgb,var(--color-cyan)_88%,white)] sm:text-[10px]">
+            Limited
+          </span>
+          <span className="sr-only">{COMPANY_LEGAL_NAME}</span>
         </Link>
         <div className="hidden items-center gap-6 md:flex md:gap-8">
           {LINKS.map((item) => (
@@ -112,8 +119,8 @@ export function Navbar(): ReactElement {
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div className="flex h-16 shrink-0 items-center justify-between px-4">
-                    <span className="font-display text-lg tracking-[0.2em] text-[var(--color-white)]">
-                      MENU
+                    <span className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-white)]">
+                      Menu
                     </span>
                     <div className="flex items-center gap-3">
                       <ThemeToggle variant="marketing" />
@@ -126,18 +133,18 @@ export function Navbar(): ReactElement {
                       </button>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-col gap-2 overflow-y-auto px-8 py-10">
+                  <div className="flex flex-1 flex-col gap-0 overflow-y-auto px-6 py-8 sm:px-8">
                     {LINKS.map((item, i) => (
                       <motion.div
                         key={item.href}
-                        initial={{ opacity: 0, y: 16 }}
+                        initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.06 * i, duration: 0.4 }}
+                        transition={{ delay: 0.05 * i, duration: 0.35 }}
                       >
                         <Link
                           href={item.href}
                           onClick={() => setOpen(false)}
-                          className="block border-b border-[color-mix(in_srgb,var(--color-silver)_25%,transparent)] py-4 font-body text-lg uppercase tracking-[0.2em] text-[var(--color-silver)]"
+                          className="block border-b border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] py-3.5 font-body text-sm font-medium uppercase tracking-[0.12em] text-[color-mix(in_srgb,var(--color-silver)_94%,white)] transition-colors hover:text-[var(--color-cyan)]"
                         >
                           {item.label}
                         </Link>

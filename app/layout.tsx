@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EB_Garamond, DM_Mono } from "next/font/google";
+import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import Script from "next/script";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
@@ -10,16 +10,17 @@ import {
   SITE_TITLE,
 } from "@/lib/site-metadata";
 
-const ebGaramond = EB_Garamond({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-display",
   display: "swap",
   preload: true,
 });
 
-const dmMono = DM_Mono({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
   preload: true,
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   applicationName: "Aztran Global Investments",
   title: {
     default: SITE_TITLE,
-    template: "%s · Aztran Global Investments",
+    template: "%s · Aztran Global Investments Limited",
   },
   description: SITE_DESCRIPTION,
   keywords: [...SITE_KEYWORDS],
@@ -64,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${ebGaramond.variable} ${dmMono.variable} min-h-svh flex flex-col bg-[var(--color-offwhite)] font-body text-body text-[var(--color-navy)] antialiased dark:bg-[var(--color-navy)] dark:text-[var(--color-offwhite)]`}
+        className={`${cormorant.variable} ${sourceSans.variable} min-h-svh flex flex-col bg-[var(--color-offwhite)] font-body text-body text-[var(--color-navy)] antialiased dark:bg-[var(--color-navy)] dark:text-[var(--color-offwhite)]`}
       >
         {/* Third-party scripts must be outside client provider trees to avoid React script-in-client errors */}
         {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}

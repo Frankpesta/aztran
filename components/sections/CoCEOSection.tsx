@@ -10,7 +10,7 @@ import { EASE_PREMIUM, VIEWPORT } from "@/lib/animations";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 /**
- * Featured co-CEO pairing: editorial layout, bios, and LinkedIn.
+ * Featured co–managing partners: editorial layout, bios, and LinkedIn.
  */
 export function CoCEOSection(): ReactElement {
   return (
@@ -31,9 +31,9 @@ export function CoCEOSection(): ReactElement {
           viewport={VIEWPORT}
           transition={{ duration: 0.65, ease: EASE_PREMIUM }}
           className="mt-4 max-w-3xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
-          id="co-chief-executives"
+          id="co-managing-partners"
         >
-          Joint chief executive leadership
+          Co–managing partner leadership
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -42,8 +42,9 @@ export function CoCEOSection(): ReactElement {
           transition={{ duration: 0.6, ease: EASE_PREMIUM, delay: 0.05 }}
           className="mt-4 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_75%,transparent)] dark:text-[var(--color-silver)]"
         >
-          Aztran is led by two co-chief executive officers whose mandates are complementary:
-          markets and capital on one side; governance and institutional advisory on the other.
+          Aztran is led by two co–managing partners with complementary mandates:
+          investments, trading, and capital formation on one side; governance, risk, and
+          institutional advisory on the other.
         </motion.p>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-12">

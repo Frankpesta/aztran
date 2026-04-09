@@ -9,7 +9,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 
 /**
  * Leadership grid with staggered entrance motion.
- * Renders nothing when {@link TEAM_MEMBERS} is empty (e.g. co-CEOs only on About).
+ * Renders nothing when {@link TEAM_MEMBERS} is empty (e.g. co–managing partners only on About).
  */
 export function TeamSection(): ReactElement | null {
   if (TEAM_MEMBERS.length === 0) {

@@ -1,15 +1,14 @@
 import type { TeamMember } from "@/components/ui/TeamMemberCard";
 
 /**
- * Co-CEO profiles for the About page.
- * Set `fullName` when approved; until then the card headline uses `leadershipFocus`.
- * Replace portraits, LinkedIn URLs, and `bioParagraphs` with final copy.
+ * Co–managing partner profiles for the About page (`CoCEOSection`).
+ * Portraits live in `/public/images/` (e.g. `victor.jpeg`, `taiwo.jpeg`).
  */
 export type CoCEOProfile = {
   id: string;
   fullName?: string;
   title: string;
-  /** Distinct mandate line — used as the main heading until `fullName` is set. */
+  /** Distinct mandate line — used as the main heading until `fullName` is set; with `fullName`, shown as the subtitle. */
   leadershipFocus: string;
   imageSrc: string;
   linkedInHref: string;
@@ -19,27 +18,27 @@ export type CoCEOProfile = {
 
 export const CO_CEOS: readonly CoCEOProfile[] = [
   {
-    id: "ceo-investments",
-    title: "Co-Chief Executive Officer",
+    id: "victor-aluyi",
+    fullName: "Victor Aluyi",
+    title: "Co-Managing Partner",
     leadershipFocus: "Investments, trading & capital formation",
-    imageSrc:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=720&fit=crop",
+    imageSrc: "/images/victor.jpeg",
     linkedInHref: "https://www.linkedin.com/company/aztran-global-investments/",
     bioParagraphs: [
-      "Leads the firm’s deployment of institutional capital across public and private markets, with emphasis on execution quality and counterparty discipline.",
-      "Prior to co-founding the partnership, held senior mandates in multi-asset trading and capital structuring for regulated institutions.",
+      "Co-leads the firm’s investment and markets agenda—deploying institutional capital across public and private markets with emphasis on execution quality, liquidity, and counterparty discipline.",
+      "Works with sovereign, pension, and private institutional clients on mandate design, portfolio implementation, and capital formation.",
     ],
   },
   {
-    id: "ceo-governance",
-    title: "Co-Chief Executive Officer",
+    id: "taiwo-adams",
+    fullName: "Taiwo Adams",
+    title: "Co-Managing Partner",
     leadershipFocus: "Governance, risk & stakeholder advisory",
-    imageSrc:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=720&fit=crop",
+    imageSrc: "/images/taiwo.jpeg",
     linkedInHref: "https://www.linkedin.com/company/aztran-global-investments/",
     bioParagraphs: [
-      "Directs governance architecture, investment policy, and risk oversight—ensuring mandates remain aligned with regulatory expectations and client objectives.",
-      "Brings deep experience in board-level advisory and institutional controls across cross-border transactions.",
+      "Co-leads governance architecture, investment policy, and risk oversight—keeping mandates aligned with regulatory expectations in Nigeria and with each client’s objectives.",
+      "Advises boards and investment committees on controls, reporting transparency, and institutional best practice across cross-border programmes.",
     ],
   },
 ];

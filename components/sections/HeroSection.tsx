@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import type { ReactElement } from "react";
 import { EASE_PREMIUM } from "@/lib/animations";
+import { COMPANY_LEGAL_NAME } from "@/lib/brand";
 
 const HEADLINE = ["Trading", "Investments", "Capital"] as const;
 
@@ -24,27 +25,31 @@ export function HeroSection(): ReactElement {
             alt=""
             fill
             priority
-            className="object-cover"
+            className="object-cover brightness-[1.12] contrast-[1.12] saturate-[1.18]"
             sizes="100vw"
           />
         </div>
       </div>
 
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[var(--color-navy)]/80 via-[var(--color-navy)]/88 to-[color-mix(in_srgb,var(--color-navy)_95%,var(--color-cyan)_5%)]"
+        className="absolute inset-0 bg-gradient-to-br from-[var(--color-navy)]/36 via-[var(--color-navy)]/48 to-[color-mix(in_srgb,var(--color-navy)_62%,var(--color-cyan)_10%)]"
         aria-hidden
       />
       <div
-        className="marketing-glow-orb pointer-events-none absolute -left-24 top-1/4 size-72 rounded-full bg-[var(--color-cyan)] opacity-[0.12] blur-[100px]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_42%,transparent_28%,color-mix(in_srgb,var(--color-navy)_48%,black)_100%)]"
         aria-hidden
       />
       <div
-        className="marketing-glow-orb pointer-events-none absolute -right-20 bottom-1/4 size-64 rounded-full bg-[var(--color-cyan)] opacity-[0.1] blur-[90px]"
+        className="marketing-glow-orb pointer-events-none absolute -left-24 top-1/4 size-72 rounded-full bg-[var(--color-cyan)] opacity-[0.07] blur-[100px]"
+        aria-hidden
+      />
+      <div
+        className="marketing-glow-orb pointer-events-none absolute -right-20 bottom-1/4 size-64 rounded-full bg-[var(--color-cyan)] opacity-[0.06] blur-[90px]"
         style={{ animationDelay: "-3s" }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
@@ -57,7 +62,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE_PREMIUM }}
-          className="flex items-center gap-3 font-body text-label uppercase tracking-[0.42em] text-[color-mix(in_srgb,var(--color-silver)_95%,white)]"
+          className="mx-auto flex max-w-[min(100%,26rem)] flex-wrap items-center justify-center gap-3 text-center font-body text-[10px] uppercase tracking-[0.2em] text-[color-mix(in_srgb,var(--color-silver)_95%,white)] sm:max-w-none sm:text-label sm:tracking-[0.32em]"
         >
           <motion.span
             className="h-px w-10 origin-left bg-[var(--color-cyan)]"
@@ -66,7 +71,7 @@ export function HeroSection(): ReactElement {
             transition={{ delay: 0.2, duration: 0.65, ease: EASE_PREMIUM }}
             aria-hidden
           />
-          Aztran Global Investments
+          {COMPANY_LEGAL_NAME}
           <motion.span
             className="h-px w-10 origin-right bg-[var(--color-cyan)]"
             initial={{ scaleX: 0 }}
@@ -77,21 +82,24 @@ export function HeroSection(): ReactElement {
         </motion.p>
 
         <h1
-          className="mt-7 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-x-5"
-          aria-label="Trading . Investments . Capital"
+          className="mx-auto mt-7 flex max-w-full flex-nowrap items-center justify-center gap-x-[0.12em] text-nowrap px-1 font-display text-[clamp(1.35rem,calc(4.2vw+0.35rem),5.5rem)] font-normal leading-[1.05] tracking-[-0.01em]"
+          aria-label="Trading | Investments | Capital"
         >
           {HEADLINE.map((word, index) => (
-            <span key={word} className="inline-flex items-center gap-x-3 sm:gap-x-5">
+            <span
+              key={word}
+              className="inline-flex shrink-0 items-center gap-x-[0.12em] sm:gap-x-[0.18em]"
+            >
               {index > 0 ? (
                 <span
-                  className="select-none bg-gradient-to-b from-[var(--color-cyan)] to-[color-mix(in_srgb,var(--color-cyan)_55%,white)] bg-clip-text font-light not-italic text-transparent opacity-90"
+                  className="select-none bg-gradient-to-b from-[var(--color-cyan)] to-[color-mix(in_srgb,var(--color-cyan)_55%,white)] bg-clip-text font-display text-[0.58em] font-medium not-italic text-transparent opacity-95"
                   aria-hidden
                 >
-                  {" . "}
+                  |
                 </span>
               ) : null}
               <motion.span
-                className="font-display text-hero font-normal italic leading-[1.05] text-[var(--color-white)] [text-shadow:0_2px_40px_rgba(0,0,0,0.35)]"
+                className="italic text-[var(--color-white)] [text-shadow:0_2px_28px_rgba(0,0,0,0.4)]"
                 initial={{ opacity: 0, y: reduce ? 0 : 36 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{

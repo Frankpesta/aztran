@@ -37,18 +37,22 @@ export function PageHero({
                 src={imageSrc}
                 alt=""
                 fill
-                className="object-cover opacity-45"
+                className="object-cover opacity-70 brightness-[1.06] contrast-[1.08] saturate-[1.08]"
                 sizes="100vw"
                 priority
               />
             </div>
           </div>
           <div
-            className="absolute inset-0 bg-gradient-to-b from-[var(--color-navy-95)] via-[var(--color-navy)]/92 to-[var(--color-navy)]"
+            className="absolute inset-0 bg-gradient-to-b from-[var(--color-navy)]/78 via-[var(--color-navy)]/85 to-[var(--color-navy)]"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--color-cyan)]/10 to-transparent"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_35%,transparent_0%,color-mix(in_srgb,var(--color-navy)_55%,black)_100%)]"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[var(--color-cyan)]/15 to-transparent"
             aria-hidden
           />
         </>

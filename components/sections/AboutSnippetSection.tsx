@@ -30,8 +30,8 @@ export function AboutSnippetSection(): ReactElement {
         >
           <SectionLabel className="mb-6 justify-start">Who we are</SectionLabel>
           <blockquote className="font-display text-h2 leading-snug text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
-            We steward capital with the same precision we demand of our own risk
-            frameworks.
+            A financial services group specializing in portfolio management and
+            strategic trading.
           </blockquote>
         </motion.div>
         <motion.div
@@ -42,13 +42,15 @@ export function AboutSnippetSection(): ReactElement {
           className="space-y-5 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_85%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]"
         >
           <p>
-            Aztran Global Investments Limited provides advisory, capital formation,
-            and portfolio management services to sovereign entities, pension systems,
-            and sophisticated private institutions.
+            Aztran Limited is an investment firm licensed by the Securities and Exchange
+            Commission as a fund and portfolio manager—focused on sustainable wealth for
+            high net-worth individuals and optimized returns on investible funds for
+            corporates (private and government).
           </p>
           <p>
-            Our mandate emphasises downside discipline, transparent reporting, and
-            alignment of incentives across each engagement.
+            We combine deep market expertise with a client-focused approach to trading,
+            investments, and advisory—guided by integrity, empathy, excellence,
+            innovation, collaboration, and responsibility.
           </p>
           <Link
             href="/about"

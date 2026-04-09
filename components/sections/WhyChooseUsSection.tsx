@@ -62,7 +62,7 @@ export function WhyChooseUsSection(): ReactElement {
           transition={{ duration: 0.6, ease: EASE_PREMIUM }}
           className="mt-4 max-w-2xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
         >
-          A partner built for long-term confidence.
+          Five reasons institutions and investors choose Aztran.
         </motion.h2>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ITEMS.map((item, i) => (

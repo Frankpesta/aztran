@@ -35,6 +35,7 @@ yarn-error.log*
 
 # Local JWT / auth dumps (secrets)
 auth-keys.local.json
+staff-jwt-keys.generated.md
 
 # vercel
 .vercel

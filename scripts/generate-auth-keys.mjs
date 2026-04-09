@@ -12,6 +12,9 @@ import {
   generateKeyPair,
 } from "jose";
 
+/** Must match {@link STAFF_JWT_KID} in lib/staff-jwt.ts (JWT header + JWKS). */
+const STAFF_JWT_KID = process.env.AUTH_JWT_KID ?? "aztran-staff-1";
+
 const issuer =
   process.env.AUTH_JWT_ISSUER ?? "https://localhost:3000";
 
@@ -28,15 +31,26 @@ const pubPemStr = await exportSPKI(publicKey);
 const jwk = await exportJWK(publicKey);
 jwk.use = "sig";
 jwk.alg = "RS256";
-jwk.kid = "aztran-staff-1";
+jwk.kid = STAFF_JWT_KID;
 
 const jwks = JSON.stringify({ keys: [jwk] });
 
+/** One env var line for Vercel (backslash-n); matches lib replace(/\\n/g, "\n"). */
+function pemToSingleLine(pem) {
+  return pem.trim().replace(/\r\n/g, "\n").split("\n").join("\\n");
+}
+
 console.log("--- Set AUTH_JWT_ISSUER (same in Next.js + Convex) ---\n");
 console.log(issuer);
-console.log("\n--- AUTH_JWT_PRIVATE_KEY (Next.js only; PEM) ---\n");
+console.log("\n--- JWT kid (header + JWKS; matches lib/staff-jwt.ts) ---\n");
+console.log(STAFF_JWT_KID);
+console.log("\n--- AUTH_JWT_PRIVATE_KEY (Next.js only; multiline PEM) ---\n");
 console.log(privPemStr);
-console.log("\n--- AUTH_JWT_PUBLIC_KEY (Next.js + middleware) ---\n");
+console.log("\n--- AUTH_JWT_PRIVATE_KEY (single line \\n for Vercel) ---\n");
+console.log(pemToSingleLine(privPemStr));
+console.log("\n--- AUTH_JWT_PUBLIC_KEY (multiline PEM) ---\n");
 console.log(pubPemStr);
-console.log("\n--- AUTH_JWT_JWKS (Convex dashboard; single-line JSON) ---\n");
+console.log("\n--- AUTH_JWT_PUBLIC_KEY (single line \\n for Vercel) ---\n");
+console.log(pemToSingleLine(pubPemStr));
+console.log("\n--- AUTH_JWT_JWKS (Convex; single-line JSON) ---\n");
 console.log(jwks);

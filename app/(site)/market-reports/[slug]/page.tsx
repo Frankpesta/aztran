@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactElement } from "react";
 import { api } from "@/convex/_generated/api";
-import type { Doc } from "@/convex/_generated/dataModel";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -19,16 +18,12 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  try {
-    const doc = await fetchQuery(api.marketReports.getMarketReportBySlug, { slug });
-    if (!doc) return { title: "Market report" };
-    return {
-      title: doc.title,
-      description: `${doc.displayDate} — rates, bonds, equities, and global markets.`,
-    };
-  } catch {
-    return { title: "Market report" };
-  }
+  const doc = await fetchQuery(api.marketReports.getMarketReportBySlug, { slug });
+  if (!doc) return { title: "Market report" };
+  return {
+    title: doc.title,
+    description: `${doc.displayDate} — rates, bonds, equities, and global markets.`,
+  };
 }
 
 function ReportTable({
@@ -107,12 +102,7 @@ export default async function MarketReportDetailPage({
   params,
 }: PageProps): Promise<ReactElement> {
   const { slug } = await params;
-  let doc: Doc<"marketReports"> | null = null;
-  try {
-    doc = await fetchQuery(api.marketReports.getMarketReportBySlug, { slug });
-  } catch {
-    notFound();
-  }
+  const doc = await fetchQuery(api.marketReports.getMarketReportBySlug, { slug });
   if (!doc) notFound();
 
   let pdfUrl: string | null = null;

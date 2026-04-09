@@ -3,7 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactElement } from "react";
+import { useEffect, useState, type ReactElement } from "react";
+import { createPortal } from "react-dom";
 import { Menu, X } from "lucide-react";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useUiStore } from "@/store/uiStore";
@@ -28,8 +29,22 @@ export function Navbar(): ReactElement {
   const isScrolled = useUiStore((s) => s.isScrolled);
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const transparentHero =
     pathname === "/" || pathname === "/about" || pathname === "/services";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   return (
     <header
@@ -81,52 +96,60 @@ export function Navbar(): ReactElement {
           </button>
         </div>
       </nav>
-      <AnimatePresence>
-        {open ? (
-          <motion.div
-            key="overlay"
-            className="fixed inset-0 z-50 flex flex-col bg-[var(--color-navy)] md:hidden"
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="flex h-16 items-center justify-between px-4">
-              <span className="font-display text-lg tracking-[0.2em] text-[var(--color-white)]">
-                MENU
-              </span>
-              <div className="flex items-center gap-3">
-                <ThemeToggle variant="marketing" />
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  aria-label="Close menu"
-                >
-                  <X className="size-7 text-[var(--color-white)]" />
-                </button>
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-2 px-8 py-10">
-              {LINKS.map((item, i) => (
+      {mounted
+        ? createPortal(
+            <AnimatePresence>
+              {open ? (
                 <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.06 * i, duration: 0.4 }}
+                  key="mobile-nav-overlay"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Site navigation"
+                  className="fixed inset-0 z-[200] flex min-h-dvh flex-col bg-[#001f3f] md:hidden"
+                  initial={{ y: "-100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-100%" }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block border-b border-[color-mix(in_srgb,var(--color-silver)_25%,transparent)] py-4 font-body text-lg uppercase tracking-[0.2em] text-[var(--color-silver)]"
-                  >
-                    {item.label}
-                  </Link>
+                  <div className="flex h-16 shrink-0 items-center justify-between px-4">
+                    <span className="font-display text-lg tracking-[0.2em] text-[var(--color-white)]">
+                      MENU
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <ThemeToggle variant="marketing" />
+                      <button
+                        type="button"
+                        onClick={() => setOpen(false)}
+                        aria-label="Close menu"
+                      >
+                        <X className="size-7 text-[var(--color-white)]" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 overflow-y-auto px-8 py-10">
+                    {LINKS.map((item, i) => (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.06 * i, duration: 0.4 }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          className="block border-b border-[color-mix(in_srgb,var(--color-silver)_25%,transparent)] py-4 font-body text-lg uppercase tracking-[0.2em] text-[var(--color-silver)]"
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
                 </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+              ) : null}
+            </AnimatePresence>,
+            document.body,
+          )
+        : null}
     </header>
   );
 }

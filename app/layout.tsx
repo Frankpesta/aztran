@@ -4,6 +4,11 @@ import Script from "next/script";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_TITLE,
+} from "@/lib/site-metadata";
 
 const ebGaramond = EB_Garamond({
   subsets: ["latin"],
@@ -25,26 +30,25 @@ const appUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
+  applicationName: "Aztran Global Investments",
   title: {
-    default: "Aztran Global Investments Limited",
+    default: SITE_TITLE,
     template: "%s · Aztran Global Investments",
   },
-  description:
-    "Institutional investment management, advisory, and capital formation with disciplined governance.",
+  description: SITE_DESCRIPTION,
+  keywords: [...SITE_KEYWORDS],
   openGraph: {
-    title: "Aztran Global Investments Limited",
-    description:
-      "Institutional investment management with disciplined underwriting and transparent reporting.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: appUrl,
-    siteName: "Aztran Global Investments",
+    siteName: "Aztran Global Investments Limited",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aztran Global Investments Limited",
-    description:
-      "Institutional investment management with disciplined underwriting and transparent reporting.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 

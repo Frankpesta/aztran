@@ -1,11 +1,11 @@
 import { fetchQuery } from "convex/nextjs";
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactElement } from "react";
 import { api } from "@/convex/_generated/api";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { ConvexStorageImage } from "@/components/ui/ConvexStorageImage";
 import { InsightCard } from "@/components/ui/InsightCard";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -23,42 +23,33 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  try {
-    const doc = await fetchQuery(api.insights.getInsightBySlug, { slug });
-    if (!doc) {
-      return { title: "Insight" };
-    }
-    const title = doc.seoTitle ?? doc.title;
-    const description = doc.seoDescription ?? doc.summary;
-    return {
-      title,
-      description,
-      openGraph: {
-        title,
-        description,
-        type: "article",
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        description,
-      },
-    };
-  } catch {
+  const doc = await fetchQuery(api.insights.getInsightBySlug, { slug });
+  if (!doc) {
     return { title: "Insight" };
   }
+  const title = doc.seoTitle ?? doc.title;
+  const description = doc.seoDescription ?? doc.summary;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function InsightArticlePage({
   params,
 }: PageProps): Promise<ReactElement> {
   const { slug } = await params;
-  let doc;
-  try {
-    doc = await fetchQuery(api.insights.getInsightBySlug, { slug });
-  } catch {
-    notFound();
-  }
+  const doc = await fetchQuery(api.insights.getInsightBySlug, { slug });
   if (!doc) {
     notFound();
   }
@@ -141,12 +132,10 @@ export default async function InsightArticlePage({
       {coverUrl ? (
         <div className="mx-auto mt-10 max-w-[900px] px-4">
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_35%,transparent)] shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-navy)_35%,transparent)]">
-            <Image
+            <ConvexStorageImage
               src={coverUrl}
               alt=""
-              fill
-              className="object-cover"
-              sizes="(max-width:900px) 100vw, 900px"
+              className="absolute inset-0 h-full w-full object-cover"
               priority
             />
           </div>

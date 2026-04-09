@@ -1,9 +1,9 @@
 import { fetchQuery } from "convex/nextjs";
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactElement } from "react";
+import { ConvexStorageImage } from "@/components/ui/ConvexStorageImage";
 import { api } from "@/convex/_generated/api";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -19,25 +19,16 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  try {
-    const doc = await fetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
-    if (!doc) return { title: "Blog" };
-    const title = doc.seoTitle ?? doc.title;
-    const description = doc.seoDescription ?? doc.summary;
-    return { title, description, openGraph: { title, description, type: "article" } };
-  } catch {
-    return { title: "Blog" };
-  }
+  const doc = await fetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
+  if (!doc) return { title: "Blog" };
+  const title = doc.seoTitle ?? doc.title;
+  const description = doc.seoDescription ?? doc.summary;
+  return { title, description, openGraph: { title, description, type: "article" } };
 }
 
 export default async function BlogArticlePage({ params }: PageProps): Promise<ReactElement> {
   const { slug } = await params;
-  let doc;
-  try {
-    doc = await fetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
-  } catch {
-    notFound();
-  }
+  const doc = await fetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
   if (!doc) notFound();
 
   let coverUrl: string | null = null;
@@ -91,7 +82,12 @@ export default async function BlogArticlePage({ params }: PageProps): Promise<Re
       {coverUrl ? (
         <div className="mx-auto mt-10 max-w-[900px] px-4">
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_35%,transparent)]">
-            <Image src={coverUrl} alt="" fill className="object-cover" sizes="900px" priority />
+            <ConvexStorageImage
+              src={coverUrl}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              priority
+            />
           </div>
         </div>
       ) : null}
@@ -130,7 +126,11 @@ export default async function BlogArticlePage({ params }: PageProps): Promise<Re
             {imgUrl ? (
               <figure className="mt-10">
                 <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-[color-mix(in_srgb,var(--color-silver)_35%,transparent)]">
-                  <Image src={imgUrl} alt={sec.imageCaption ?? ""} fill className="object-cover" />
+                  <ConvexStorageImage
+                    src={imgUrl}
+                    alt={sec.imageCaption ?? ""}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
                 </div>
                 {sec.imageCaption ? (
                   <figcaption className="mt-3 text-center font-body text-caption text-[var(--color-silver)]">

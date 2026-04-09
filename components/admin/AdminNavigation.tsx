@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Users } from "lucide-react";
-import { useQuery } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import type { ReactElement } from "react";
 import { api } from "@/convex/_generated/api";
 import { useConvexStaffSessionReady } from "@/hooks/useConvexStaffSessionReady";
@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 import { ADMIN_NAV } from "@/components/admin/adminNavConfig";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { StaffAccountMenu } from "@/components/admin/StaffAccountMenu";
+import { StaffSignOutButton } from "@/components/admin/StaffSignOutButton";
+import { CONVEX_REJECTED_SESSION_UPLOAD } from "@/lib/convex-staff-session-copy";
 
 type AdminNavigationProps = {
   /** Close mobile drawer after navigation */
@@ -26,6 +28,7 @@ export function AdminNavigation({
   className,
 }: AdminNavigationProps): ReactElement {
   const pathname = usePathname();
+  const { isLoading: convexAuthLoading } = useConvexAuth();
   const staffReady = useConvexStaffSessionReady();
   const me = useQuery(api.staff.me);
   /** `getUnreadCount` uses `requireUser`; wait until Convex has the staff JWT. */
@@ -102,8 +105,20 @@ export function AdminNavigation({
         </div>
         {me ? (
           <StaffAccountMenu email={me.email} role={me.role} />
-        ) : (
+        ) : me === undefined || convexAuthLoading ? (
           <div className="h-10 animate-pulse rounded-md bg-white/5" />
+        ) : (
+          <div className="space-y-2 rounded-md border border-amber-400/35 bg-amber-400/[0.07] p-3">
+            <p className="text-[11px] leading-snug text-amber-100/90">
+              {CONVEX_REJECTED_SESSION_UPLOAD}
+            </p>
+            <StaffSignOutButton
+              variant="outline"
+              size="sm"
+              className="w-full justify-center border-amber-400/40 bg-[#070a12]/60 text-amber-50 hover:bg-amber-400/10"
+              label="Sign out"
+            />
+          </div>
         )}
       </div>
     </div>

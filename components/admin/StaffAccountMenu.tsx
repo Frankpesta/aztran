@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { performStaffLogout } from "@/lib/staff-logout-client";
 
 type StaffAccountMenuProps = {
   email: string;
@@ -31,7 +32,7 @@ export function StaffAccountMenu({
   async function logout(): Promise<void> {
     setBusy(true);
     try {
-      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+      await performStaffLogout();
       router.push("/admin/login");
       router.refresh();
     } finally {

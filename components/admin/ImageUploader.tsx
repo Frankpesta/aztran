@@ -4,6 +4,7 @@ import { useConvexAuth, useMutation } from "convex/react";
 import { useCallback, useRef, useState, type ReactElement } from "react";
 import { toast } from "sonner";
 import { fetchStaffConvexAccessToken } from "@/lib/convex-staff-token-client";
+import { CONVEX_REJECTED_SESSION_UPLOAD } from "@/lib/convex-staff-session-copy";
 import { api } from "@/convex/_generated/api";
 import type { GenericId } from "convex/values";
 import { useRecaptchaGate } from "@/hooks/useRecaptchaGate";
@@ -132,7 +133,7 @@ export function ImageUploader({
         <p className="mb-2 font-body text-caption text-zinc-500">Connecting your session…</p>
       ) : !isAuthenticated ? (
         <p className="mb-2 font-body text-caption text-amber-400/90">
-          Not signed in to Convex — uploads stay disabled. Refresh the page or log in again.
+          {CONVEX_REJECTED_SESSION_UPLOAD}
         </p>
       ) : null}
       {previewUrl ? (

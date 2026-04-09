@@ -5,6 +5,7 @@ import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { AdminNavigation } from "@/components/admin/AdminNavigation";
 import { AdminFooter } from "@/components/admin/AdminFooter";
+import { StaffSignOutButton } from "@/components/admin/StaffSignOutButton";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
 
@@ -45,19 +46,25 @@ export function AdminChrome({ children }: AdminChromeProps): ReactElement {
       <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
         <div className="flex min-h-svh flex-1 flex-col md:pl-[260px]">
           <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-white/10 bg-[#0c1222]/90 px-4 py-3 backdrop-blur-md md:hidden">
-            <div className="flex items-center gap-2">
-              <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-md border border-white/20 bg-white/5 text-white outline-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+            <div className="flex min-w-0 flex-1 items-center gap-2">
+              <SheetTrigger className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-white/20 bg-white/5 text-white outline-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan-400/60">
                 <Menu className="size-5" />
                 <span className="sr-only">Open menu</span>
               </SheetTrigger>
               <Link
                 href="/admin"
-                className="text-sm font-semibold tracking-tight text-white"
+                className="min-w-0 truncate text-sm font-semibold tracking-tight text-white"
                 onClick={() => setMobileNavOpen(false)}
               >
                 Aztran Admin
               </Link>
             </div>
+            <StaffSignOutButton
+              variant="ghost"
+              size="sm"
+              label="Sign out"
+              className="shrink-0 text-zinc-300 hover:bg-white/10 hover:text-white"
+            />
           </header>
 
           <SheetContent

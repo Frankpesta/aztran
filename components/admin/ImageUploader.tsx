@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation } from "convex/react";
+import { useConvexAuth, useMutation } from "convex/react";
 import { useCallback, useRef, useState, type ReactElement } from "react";
 import { toast } from "sonner";
 import { api } from "@/convex/_generated/api";
@@ -27,6 +27,12 @@ export function ImageUploader({
   onRemoved: () => void;
   label?: string;
 }): ReactElement {
+  const {
+    isLoading: authLoading,
+    isAuthenticated,
+    fetchAccessToken,
+  } = useConvexAuth();
+  const sessionReady = !authLoading && isAuthenticated;
   const inputRef = useRef<HTMLInputElement>(null);
   const verifyHuman = useRecaptchaGate();
   const generateUploadUrl = useMutation(api.storage.generateUploadUrl);
@@ -37,10 +43,23 @@ export function ImageUploader({
   const onFile = useCallback(
     async (file: File | undefined) => {
       if (!file) return;
+      if (!sessionReady) {
+        toast.error("Session not ready", {
+          description: "Wait until you are signed in, then try again.",
+        });
+        return;
+      }
       setLoading(true);
       setJustUploaded(false);
       try {
         await verifyHuman("admin_storage_upload");
+        const token = await fetchAccessToken({ forceRefreshToken: false });
+        if (!token) {
+          toast.error("No Convex token", {
+            description: "Log in again at /admin/login, then retry the upload.",
+          });
+          return;
+        }
         const postUrl = await generateUploadUrl();
         const res = await fetch(postUrl, {
           method: "POST",
@@ -61,22 +80,38 @@ export function ImageUploader({
         setJustUploaded(true);
         window.setTimeout(() => setJustUploaded(false), 4000);
       } catch (e) {
-        toast.error("Upload failed", {
-          description:
-            e instanceof Error ? e.message : "Check your connection and try again.",
-        });
+        const raw = e instanceof Error ? e.message : "";
+        if (/unauthorized/i.test(raw)) {
+          toast.error("Upload blocked (unauthorized)", {
+            description:
+              "Convex did not accept your staff session. Refresh the page, log in again, and ensure AUTH_JWT_ISSUER and AUTH_JWT_JWKS in the Convex dashboard match your Next.js JWT keys.",
+          });
+        } else {
+          toast.error("Upload failed", {
+            description: raw || "Check your connection and try again.",
+          });
+        }
       } finally {
         setLoading(false);
         if (inputRef.current) inputRef.current.value = "";
       }
     },
-    [generateUploadUrl, onUploaded, verifyHuman],
+    [fetchAccessToken, generateUploadUrl, onUploaded, verifyHuman, sessionReady],
   );
 
   const remove = useCallback(async () => {
+    if (!sessionReady) {
+      toast.error("Session not ready");
+      return;
+    }
     try {
       if (storageId) {
         await verifyHuman("admin_storage_delete");
+        const token = await fetchAccessToken({ forceRefreshToken: false });
+        if (!token) {
+          toast.error("No Convex token", { description: "Log in again and retry." });
+          return;
+        }
         await deleteFile({ storageId });
       }
       onRemoved();
@@ -85,13 +120,20 @@ export function ImageUploader({
     } catch {
       toast.error("Could not remove file. Try again.");
     }
-  }, [deleteFile, storageId, onRemoved, verifyHuman]);
+  }, [deleteFile, fetchAccessToken, storageId, onRemoved, verifyHuman, sessionReady]);
 
   return (
     <div>
       <p className="mb-2 font-body text-label uppercase tracking-wide text-[var(--color-silver)]">
         {label}
       </p>
+      {authLoading ? (
+        <p className="mb-2 font-body text-caption text-zinc-500">Connecting your session…</p>
+      ) : !isAuthenticated ? (
+        <p className="mb-2 font-body text-caption text-amber-400/90">
+          Not signed in to Convex — uploads stay disabled. Refresh the page or log in again.
+        </p>
+      ) : null}
       {previewUrl ? (
         <div className="relative mb-3 h-40 w-full max-w-sm overflow-hidden rounded-md border">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -121,13 +163,18 @@ export function ImageUploader({
         <Button
           type="button"
           variant="outline"
-          disabled={loading}
+          disabled={loading || !sessionReady}
           onClick={() => inputRef.current?.click()}
         >
           {loading ? "Uploading…" : previewUrl ? "Replace image" : "Select image"}
         </Button>
         {previewUrl ? (
-          <Button type="button" variant="ghost" onClick={() => void remove()}>
+          <Button
+            type="button"
+            variant="ghost"
+            disabled={!sessionReady}
+            onClick={() => void remove()}
+          >
             Remove
           </Button>
         ) : null}

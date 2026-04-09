@@ -3,6 +3,7 @@
 import { useConvexAuth, useMutation } from "convex/react";
 import { useCallback, useRef, useState, type ReactElement } from "react";
 import { toast } from "sonner";
+import { fetchStaffConvexAccessToken } from "@/lib/convex-staff-token-client";
 import { api } from "@/convex/_generated/api";
 import type { GenericId } from "convex/values";
 import { useRecaptchaGate } from "@/hooks/useRecaptchaGate";
@@ -27,11 +28,7 @@ export function PdfUploader({
   onRemoved: () => void;
   label?: string;
 }): ReactElement {
-  const {
-    isLoading: authLoading,
-    isAuthenticated,
-    fetchAccessToken,
-  } = useConvexAuth();
+  const { isLoading: authLoading, isAuthenticated } = useConvexAuth();
   const sessionReady = !authLoading && isAuthenticated;
   const inputRef = useRef<HTMLInputElement>(null);
   const verifyHuman = useRecaptchaGate();
@@ -53,7 +50,9 @@ export function PdfUploader({
       setJustUploaded(false);
       try {
         await verifyHuman("admin_storage_upload");
-        const token = await fetchAccessToken({ forceRefreshToken: false });
+        const token = await fetchStaffConvexAccessToken({
+          forceRefreshToken: false,
+        });
         if (!token) {
           toast.error("No Convex token", {
             description: "Log in again at /admin/login, then retry the upload.",
@@ -96,7 +95,7 @@ export function PdfUploader({
         if (inputRef.current) inputRef.current.value = "";
       }
     },
-    [fetchAccessToken, generateUploadUrl, onUploaded, verifyHuman, sessionReady],
+    [generateUploadUrl, onUploaded, verifyHuman, sessionReady],
   );
 
   const remove = useCallback(async () => {
@@ -107,7 +106,9 @@ export function PdfUploader({
     try {
       if (storageId) {
         await verifyHuman("admin_storage_delete");
-        const token = await fetchAccessToken({ forceRefreshToken: false });
+        const token = await fetchStaffConvexAccessToken({
+          forceRefreshToken: false,
+        });
         if (!token) {
           toast.error("No Convex token", { description: "Log in again and retry." });
           return;
@@ -120,7 +121,7 @@ export function PdfUploader({
     } catch {
       toast.error("Could not remove file. Try again.");
     }
-  }, [deleteFile, fetchAccessToken, storageId, onRemoved, verifyHuman, sessionReady]);
+  }, [deleteFile, storageId, onRemoved, verifyHuman, sessionReady]);
 
   return (
     <div>

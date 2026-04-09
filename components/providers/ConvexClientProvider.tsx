@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { fetchStaffConvexAccessToken } from "@/lib/convex-staff-token-client";
 
 /**
  * Convex + custom staff JWT from an httpOnly cookie (see /api/auth/convex-token).
@@ -46,19 +47,11 @@ function useStaffConvexAuth(): {
   });
 
   const fetchAccessToken = useCallback(
-    async (_args: { forceRefreshToken: boolean }) => {
-      const response = await fetch("/api/auth/convex-token", {
-        credentials: "include",
-        cache: "no-store",
-      });
-      if (!response.ok) {
-        setAuthState({ isLoading: false, isAuthenticated: false });
-        return null;
-      }
-      const data = (await response.json()) as { token: string | null };
-      if (data.token) {
+    async (args: { forceRefreshToken: boolean }) => {
+      const token = await fetchStaffConvexAccessToken(args);
+      if (token) {
         setAuthState({ isLoading: false, isAuthenticated: true });
-        return data.token;
+        return token;
       }
       setAuthState({ isLoading: false, isAuthenticated: false });
       return null;

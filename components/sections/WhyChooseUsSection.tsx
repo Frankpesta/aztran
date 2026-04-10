@@ -12,6 +12,7 @@ import type { LucideIcon } from "lucide-react";
 import type { ReactElement } from "react";
 import { EASE_PREMIUM, VIEWPORT } from "@/lib/animations";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { cn } from "@/lib/utils";
 
 type WhyItem = {
   title: string;
@@ -50,10 +51,33 @@ const ITEMS: readonly WhyItem[] = [
 /**
  * Trust pillars with icon tiles, gradient hover motion, and cyan accent choreography.
  */
-export function WhyChooseUsSection(): ReactElement {
+export function WhyChooseUsSection({
+  homepage = false,
+}: {
+  homepage?: boolean;
+} = {}): ReactElement {
   return (
-    <section className="border-t border-[color-mix(in_srgb,var(--color-silver)_60%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_100%,var(--color-white))] py-section dark:border-[color-mix(in_srgb,var(--color-silver)_25%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_96%,black)]">
-      <div className="mx-auto max-w-container px-4 md:px-8">
+    <section
+      className={cn(
+        "relative overflow-hidden border-t py-section dark:border-[color-mix(in_srgb,var(--color-silver)_25%,transparent)]",
+        homepage
+          ? "border-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] bg-[linear-gradient(180deg,#ffffff_0%,#f8fcfd_50%,#ffffff_100%)] dark:border-[color-mix(in_srgb,var(--color-cyan)_16%,transparent)] dark:bg-[linear-gradient(180deg,color-mix(in_srgb,var(--color-navy)_98%,black)_0%,color-mix(in_srgb,var(--color-navy)_91%,black)_100%)]"
+          : "border-[color-mix(in_srgb,var(--color-silver)_60%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_100%,var(--color-white))] dark:bg-[color-mix(in_srgb,var(--color-navy)_96%,black)]",
+      )}
+    >
+      {homepage ? (
+        <>
+          <div
+            className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[min(140%,48rem)] -translate-x-1/2 rounded-[100%] bg-[color-mix(in_srgb,var(--color-cyan)_10%,transparent)] blur-[100px] dark:bg-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] dark:opacity-80"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -right-32 bottom-0 size-80 rounded-full bg-[color-mix(in_srgb,var(--color-navy)_08%,var(--color-cyan))] opacity-40 blur-[90px] dark:opacity-30"
+            aria-hidden
+          />
+        </>
+      ) : null}
+      <div className="relative z-[1] mx-auto max-w-container px-4 md:px-8">
         <SectionLabel>Why choose us</SectionLabel>
         <motion.h2
           initial={{ opacity: 0, y: 22 }}

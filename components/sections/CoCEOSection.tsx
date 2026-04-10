@@ -33,16 +33,16 @@ export function CoCEOSection(): ReactElement {
         >
           Co–managing partner leadership
         </motion.h2>
-        <motion.p
+               <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
           transition={{ duration: 0.6, ease: EASE_PREMIUM, delay: 0.05 }}
           className="mt-4 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_86%,transparent)] dark:text-[var(--color-silver)]"
         >
-          Aztran is led by two co–managing partners with complementary mandates:
-          investments, trading, and capital formation on one side; governance, risk, and
-          institutional advisory on the other.
+          Aztran is led by two co–managing partners with complementary depth: investment
+          research, portfolio management, and capital markets leadership alongside brokerage,
+          execution, and institutional stakeholder advisory.
         </motion.p>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-12">
@@ -91,9 +91,9 @@ export function CoCEOSection(): ReactElement {
                   </h3>
                 </div>
                 <div className="mt-6 space-y-4 border-t border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pt-6 dark:border-[color-mix(in_srgb,var(--color-silver)_20%,transparent)]">
-                  {ceo.bioParagraphs.map((para) => (
+                  {ceo.bioParagraphs.map((para, pi) => (
                     <p
-                      key={para.slice(0, 48)}
+                      key={`${ceo.id}-bio-${pi}`}
                       className="font-body text-body leading-[1.75] text-[color-mix(in_srgb,var(--color-navy)_90%,transparent)] dark:text-[var(--color-silver)]"
                     >
                       {para}

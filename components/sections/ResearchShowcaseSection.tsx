@@ -12,6 +12,7 @@ import { MarketReportCard } from "@/components/ui/MarketReportCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EASE_PREMIUM, VIEWPORT } from "@/lib/animations";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 function MarqueeRow({
   label,
@@ -56,7 +57,11 @@ function MarqueeCardShell({ children }: { children: ReactNode }): ReactElement {
 /**
  * Three auto-scrolling rows highlighting insights, blog, and market reports.
  */
-export function ResearchShowcaseSection(): ReactElement {
+export function ResearchShowcaseSection({
+  homepage = false,
+}: {
+  homepage?: boolean;
+} = {}): ReactElement {
   const insights = useQuery(api.insights.getHomeInsights, { limit: 8 });
   const blog = useQuery(api.blogPosts.getHomeBlogPosts, { limit: 8 });
   const reports = useQuery(api.marketReports.getHomeMarketReports, { limit: 8 });
@@ -65,8 +70,36 @@ export function ResearchShowcaseSection(): ReactElement {
     insights === undefined || blog === undefined || reports === undefined;
 
   return (
-    <section className="bg-[var(--color-offwhite)] py-section dark:bg-[color-mix(in_srgb,var(--color-navy)_94%,black)]">
-      <div className="mx-auto max-w-container px-4 md:px-8">
+    <section
+      className={cn(
+        "relative overflow-hidden py-section",
+        homepage
+          ? "border-t border-[color-mix(in_srgb,var(--color-cyan)_12%,transparent)] bg-[linear-gradient(180deg,#eef8fa_0%,#ffffff_100%)] dark:border-[color-mix(in_srgb,var(--color-cyan)_18%,transparent)] dark:bg-[linear-gradient(180deg,color-mix(in_srgb,var(--color-navy)_98%,black)_0%,color-mix(in_srgb,var(--color-navy)_90%,black)_100%)]"
+          : "bg-[var(--color-offwhite)] dark:bg-[color-mix(in_srgb,var(--color-navy)_94%,black)]",
+      )}
+    >
+      {homepage ? (
+        <>
+          <div
+            className="pointer-events-none absolute inset-0 opacity-70 dark:opacity-40"
+            style={{
+              background:
+                "radial-gradient(ellipse 55% 40% at 100% 0%, color-mix(in srgb, var(--color-cyan) 12%, transparent), transparent 70%), radial-gradient(ellipse 50% 45% at 0% 100%, color-mix(in srgb, var(--color-cyan) 8%, transparent), transparent 65%)",
+            }}
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-[0.12]"
+            style={{
+              backgroundImage:
+                "radial-gradient(color-mix(in srgb, var(--color-navy) 8%, transparent) 1px, transparent 1px)",
+              backgroundSize: "24px 24px",
+            }}
+            aria-hidden
+          />
+        </>
+      ) : null}
+      <div className="relative z-[1] mx-auto max-w-container px-4 md:px-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <SectionLabel>Research</SectionLabel>

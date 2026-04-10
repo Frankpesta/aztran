@@ -190,6 +190,27 @@
   }
 }
 
+@keyframes hero-topline-shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.marketing-hero-topline {
+  animation: hero-topline-shimmer 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketing-hero-topline {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
 .marketing-hero-ken-burns {
   animation: hero-ken-burns 28s ease-in-out infinite alternate;
 }

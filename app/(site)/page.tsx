@@ -16,11 +16,11 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <HeroSection />
-      <AboutSnippetSection />
-      <ServicesSection />
-      <WhyChooseUsSection />
-      <ResearchShowcaseSection />
-      <ContactCTABand />
+      <AboutSnippetSection homepage />
+      <ServicesSection homepage />
+      <WhyChooseUsSection homepage />
+      <ResearchShowcaseSection homepage />
+      <ContactCTABand tone="airy" />
     </>
   );
 }

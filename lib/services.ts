@@ -1,6 +1,7 @@
 export type ServiceSection = {
   title: string;
-  paragraphs: string[];
+  paragraphs?: readonly string[];
+  bullets?: readonly string[];
 };
 
 export type ServicePageContent = {
@@ -91,39 +92,46 @@ export const SERVICES: readonly ServiceOffering[] = [
     page: {
       metaTitle: "Global markets & brokerage",
       metaDescription:
-        "Global markets, trading, and brokerage: multi-currency treasury, securities execution, ALM, institutional counterparties, and high-volume trade capability.",
+        "Global markets and brokerage: fixed income, government securities, sovereign and corporate bonds, Nigerian and international equities, ETFs, and OTC access.",
       heroEyebrow: "Service",
       headline: "Global markets & brokerage",
       capabilitiesHeading: "Our solutions & services",
       lead:
         "Our Global Markets, Trading, and Brokerage division acts as the Group’s multi-currency treasury, providing brokerage services and facilitating the execution of local and international securities trades, including sovereign and corporate bonds, and Treasury Bills.",
+      introBeforeServices: [
+        "The division also houses the Asset and Liability Management (ALM) team, which monitors liquidity and optimizes capital deployment across the Group.",
+        "At Aztran, we leverage a broad network of institutional counterparties to deliver real-time market insights, including pricing trends, trading flows, and market activity, ensuring competitive pricing and informed investment decisions.",
+        "Our large-ticket execution capabilities enable us to handle high-volume trades across multiple asset classes, even during market volatility, providing liquidity and access often unavailable through traditional banking channels.",
+      ],
       sections: [
         {
-          title: "ALM & liquidity",
-          paragraphs: [
-            "The division also houses the Asset and Liability Management (ALM) team, which monitors liquidity and optimizes capital deployment across the Group.",
+          title: "Fixed Income",
+          bullets: [
+            "Fixed Income Instruments",
+            "Local and International Bills",
+            "Government Securities",
+            "Sovereign & corporate bonds",
           ],
         },
         {
-          title: "Insights & pricing",
-          paragraphs: [
-            "At Aztran, we leverage a broad network of institutional counterparties to deliver real-time market insights, including pricing trends, trading flows, and market activity, ensuring competitive pricing and informed investment decisions.",
-          ],
-        },
-        {
-          title: "Execution at scale",
-          paragraphs: [
-            "Our large-ticket execution capabilities enable us to handle high-volume trades across multiple asset classes, even during market volatility, providing liquidity and access often unavailable through traditional banking channels.",
+          title: "Equities",
+          bullets: [
+            "Nigerian Equities",
+            "ETFs",
+            "Select foreign equities & index funds",
+            "OTC market",
           ],
         },
       ],
       capabilities: [
-        "Euro bond-backed investment",
-        "Equities & ETFs",
-        "Financial planning",
-        "Portfolio management",
-        "Family office",
-        "Investment Education",
+        "Fixed Income Instruments",
+        "Local and International Bills",
+        "Government Securities",
+        "Sovereign & corporate bonds",
+        "Nigerian Equities",
+        "ETFs",
+        "Select foreign equities & index funds",
+        "OTC market",
       ],
     },
   },

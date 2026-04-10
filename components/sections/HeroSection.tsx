@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import type { ReactElement } from "react";
+import { HeroRightInfographic } from "@/components/sections/HeroRightInfographic";
 import { EASE_PREMIUM } from "@/lib/animations";
 import { COMPANY_LEGAL_NAME } from "@/lib/brand";
 import { HERO_PRIMARY_IMAGE, isRemoteHeroImage } from "@/lib/hero-slides";
@@ -19,7 +20,8 @@ const TRUST_PILLS = [
 ] as const;
 
 /**
- * Full-bleed hero: single building image with slow scale in/out; light/dark veil stacks.
+ * Full-bleed hero: same building image with slow zoom, diagonal brand panels, scrims,
+ * and an asymmetric text column on large screens (editorial “pop” without new photography).
  */
 export function HeroSection(): ReactElement {
   const reduce = useReducedMotion();
@@ -41,6 +43,32 @@ export function HeroSection(): ReactElement {
             sizes="100vw"
             unoptimized={isRemoteHeroImage(HERO_PRIMARY_IMAGE.src)}
             className="object-cover object-center brightness-[0.9] contrast-[1.06] saturate-[1.05] dark:brightness-[0.88] dark:contrast-[1.06] dark:saturate-[1.05]"
+          />
+        </div>
+      </div>
+
+      {/* Bold diagonal panels (brand cyan) layered over the photo — ICAN-style energy without swapping the image. */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+        aria-hidden
+      >
+        <div className="absolute -right-[14%] top-[-12%] flex h-[110%] w-[min(85vw,620px)] origin-[70%_40%] -rotate-[10deg] items-stretch justify-end">
+          <div
+            className={cn(
+              "h-full w-full bg-[color-mix(in_srgb,var(--color-cyan)_42%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-cyan)_28%,transparent)]",
+              !reduce && "marketing-hero-diagonal-drift",
+            )}
+            style={{
+              clipPath: "polygon(42% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            }}
+          />
+        </div>
+        <div className="absolute -right-[6%] bottom-[-20%] flex h-[65%] w-[min(65vw,480px)] origin-[80%_80%] -rotate-[15deg] items-stretch justify-end opacity-80">
+          <div
+            className="h-full w-full bg-[color-mix(in_srgb,var(--color-navy)_55%,var(--color-cyan)_45%)] opacity-[0.2] dark:opacity-[0.26]"
+            style={{
+              clipPath: "polygon(30% 0%, 100% 12%, 92% 100%, 0% 88%)",
+            }}
           />
         </div>
       </div>
@@ -99,12 +127,13 @@ export function HeroSection(): ReactElement {
       />
 
       {/* Clear fixed navbar (4.25rem / 4.75rem) + breathing room + safe area */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[920px] flex-col items-center px-4 pb-20 pt-[max(6.75rem,calc(4.25rem+1.75rem+env(safe-area-inset-top,0px)))] text-center sm:pt-[max(7rem,calc(4.25rem+2rem+env(safe-area-inset-top,0px)))] md:px-8 md:pb-24 md:pt-[max(8rem,calc(4.75rem+2.25rem+env(safe-area-inset-top,0px)))]">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-10 px-4 pb-20 pt-[max(6.75rem,calc(4.25rem+1.75rem+env(safe-area-inset-top,0px)))] sm:pt-[max(7rem,calc(4.25rem+2rem+env(safe-area-inset-top,0px)))] md:px-8 md:pb-24 md:pt-[max(8rem,calc(4.75rem+2.25rem+env(safe-area-inset-top,0px)))] lg:grid-cols-[minmax(0,1.08fr)_minmax(280px,0.92fr)] lg:gap-8 lg:px-10 xl:gap-12">
+        <div className="relative mx-auto flex w-full max-w-[920px] flex-col items-center text-center lg:mx-0 lg:max-w-none lg:items-start lg:border-l-[3px] lg:border-l-[var(--color-cyan)] lg:pl-8 lg:pt-1 lg:text-left">
         <motion.p
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE_PREMIUM }}
-          className="mx-auto flex max-w-[min(100%,28rem)] flex-wrap items-center justify-center gap-3 font-body text-[10px] uppercase tracking-[0.22em] text-[color-mix(in_srgb,var(--color-navy)_82%,var(--color-cyan))] [text-shadow:0_0_20px_rgba(255,255,255,0.95),0_1px_14px_rgba(255,255,255,0.98)] sm:text-label sm:tracking-[0.32em] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)] dark:[text-shadow:none]"
+          className="mx-auto flex max-w-[min(100%,28rem)] flex-wrap items-center justify-center gap-3 font-body text-[10px] uppercase tracking-[0.22em] text-[color-mix(in_srgb,var(--color-navy)_82%,var(--color-cyan))] [text-shadow:0_0_20px_rgba(255,255,255,0.95),0_1px_14px_rgba(255,255,255,0.98)] sm:text-label sm:tracking-[0.32em] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)] dark:[text-shadow:none] lg:mx-0 lg:justify-start"
         >
           <motion.span
             className="h-px w-12 origin-left bg-[var(--color-cyan)] dark:opacity-90"
@@ -124,7 +153,7 @@ export function HeroSection(): ReactElement {
         </motion.p>
 
         <motion.h1
-          className="mt-8 flex max-w-full flex-wrap items-baseline justify-center gap-x-1.5 gap-y-1 font-display text-[clamp(2rem,5.5vw+0.5rem,4.75rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-[var(--color-navy)] [text-shadow:0_0_2px_rgba(255,255,255,0.98),0_1px_3px_rgba(255,255,255,0.95),0_4px_32px_rgba(255,255,255,0.9),0_8px_56px_rgba(255,255,255,0.65)] dark:font-medium dark:text-[var(--color-white)] dark:[text-shadow:0_4px_48px_rgba(0,0,0,0.55)]"
+          className="mt-8 flex max-w-full flex-wrap items-baseline justify-center gap-x-1.5 gap-y-1 font-display text-[clamp(2rem,5.5vw+0.5rem,4.75rem)] font-semibold leading-[1.06] tracking-[-0.03em] dark:font-medium lg:justify-start"
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.72, ease: EASE_PREMIUM, delay: 0.06 }}
@@ -134,7 +163,7 @@ export function HeroSection(): ReactElement {
             <span key={word} className="inline-flex items-baseline gap-x-[0.14em]">
               {index > 0 ? (
                 <span
-                  className="select-none font-body text-[0.5em] font-normal text-[var(--color-cyan)] opacity-95 dark:text-[var(--color-cyan)]"
+                  className="select-none font-body text-[0.5em] font-normal text-[color-mix(in_srgb,var(--color-navy)_55%,var(--color-cyan))] opacity-90 dark:text-[var(--color-cyan)]"
                   aria-hidden
                 >
                   ·
@@ -142,8 +171,12 @@ export function HeroSection(): ReactElement {
               ) : null}
               <span
                 className={cn(
+                  index === 0 &&
+                    "text-transparent [-webkit-text-stroke-width:1.5px] [-webkit-text-stroke-color:var(--color-navy)] [text-shadow:none] sm:[-webkit-text-stroke-width:2px] dark:[-webkit-text-stroke-color:color-mix(in_srgb,var(--color-cyan)_75%,white)]",
                   index === 1 &&
-                    "bg-gradient-to-r from-[var(--color-navy)] via-[var(--color-cyan)] to-[var(--color-navy)] bg-clip-text text-transparent [text-shadow:none] [filter:drop-shadow(0_0_18px_rgba(255,255,255,0.98))_drop-shadow(0_2px_14px_rgba(255,255,255,0.92))] dark:from-[var(--color-white)] dark:via-[var(--color-cyan)] dark:to-[var(--color-white)] dark:[filter:none]",
+                    "text-[var(--color-navy)] [text-shadow:0_0_2px_rgba(255,255,255,0.95),0_2px_28px_rgba(255,255,255,0.88)] dark:bg-gradient-to-r dark:from-white dark:via-[var(--color-cyan)] dark:to-white dark:bg-clip-text dark:text-transparent dark:[text-shadow:none]",
+                  index === 2 &&
+                    "text-[var(--color-navy)] [text-shadow:0_0_2px_rgba(255,255,255,0.98),0_1px_3px_rgba(255,255,255,0.95),0_4px_32px_rgba(255,255,255,0.9),0_8px_56px_rgba(255,255,255,0.65)] dark:text-[var(--color-white)] dark:[text-shadow:0_4px_48px_rgba(0,0,0,0.55)]",
                 )}
               >
                 {word}
@@ -156,7 +189,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.68, ease: EASE_PREMIUM, delay: 0.14 }}
-          className="mt-7 max-w-[34rem] font-body text-[1.0625rem] leading-[1.8] text-[color-mix(in_srgb,var(--color-navy)_96%,transparent)] [text-shadow:0_0_16px_rgba(255,255,255,0.94),0_1px_18px_rgba(255,255,255,0.96)] md:text-[1.125rem] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)] dark:[text-shadow:0_2px_24px_rgba(0,0,0,0.35)]"
+          className="mt-7 max-w-[34rem] font-body text-[1.0625rem] leading-[1.8] text-[color-mix(in_srgb,var(--color-navy)_96%,transparent)] [text-shadow:0_0_16px_rgba(255,255,255,0.94),0_1px_18px_rgba(255,255,255,0.96)] md:text-[1.125rem] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)] dark:[text-shadow:0_2px_24px_rgba(0,0,0,0.35)] lg:max-w-none"
         >
           Creating sustainable wealth for high net-worth individuals while optimizing returns on
           investible funds for corporates — with institutional clarity and discipline.
@@ -166,7 +199,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.62, ease: EASE_PREMIUM, delay: 0.22 }}
-          className="mt-8 flex flex-wrap justify-center gap-2"
+          className="mt-8 flex flex-wrap justify-center gap-2 lg:justify-start"
         >
           {TRUST_PILLS.map((label) => (
             <span
@@ -182,7 +215,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: EASE_PREMIUM, delay: 0.3 }}
-          className="mt-11 flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-5"
+          className="mt-11 flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-5 lg:justify-start"
         >
           <Link
             href="/services"
@@ -192,7 +225,7 @@ export function HeroSection(): ReactElement {
           </Link>
           <Link
             href="/about"
-            className="inline-flex justify-center rounded-md border-2 border-[color-mix(in_srgb,var(--color-navy)_18%,transparent)] bg-[color-mix(in_srgb,white_82%,transparent)] px-10 py-3.5 text-center font-body text-label uppercase tracking-[0.12em] text-[var(--color-navy)] backdrop-blur-lg transition-[background-color,border-color,transform] hover:border-[color-mix(in_srgb,var(--color-cyan)_50%,var(--color-navy))] hover:bg-[color-mix(in_srgb,white_92%,var(--color-cyan))] dark:border-[color-mix(in_srgb,var(--color-white)_35%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_35%,black)]/55 dark:text-[var(--color-white)] dark:backdrop-blur-xl dark:hover:border-[var(--color-cyan)] dark:hover:bg-[color-mix(in_srgb,var(--color-navy)_25%,var(--color-cyan))]/40"
+            className="inline-flex justify-center rounded-md border-2 border-[color-mix(in_srgb,var(--color-navy)_35%,transparent)] bg-transparent px-10 py-3.5 text-center font-body text-label uppercase tracking-[0.12em] text-[var(--color-navy)] backdrop-blur-[2px] transition-[background-color,border-color,transform] hover:border-[var(--color-cyan)] hover:bg-[color-mix(in_srgb,white_88%,transparent)] dark:border-[color-mix(in_srgb,var(--color-white)_45%,transparent)] dark:bg-transparent dark:text-[var(--color-white)] dark:backdrop-blur-xl dark:hover:border-[var(--color-cyan)] dark:hover:bg-[color-mix(in_srgb,var(--color-white)_08%,transparent)]"
           >
             Our story
           </Link>
@@ -202,7 +235,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.65, delay: 0.85 }}
-          className="mt-16 flex flex-col items-center gap-2 text-[color-mix(in_srgb,var(--color-navy)_68%,transparent)] [text-shadow:0_0_12px_rgba(255,255,255,0.9),0_1px_12px_rgba(255,255,255,0.95)] dark:text-[color-mix(in_srgb,var(--color-silver)_80%,transparent)] dark:[text-shadow:none]"
+          className="mt-16 flex flex-col items-center gap-2 text-[color-mix(in_srgb,var(--color-navy)_68%,transparent)] [text-shadow:0_0_12px_rgba(255,255,255,0.9),0_1px_12px_rgba(255,255,255,0.95)] dark:text-[color-mix(in_srgb,var(--color-silver)_80%,transparent)] dark:[text-shadow:none] lg:items-start"
           aria-hidden
         >
           <span className="font-body text-caption uppercase tracking-[0.38em]">
@@ -215,6 +248,11 @@ export function HeroSection(): ReactElement {
             <ChevronDown className="size-6 text-[var(--color-cyan)] drop-shadow-[0_0_14px_color-mix(in_srgb,var(--color-cyan)_35%,transparent)]" />
           </motion.span>
         </motion.div>
+        </div>
+
+        <div className="hidden min-h-[min(420px,50svh)] min-w-0 lg:flex lg:items-center lg:justify-center xl:justify-end">
+          <HeroRightInfographic />
+        </div>
       </div>
 
       <div

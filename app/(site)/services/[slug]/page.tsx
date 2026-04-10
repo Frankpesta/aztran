@@ -109,9 +109,22 @@ export default async function ServiceDetailPage({
                     {section.title}
                   </h2>
                   <div className="mt-4 space-y-4 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] dark:text-[var(--color-silver)]">
-                    {section.paragraphs.map((p, i) => (
-                      <p key={`${section.title}-${i}`}>{p}</p>
+                    {section.paragraphs?.map((p, i) => (
+                      <p key={`${section.title}-p-${i}`}>{p}</p>
                     ))}
+                    {section.bullets && section.bullets.length > 0 ? (
+                      <ul className="list-none space-y-3 pl-0.5">
+                        {section.bullets.map((item) => (
+                          <li
+                            key={`${section.title}-${item}`}
+                            className="flex gap-3"
+                          >
+                            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-cyan)]" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </div>
                 </section>
               ))}

@@ -40,7 +40,7 @@ export function HeroSection(): ReactElement {
             priority
             sizes="100vw"
             unoptimized={isRemoteHeroImage(HERO_PRIMARY_IMAGE.src)}
-            className="object-cover object-center brightness-[1.06] contrast-[1.02] saturate-[1.12] dark:brightness-[0.88] dark:contrast-[1.06] dark:saturate-[1.05]"
+            className="object-cover object-center brightness-[0.97] contrast-[1.05] saturate-[1.08] dark:brightness-[0.88] dark:contrast-[1.06] dark:saturate-[1.05]"
           />
         </div>
       </div>
@@ -49,10 +49,12 @@ export function HeroSection(): ReactElement {
         className="pointer-events-none absolute inset-0 z-[2] dark:hidden"
         aria-hidden
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_110%_85%_at_50%_38%,color-mix(in_srgb,white_55%,transparent)_0%,transparent_62%)]" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[color-mix(in_srgb,var(--color-cyan)_12%,white)]/55 via-transparent to-[color-mix(in_srgb,var(--color-cyan)_08%,white)]/35" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,transparent_28%,color-mix(in_srgb,white_50%,transparent)_55%,color-mix(in_srgb,white_88%,var(--color-offwhite))_92%,white_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_100%,color-mix(in_srgb,var(--color-cyan)_06%,white)_0%,transparent_55%)] opacity-80" />
+        {/* Stronger center scrim so navy/cyan type clears the building photography */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_95%_78%_at_50%_40%,color-mix(in_srgb,white_78%,transparent)_0%,color-mix(in_srgb,white_42%,transparent)_45%,transparent_68%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[color-mix(in_srgb,white_52%,transparent)] via-[color-mix(in_srgb,white_22%,transparent)] to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[color-mix(in_srgb,var(--color-cyan)_10%,white)]/60 via-transparent to-[color-mix(in_srgb,var(--color-cyan)_06%,white)]/40" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,transparent_22%,color-mix(in_srgb,white_58%,transparent)_52%,color-mix(in_srgb,white_90%,var(--color-offwhite))_90%,white_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_100%,color-mix(in_srgb,var(--color-cyan)_08%,white)_0%,transparent_55%)] opacity-90" />
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -94,7 +96,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE_PREMIUM }}
-          className="mx-auto flex max-w-[min(100%,28rem)] flex-wrap items-center justify-center gap-3 font-body text-[10px] uppercase tracking-[0.22em] text-[color-mix(in_srgb,var(--color-navy)_58%,var(--color-cyan))] sm:text-label sm:tracking-[0.32em] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)]"
+          className="mx-auto flex max-w-[min(100%,28rem)] flex-wrap items-center justify-center gap-3 font-body text-[10px] uppercase tracking-[0.22em] text-[color-mix(in_srgb,var(--color-navy)_72%,var(--color-cyan))] [text-shadow:0_1px_12px_rgba(255,255,255,0.92)] sm:text-label sm:tracking-[0.32em] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)] dark:[text-shadow:none]"
         >
           <motion.span
             className="h-px w-12 origin-left bg-[var(--color-cyan)] dark:opacity-90"
@@ -114,7 +116,7 @@ export function HeroSection(): ReactElement {
         </motion.p>
 
         <motion.h1
-          className="mt-8 flex max-w-full flex-wrap items-baseline justify-center gap-x-1.5 gap-y-1 font-display text-[clamp(2rem,5.5vw+0.5rem,4.75rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-[var(--color-navy)] [text-shadow:0_2px_36px_color-mix(in_srgb,white_75%,transparent)] dark:font-medium dark:text-[var(--color-white)] dark:[text-shadow:0_4px_48px_rgba(0,0,0,0.55)]"
+          className="mt-8 flex max-w-full flex-wrap items-baseline justify-center gap-x-1.5 gap-y-1 font-display text-[clamp(2rem,5.5vw+0.5rem,4.75rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-[var(--color-navy)] [text-shadow:0_0_1px_color-mix(in_srgb,white_95%,transparent),0_2px_28px_rgba(255,255,255,0.88),0_4px_48px_rgba(255,255,255,0.55)] dark:font-medium dark:text-[var(--color-white)] dark:[text-shadow:0_4px_48px_rgba(0,0,0,0.55)]"
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.72, ease: EASE_PREMIUM, delay: 0.06 }}
@@ -133,7 +135,7 @@ export function HeroSection(): ReactElement {
               <span
                 className={cn(
                   index === 1 &&
-                    "bg-gradient-to-r from-[var(--color-navy)] via-[var(--color-cyan)] to-[var(--color-navy)] bg-clip-text text-transparent [text-shadow:none] dark:from-[var(--color-white)] dark:via-[var(--color-cyan)] dark:to-[var(--color-white)]",
+                    "bg-gradient-to-r from-[var(--color-navy)] via-[var(--color-cyan)] to-[var(--color-navy)] bg-clip-text text-transparent [text-shadow:none] [filter:drop-shadow(0_1px_10px_rgba(255,255,255,0.92))] dark:from-[var(--color-white)] dark:via-[var(--color-cyan)] dark:to-[var(--color-white)] dark:[filter:none]",
                 )}
               >
                 {word}
@@ -146,7 +148,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.68, ease: EASE_PREMIUM, delay: 0.14 }}
-          className="mt-7 max-w-[34rem] font-body text-[1.0625rem] leading-[1.8] text-[color-mix(in_srgb,var(--color-navy)_76%,transparent)] md:text-[1.125rem] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)] dark:[text-shadow:0_2px_24px_rgba(0,0,0,0.35)]"
+          className="mt-7 max-w-[34rem] font-body text-[1.0625rem] leading-[1.8] text-[color-mix(in_srgb,var(--color-navy)_90%,transparent)] [text-shadow:0_1px_14px_rgba(255,255,255,0.88)] md:text-[1.125rem] dark:text-[color-mix(in_srgb,var(--color-silver)_94%,white)] dark:[text-shadow:0_2px_24px_rgba(0,0,0,0.35)]"
         >
           Creating sustainable wealth for high net-worth individuals while optimizing returns on
           investible funds for corporates — with institutional clarity and discipline.
@@ -161,7 +163,7 @@ export function HeroSection(): ReactElement {
           {TRUST_PILLS.map((label) => (
             <span
               key={label}
-              className="rounded-full border border-[color-mix(in_srgb,var(--color-cyan)_38%,transparent)] bg-[color-mix(in_srgb,white_78%,transparent)] px-3.5 py-1.5 font-body text-caption uppercase tracking-[0.14em] text-[color-mix(in_srgb,var(--color-navy)_75%,transparent)] shadow-[0_1px_0_rgba(255,255,255,0.9)_inset] backdrop-blur-md dark:border-[color-mix(in_srgb,var(--color-cyan)_35%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_45%,black)]/75 dark:text-[color-mix(in_srgb,var(--color-offwhite)_92%,transparent)] dark:shadow-none dark:backdrop-blur-xl"
+              className="rounded-full border border-[color-mix(in_srgb,var(--color-cyan)_42%,transparent)] bg-[color-mix(in_srgb,white_88%,transparent)] px-3.5 py-1.5 font-body text-caption uppercase tracking-[0.14em] text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] shadow-[0_1px_0_rgba(255,255,255,0.95)_inset,0_2px_12px_rgba(255,255,255,0.65)] backdrop-blur-md dark:border-[color-mix(in_srgb,var(--color-cyan)_35%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_45%,black)]/75 dark:text-[color-mix(in_srgb,var(--color-offwhite)_92%,transparent)] dark:shadow-none dark:backdrop-blur-xl"
             >
               {label}
             </span>
@@ -192,7 +194,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.65, delay: 0.85 }}
-          className="mt-16 flex flex-col items-center gap-2 text-[color-mix(in_srgb,var(--color-navy)_42%,transparent)] dark:text-[color-mix(in_srgb,var(--color-silver)_80%,transparent)]"
+          className="mt-16 flex flex-col items-center gap-2 text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] [text-shadow:0_1px_10px_rgba(255,255,255,0.85)] dark:text-[color-mix(in_srgb,var(--color-silver)_80%,transparent)] dark:[text-shadow:none]"
           aria-hidden
         >
           <span className="font-body text-caption uppercase tracking-[0.38em]">

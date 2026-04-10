@@ -19,13 +19,13 @@
   --font-body:
     "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --text-hero: clamp(52px, 7vw, 88px);
-  --text-h1: clamp(40px, 5vw, 64px);
-  --text-h2: clamp(28px, 3.5vw, 44px);
-  --text-h3: clamp(20px, 2.5vw, 28px);
-  --text-body: 16px;
-  --text-label: 13px;
-  --text-caption: 12px;
+  --text-hero: clamp(54px, 7vw, 90px);
+  --text-h1: clamp(42px, 5vw, 66px);
+  --text-h2: clamp(30px, 3.5vw, 46px);
+  --text-h3: clamp(21px, 2.5vw, 30px);
+  --text-body: 17px;
+  --text-label: 14px;
+  --text-caption: 13px;
 
   --space-section: clamp(80px, 10vw, 120px);
   --space-container: 1280px;
@@ -41,7 +41,7 @@
   --secondary: var(--color-silver);
   --secondary-foreground: var(--color-navy);
   --muted: color-mix(in srgb, var(--color-silver) 45%, var(--color-white));
-  --muted-foreground: color-mix(in srgb, var(--color-navy) 55%, transparent);
+  --muted-foreground: color-mix(in srgb, var(--color-navy) 72%, transparent);
   --accent: var(--color-cyan);
   --accent-foreground: var(--color-navy);
   --destructive: oklch(0.55 0.22 27);

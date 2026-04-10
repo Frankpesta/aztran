@@ -1,26 +1,28 @@
-import { fetchQuery } from "convex/nextjs";
 import type { MetadataRoute } from "next";
 import { api } from "@/convex/_generated/api";
 import { getAllServiceSlugs } from "@/lib/services";
+import { serverFetchQuery } from "@/lib/server-convex-query";
 
 const base = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+
+export const runtime = "nodejs";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let insightSlugs: string[] = [];
   let blogSlugs: string[] = [];
   let reportSlugs: string[] = [];
   try {
-    insightSlugs = await fetchQuery(api.insights.getAllInsightSlugs);
+    insightSlugs = await serverFetchQuery(api.insights.getAllInsightSlugs);
   } catch {
     insightSlugs = [];
   }
   try {
-    blogSlugs = await fetchQuery(api.blogPosts.getAllBlogSlugs);
+    blogSlugs = await serverFetchQuery(api.blogPosts.getAllBlogSlugs);
   } catch {
     blogSlugs = [];
   }
   try {
-    reportSlugs = await fetchQuery(api.marketReports.getAllMarketReportSlugs);
+    reportSlugs = await serverFetchQuery(api.marketReports.getAllMarketReportSlugs);
   } catch {
     reportSlugs = [];
   }

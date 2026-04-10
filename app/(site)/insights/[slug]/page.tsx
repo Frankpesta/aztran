@@ -1,4 +1,3 @@
-import { fetchQuery } from "convex/nextjs";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -7,12 +6,15 @@ import { api } from "@/convex/_generated/api";
 import type { Doc } from "@/convex/_generated/dataModel";
 import { ConvexStorageImage } from "@/components/ui/ConvexStorageImage";
 import { InsightCard } from "@/components/ui/InsightCard";
+import { serverFetchQuery } from "@/lib/server-convex-query";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+export const runtime = "nodejs";
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
-    const slugs = await fetchQuery(api.insights.getAllInsightSlugs);
+    const slugs = await serverFetchQuery(api.insights.getAllInsightSlugs);
     return slugs.map((slug: string) => ({ slug }));
   } catch {
     return [];
@@ -23,7 +25,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const doc = await fetchQuery(api.insights.getInsightBySlug, { slug });
+  const doc = await serverFetchQuery(api.insights.getInsightBySlug, { slug });
   if (!doc) {
     return { title: "Insight" };
   }
@@ -49,14 +51,14 @@ export default async function InsightArticlePage({
   params,
 }: PageProps): Promise<ReactElement> {
   const { slug } = await params;
-  const doc = await fetchQuery(api.insights.getInsightBySlug, { slug });
+  const doc = await serverFetchQuery(api.insights.getInsightBySlug, { slug });
   if (!doc) {
     notFound();
   }
 
   let related: Doc<"insights">[] = [];
   try {
-    const byCat = await fetchQuery(api.insights.getInsightsByCategory, {
+    const byCat = await serverFetchQuery(api.insights.getInsightsByCategory, {
       category: doc.category,
     });
     related = (byCat as Doc<"insights">[])
@@ -69,7 +71,7 @@ export default async function InsightArticlePage({
   let coverUrl: string | null = null;
   if (doc.coverImageId) {
     try {
-      coverUrl = await fetchQuery(api.storage.getFileUrl, {
+      coverUrl = await serverFetchQuery(api.storage.getFileUrl, {
         storageId: doc.coverImageId,
       });
     } catch {
@@ -80,7 +82,7 @@ export default async function InsightArticlePage({
   let pdfUrl: string | null = null;
   if (doc.pdfStorageId) {
     try {
-      pdfUrl = await fetchQuery(api.storage.getFileUrl, {
+      pdfUrl = await serverFetchQuery(api.storage.getFileUrl, {
         storageId: doc.pdfStorageId,
       });
     } catch {
@@ -112,18 +114,21 @@ export default async function InsightArticlePage({
         <p className="font-body text-caption uppercase tracking-[0.2em] text-[var(--color-cyan)]">
           {doc.category}
           {doc.readTimeMinutes ? (
-            <span className="text-[var(--color-silver)]">
+            <span className="text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
               {" "}
               · {doc.readTimeMinutes} min read
             </span>
           ) : null}
-          <span className="text-[var(--color-silver)]"> · {doc.displayDate}</span>
+          <span className="text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
+            {" "}
+            · {doc.displayDate}
+          </span>
         </p>
         <h1 className="mt-4 font-display text-h1 leading-snug text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
           {doc.title}
         </h1>
         {doc.sources.length > 0 ? (
-          <p className="mt-3 font-body text-caption text-[var(--color-silver)]">
+          <p className="mt-3 font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
             Sources: {doc.sources.join(" · ")}
           </p>
         ) : null}
@@ -159,20 +164,20 @@ export default async function InsightArticlePage({
                   </p>
                 ) : null}
                 {m.yoyContext ? (
-                  <p className="mt-1 font-body text-caption text-[var(--color-silver)]">
+                  <p className="mt-1 font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
                     {m.yoyContext}
                   </p>
                 ) : null}
                 {m.momValue ? (
                   <p className="mt-4 font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                     {m.momValue}{" "}
-                    <span className="font-body text-caption font-normal text-[var(--color-silver)]">
+                    <span className="font-body text-caption font-normal text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
                       MoM
                     </span>
                   </p>
                 ) : null}
                 {m.momContext ? (
-                  <p className="mt-1 font-body text-caption text-[var(--color-silver)]">
+                  <p className="mt-1 font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
                     {m.momContext}
                   </p>
                 ) : null}
@@ -196,7 +201,7 @@ export default async function InsightArticlePage({
               {sec.bullets.map((b, j) => (
                 <li
                   key={j}
-                  className="relative pl-6 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_85%,transparent)] before:absolute before:left-0 before:top-[0.55em] before:size-1.5 before:rounded-full before:bg-[var(--color-cyan)] dark:text-[var(--color-silver)]"
+                  className="relative pl-6 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] before:absolute before:left-0 before:top-[0.55em] before:size-1.5 before:rounded-full before:bg-[var(--color-cyan)] dark:text-[var(--color-silver)]"
                 >
                   {b}
                 </li>

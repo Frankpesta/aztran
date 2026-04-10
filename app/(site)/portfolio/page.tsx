@@ -19,7 +19,6 @@ export default function PortfolioPage(): ReactElement {
         title="Investment Portfolio"
         subtitle="A representative view of active work, realised outcomes, and pipeline review."
         imageSrc="/images/hero-bg.jpg"
-        minHeightClass="min-h-[45vh]"
       />
       <PortfolioStatsSection />
       <PortfolioFeaturedSection />

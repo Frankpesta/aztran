@@ -39,7 +39,7 @@ export function AboutSnippetSection(): ReactElement {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
           transition={{ duration: 0.65, ease: EASE_PREMIUM, delay: 0.1 }}
-          className="space-y-5 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_85%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]"
+          className="space-y-5 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_92%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]"
         >
           <p>
             Aztran Limited is an investment firm licensed by the Securities and Exchange

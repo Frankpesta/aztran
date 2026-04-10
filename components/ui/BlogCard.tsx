@@ -29,10 +29,10 @@ export function BlogCard({
       <h3 className="mt-3 font-display text-h3 leading-snug text-[var(--color-navy)] group-hover:text-[var(--color-cyan)] dark:text-[var(--color-offwhite)]">
         {post.title}
       </h3>
-      <p className="mt-2 font-body text-caption text-[var(--color-silver)]">
+      <p className="mt-2 font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
         {post.displayDate} · {post.author}
       </p>
-      <p className="mt-3 line-clamp-3 flex-1 font-body text-body text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] dark:text-[var(--color-silver)]">
+      <p className="mt-3 line-clamp-3 flex-1 font-body text-body text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:text-[var(--color-silver)]">
         {post.summary}
       </p>
       <span className="mt-4 inline-flex font-body text-label uppercase tracking-wide text-[var(--color-cyan)]">

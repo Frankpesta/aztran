@@ -16,7 +16,6 @@ export default function InsightsPage(): ReactElement {
         title="Insights"
         subtitle="Structured research briefs: inflation, rates, markets, and strategy—in concise institutional format."
         imageSrc="/images/hero-bg.jpg"
-        minHeightClass="min-h-[45vh]"
       />
       <section className="py-section">
         <div className="mx-auto max-w-container px-4 md:px-8">

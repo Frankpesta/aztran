@@ -16,7 +16,6 @@ export default function MarketReportsPage(): ReactElement {
         title="Market Reports"
         subtitle="Fixed income, liquidity, local equities, and global benchmarks—in one institutional view."
         imageSrc="/images/hero-bg.jpg"
-        minHeightClass="min-h-[45vh]"
       />
       <section className="py-section">
         <div className="mx-auto max-w-container px-4 md:px-8">

@@ -16,7 +16,6 @@ export default function BlogPage(): ReactElement {
         title="Blog"
         subtitle="Market buzz, company news, education, and institutional perspective."
         imageSrc="/images/hero-bg.jpg"
-        minHeightClass="min-h-[45vh]"
       />
       <section className="py-section">
         <div className="mx-auto max-w-container px-4 md:px-8">

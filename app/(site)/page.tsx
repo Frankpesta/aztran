@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSnippetSection } from "@/components/sections/AboutSnippetSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
-import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { ResearchShowcaseSection } from "@/components/sections/ResearchShowcaseSection";
 import { ContactCTABand } from "@/components/sections/ContactCTABand";
 
@@ -20,7 +19,6 @@ export default function HomePage(): React.ReactElement {
       <AboutSnippetSection />
       <ServicesSection />
       <WhyChooseUsSection />
-      <PortfolioSection />
       <ResearchShowcaseSection />
       <ContactCTABand />
     </>

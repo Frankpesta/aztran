@@ -27,7 +27,7 @@ function MarqueeRow({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between px-1">
-        <p className="font-body text-label uppercase tracking-[0.2em] text-[var(--color-silver)]">
+        <p className="font-body text-label uppercase tracking-[0.2em] text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
           {label}
         </p>
         <Link

@@ -1,15 +1,18 @@
-import { fetchQuery } from "convex/nextjs";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactElement } from "react";
 import { api } from "@/convex/_generated/api";
+import { serverFetchQuery } from "@/lib/server-convex-query";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+/** Avoid Edge runtime fetch quirks when calling Convex from RSC. */
+export const runtime = "nodejs";
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
-    const slugs = await fetchQuery(api.marketReports.getAllMarketReportSlugs);
+    const slugs = await serverFetchQuery(api.marketReports.getAllMarketReportSlugs);
     return slugs.map((slug: string) => ({ slug }));
   } catch {
     return [];
@@ -18,7 +21,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const doc = await fetchQuery(api.marketReports.getMarketReportBySlug, { slug });
+  const doc = await serverFetchQuery(api.marketReports.getMarketReportBySlug, { slug });
   if (!doc) return { title: "Market report" };
   return {
     title: doc.title,
@@ -102,13 +105,15 @@ export default async function MarketReportDetailPage({
   params,
 }: PageProps): Promise<ReactElement> {
   const { slug } = await params;
-  const doc = await fetchQuery(api.marketReports.getMarketReportBySlug, { slug });
+  const doc = await serverFetchQuery(api.marketReports.getMarketReportBySlug, { slug });
   if (!doc) notFound();
 
   let pdfUrl: string | null = null;
   if (doc.pdfStorageId) {
     try {
-      pdfUrl = await fetchQuery(api.storage.getFileUrl, { storageId: doc.pdfStorageId });
+      pdfUrl = await serverFetchQuery(api.storage.getFileUrl, {
+        storageId: doc.pdfStorageId,
+      });
     } catch {
       pdfUrl = null;
     }
@@ -174,9 +179,11 @@ export default async function MarketReportDetailPage({
         <h1 className="mt-3 max-w-4xl font-display text-h1 leading-snug text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
           {doc.title}
         </h1>
-        <p className="mt-4 font-body text-label text-[var(--color-silver)]">{doc.displayDate}</p>
+        <p className="mt-4 font-body text-label text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
+          {doc.displayDate}
+        </p>
         {doc.moneyMarket.systemLiquiditySummary ? (
-          <p className="mt-6 max-w-3xl border-l-2 border-[var(--color-cyan)] pl-5 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_85%,transparent)] dark:text-[var(--color-silver)]">
+          <p className="mt-6 max-w-3xl border-l-2 border-[var(--color-cyan)] pl-5 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:text-[var(--color-silver)]">
             {doc.moneyMarket.systemLiquiditySummary}
           </p>
         ) : null}
@@ -205,7 +212,9 @@ export default async function MarketReportDetailPage({
               rows={mmRows}
             />
           ) : (
-            <p className="mt-4 text-sm text-[var(--color-silver)]">No rows.</p>
+            <p className="mt-4 text-sm text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
+              No rows.
+            </p>
           )}
           <NarrativeBlock {...doc.moneyMarket.narrative} />
         </section>
@@ -215,7 +224,7 @@ export default async function MarketReportDetailPage({
             Treasury bills
           </h2>
           {doc.treasuryBills.averageBenchmarkRate !== undefined ? (
-            <p className="mt-3 font-body text-body text-[var(--color-silver)]">
+            <p className="mt-3 font-body text-body text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
               Average benchmark:{" "}
               <span className="tabular-nums text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                 {doc.treasuryBills.averageBenchmarkRate}
@@ -236,7 +245,7 @@ export default async function MarketReportDetailPage({
             FGN bonds
           </h2>
           {doc.fgnBonds.averageBenchmarkYield !== undefined ? (
-            <p className="mt-3 font-body text-body text-[var(--color-silver)]">
+            <p className="mt-3 font-body text-body text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
               Avg benchmark yield:{" "}
               <span className="tabular-nums text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                 {doc.fgnBonds.averageBenchmarkYield}
@@ -290,7 +299,7 @@ export default async function MarketReportDetailPage({
                   key={String(k)}
                   className="rounded-lg border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] p-4 dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)]"
                 >
-                  <p className="font-body text-caption uppercase tracking-wide text-[var(--color-silver)]">
+                  <p className="font-body text-caption uppercase tracking-wide text-[color-mix(in_srgb,var(--color-navy)_55%,transparent)] dark:text-[var(--color-silver)]">
                     {k}
                   </p>
                   <p className="mt-2 font-display text-h3 tabular-nums text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
@@ -302,20 +311,32 @@ export default async function MarketReportDetailPage({
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {doc.localEquities.marketCap ? (
               <div>
-                <p className="font-body text-caption text-[var(--color-silver)]">Market cap</p>
-                <p className="mt-1 font-body">{doc.localEquities.marketCap}</p>
+                <p className="font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_55%,transparent)] dark:text-[var(--color-silver)]">
+                  Market cap
+                </p>
+                <p className="mt-1 font-body text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
+                  {doc.localEquities.marketCap}
+                </p>
               </div>
             ) : null}
             {doc.localEquities.turnoverValue ? (
               <div>
-                <p className="font-body text-caption text-[var(--color-silver)]">Turnover</p>
-                <p className="mt-1 font-body">{doc.localEquities.turnoverValue}</p>
+                <p className="font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_55%,transparent)] dark:text-[var(--color-silver)]">
+                  Turnover
+                </p>
+                <p className="mt-1 font-body text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
+                  {doc.localEquities.turnoverValue}
+                </p>
               </div>
             ) : null}
             {doc.localEquities.volumeTraded ? (
               <div>
-                <p className="font-body text-caption text-[var(--color-silver)]">Volume</p>
-                <p className="mt-1 font-body">{doc.localEquities.volumeTraded}</p>
+                <p className="font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_55%,transparent)] dark:text-[var(--color-silver)]">
+                  Volume
+                </p>
+                <p className="mt-1 font-body text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
+                  {doc.localEquities.volumeTraded}
+                </p>
               </div>
             ) : null}
           </div>
@@ -357,7 +378,7 @@ export default async function MarketReportDetailPage({
         {doc.sources || doc.disclaimer ? (
           <footer className="border-t border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] pt-10 dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)]">
             {doc.sources ? (
-              <p className="font-body text-caption text-[var(--color-silver)]">
+              <p className="font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_68%,transparent)] dark:text-[var(--color-silver)]">
                 <span className="font-medium text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                   Sources:{" "}
                 </span>
@@ -365,7 +386,7 @@ export default async function MarketReportDetailPage({
               </p>
             ) : null}
             {doc.disclaimer ? (
-              <p className="mt-4 font-body text-caption leading-relaxed text-[var(--color-silver)]">
+              <p className="mt-4 font-body text-caption leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_68%,transparent)] dark:text-[var(--color-silver)]">
                 {doc.disclaimer}
               </p>
             ) : null}

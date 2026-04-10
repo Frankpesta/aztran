@@ -102,7 +102,7 @@ export function WhyChooseUsSection(): ReactElement {
               <h3 className="relative mt-4 font-display text-h3 text-[var(--color-navy)] transition-colors duration-300 group-hover:text-[color-mix(in_srgb,var(--color-navy)_82%,var(--color-cyan))] dark:text-[var(--color-offwhite)] dark:group-hover:text-[var(--color-white)]">
                 {item.title}
               </h3>
-              <p className="relative mt-3 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
+              <p className="relative mt-3 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:text-[var(--color-silver)]">
                 {item.body}
               </p>
             </motion.article>

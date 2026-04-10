@@ -1,16 +1,18 @@
-import { fetchQuery } from "convex/nextjs";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactElement } from "react";
 import { ConvexStorageImage } from "@/components/ui/ConvexStorageImage";
 import { api } from "@/convex/_generated/api";
+import { serverFetchQuery } from "@/lib/server-convex-query";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+export const runtime = "nodejs";
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
-    const slugs = await fetchQuery(api.blogPosts.getAllBlogSlugs);
+    const slugs = await serverFetchQuery(api.blogPosts.getAllBlogSlugs);
     return slugs.map((slug: string) => ({ slug }));
   } catch {
     return [];
@@ -19,7 +21,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const doc = await fetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
+  const doc = await serverFetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
   if (!doc) return { title: "Blog" };
   const title = doc.seoTitle ?? doc.title;
   const description = doc.seoDescription ?? doc.summary;
@@ -28,13 +30,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogArticlePage({ params }: PageProps): Promise<ReactElement> {
   const { slug } = await params;
-  const doc = await fetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
+  const doc = await serverFetchQuery(api.blogPosts.getBlogPostBySlug, { slug });
   if (!doc) notFound();
 
   let coverUrl: string | null = null;
   if (doc.coverImageId) {
     try {
-      coverUrl = await fetchQuery(api.storage.getFileUrl, { storageId: doc.coverImageId });
+      coverUrl = await serverFetchQuery(api.storage.getFileUrl, {
+        storageId: doc.coverImageId,
+      });
     } catch {
       coverUrl = null;
     }
@@ -45,7 +49,9 @@ export default async function BlogArticlePage({ params }: PageProps): Promise<Re
     if (s.imageStorageId) {
       try {
         sectionImageUrls.push(
-          await fetchQuery(api.storage.getFileUrl, { storageId: s.imageStorageId }),
+          await serverFetchQuery(api.storage.getFileUrl, {
+            storageId: s.imageStorageId,
+          }),
         );
       } catch {
         sectionImageUrls.push(null);
@@ -63,7 +69,7 @@ export default async function BlogArticlePage({ params }: PageProps): Promise<Re
             {doc.seriesName}
           </p>
         ) : null}
-        <p className="mt-2 font-body text-caption uppercase tracking-[0.2em] text-[var(--color-silver)]">
+        <p className="mt-2 font-body text-caption uppercase tracking-[0.2em] text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
           {doc.category}
           {doc.readTimeMinutes ? (
             <>
@@ -76,7 +82,9 @@ export default async function BlogArticlePage({ params }: PageProps): Promise<Re
         <h1 className="mt-4 font-display text-h1 leading-snug text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
           {doc.title}
         </h1>
-        <p className="mt-4 font-body text-label text-[var(--color-silver)]">By {doc.author}</p>
+        <p className="mt-4 font-body text-label text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
+          By {doc.author}
+        </p>
       </div>
 
       {coverUrl ? (
@@ -133,7 +141,7 @@ export default async function BlogArticlePage({ params }: PageProps): Promise<Re
                   />
                 </div>
                 {sec.imageCaption ? (
-                  <figcaption className="mt-3 text-center font-body text-caption text-[var(--color-silver)]">
+                  <figcaption className="mt-3 text-center font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
                     {sec.imageCaption}
                   </figcaption>
                 ) : null}

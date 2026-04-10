@@ -69,7 +69,6 @@ export default function AboutPage(): ReactElement {
         title="About us"
         subtitle="A financial services group specializing in portfolio management and strategic trading—licensed by the Securities and Exchange Commission Nigeria."
         imageSrc="/images/hero-bg.jpg"
-        minHeightClass="min-h-[56vh]"
       />
 
       <section className="relative overflow-hidden py-section">

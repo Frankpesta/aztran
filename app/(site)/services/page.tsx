@@ -20,7 +20,6 @@ export default function ServicesPage(): ReactElement {
         title="Services"
         subtitle="Asset management, global markets & trading, and brokerage coverage—structured for institutional mandates and regulatory scrutiny."
         imageSrc="/images/hero-bg.jpg"
-        minHeightClass="min-h-[52vh]"
       />
       <section className="py-section">
         <div className="mx-auto max-w-container px-4 md:px-8">
@@ -28,7 +27,7 @@ export default function ServicesPage(): ReactElement {
           <AnimatedHeading as="h2" className="mt-4 max-w-3xl font-display text-h2">
             Three pillars, one disciplined operating model.
           </AnimatedHeading>
-          <p className="mt-6 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] dark:text-[var(--color-silver)]">
+          <p className="mt-6 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:text-[var(--color-silver)]">
             Each line of business has a dedicated team, documented workflows, and clear
             accountability. Select a service to read how we work, who it fits, and what
             you can expect from day one.

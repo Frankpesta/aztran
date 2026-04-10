@@ -24,10 +24,10 @@ export function MarketReportCard({
       <h3 className="mt-3 font-display text-h3 leading-snug text-[var(--color-navy)] group-hover:text-[var(--color-cyan)] dark:text-[var(--color-offwhite)]">
         {report.title}
       </h3>
-      <p className="mt-2 font-body text-caption text-[var(--color-silver)]">
+      <p className="mt-2 font-body text-caption text-[color-mix(in_srgb,var(--color-navy)_58%,transparent)] dark:text-[var(--color-silver)]">
         {report.displayDate}
       </p>
-      <p className="mt-3 line-clamp-2 flex-1 font-body text-body text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] dark:text-[var(--color-silver)]">
+      <p className="mt-3 line-clamp-2 flex-1 font-body text-body text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:text-[var(--color-silver)]">
         {(() => {
           const t = report.moneyMarket.narrative.body.trim();
           if (!t) return "Daily rates, fixed income, equities, and global markets.";

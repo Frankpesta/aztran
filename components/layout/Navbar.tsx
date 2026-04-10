@@ -12,7 +12,11 @@ import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useUiStore } from "@/store/uiStore";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { COMPANY_LEGAL_NAME, SITE_LOGO_PATH } from "@/lib/brand";
+import {
+  COMPANY_LEGAL_NAME,
+  SITE_LOGO_PATH,
+  SITE_LOGO_PATH_ON_DARK,
+} from "@/lib/brand";
 
 const LINKS: readonly { href: string; label: string }[] = [
   { href: "/about", label: "About" },
@@ -57,6 +61,8 @@ export function Navbar(): ReactElement {
     (headerSurface === "home-top" || headerSurface === "home-scroll") &&
     !isDarkMode;
 
+  const logoSrc = isDarkMode ? SITE_LOGO_PATH_ON_DARK : SITE_LOGO_PATH;
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -93,7 +99,8 @@ export function Navbar(): ReactElement {
           className="group relative z-[1] flex shrink-0 items-center transition-opacity duration-300 hover:opacity-[0.97]"
         >
           <Image
-            src={SITE_LOGO_PATH}
+            key={logoSrc}
+            src={logoSrc}
             alt={COMPANY_LEGAL_NAME}
             width={960}
             height={288}

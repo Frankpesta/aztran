@@ -9,7 +9,11 @@ export type ServicePageContent = {
   heroEyebrow: string;
   headline: string;
   lead: string;
+  /** Extra overview paragraphs after `lead`, shown before detail sections and the solutions list. */
+  introBeforeServices?: readonly string[];
   sections: ServiceSection[];
+  /** Sidebar list heading; defaults to “Capabilities” on the detail page. */
+  capabilitiesHeading?: string;
   capabilities: string[];
 };
 
@@ -41,6 +45,7 @@ export const SERVICES: readonly ServiceOffering[] = [
         "Licensed by the SEC as a fund and portfolio manager: diversified portfolios, financial planning, family office, and investment education for corporates, HNIs, and mass-affluent clients.",
       heroEyebrow: "Service",
       headline: "Asset management",
+      capabilitiesHeading: "Our solutions & services",
       lead:
         "Licensed by the SEC as a fund and portfolio manager, our Asset Management business delivers world-class investment solutions designed to preserve capital, generate consistent returns, and build long-term wealth.",
       sections: [
@@ -64,12 +69,12 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "Eurobond-backed investment",
+        "Euro bond-backed investment",
         "Equities & ETFs",
         "Financial planning",
         "Portfolio management",
         "Family office",
-        "Investment education",
+        "Investment Education",
       ],
     },
   },
@@ -89,6 +94,7 @@ export const SERVICES: readonly ServiceOffering[] = [
         "Global markets, trading, and brokerage: multi-currency treasury, securities execution, ALM, institutional counterparties, and high-volume trade capability.",
       heroEyebrow: "Service",
       headline: "Global markets & brokerage",
+      capabilitiesHeading: "Our solutions & services",
       lead:
         "Our Global Markets, Trading, and Brokerage division acts as the Group’s multi-currency treasury, providing brokerage services and facilitating the execution of local and international securities trades, including sovereign and corporate bonds, and Treasury Bills.",
       sections: [
@@ -112,12 +118,12 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "Multi-currency treasury & brokerage",
-        "Local & international securities execution",
-        "Sovereign & corporate bonds, Treasury Bills",
-        "Asset & liability management (ALM)",
-        "Real-time market intelligence & institutional pricing",
-        "Large-ticket & high-volume execution",
+        "Euro bond-backed investment",
+        "Equities & ETFs",
+        "Financial planning",
+        "Portfolio management",
+        "Family office",
+        "Investment Education",
       ],
     },
   },

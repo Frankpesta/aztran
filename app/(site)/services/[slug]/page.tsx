@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactElement } from "react";
@@ -43,20 +42,16 @@ export default async function ServiceDetailPage({
 
   return (
     <>
-      <section className="relative min-h-[48vh] overflow-hidden bg-[var(--color-navy)] text-[var(--color-white)]">
-        <div className="absolute inset-0">
-          <Image
-            src={service.imageSrc}
-            alt={service.imageAlt}
-            fill
-            className="object-cover opacity-35"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/80 to-[var(--color-navy)]/55" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-cyan)]/15 to-transparent mix-blend-screen" />
-        </div>
-        <div className="relative mx-auto flex min-h-[48vh] max-w-container flex-col justify-end px-4 pb-12 pt-28 md:px-8 md:pb-16 md:pt-32">
+      <section className="relative overflow-hidden bg-[var(--color-navy)] text-[var(--color-white)]">
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--color-navy)] via-[color-mix(in_srgb,var(--color-navy)_90%,black)] to-[color-mix(in_srgb,var(--color-navy)_72%,black)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] to-[color-mix(in_srgb,var(--color-cyan)_8%,transparent)] opacity-70 mix-blend-screen"
+          aria-hidden
+        />
+        <div className="relative mx-auto flex max-w-container flex-col px-4 pb-14 pt-28 md:px-8 md:pb-16 md:pt-32">
           <nav
             className="mb-8 font-body text-caption uppercase tracking-[0.16em] text-[color-mix(in_srgb,var(--color-silver)_88%,transparent)]"
             aria-label="Breadcrumb"
@@ -92,15 +87,21 @@ export default async function ServiceDetailPage({
           >
             {page.headline}
           </h1>
-          <p className="mt-6 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,transparent)]">
-            {page.lead}
-          </p>
         </div>
       </section>
 
       <article className="border-b border-[color-mix(in_srgb,var(--color-silver)_55%,transparent)] bg-[var(--color-white)] py-section dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[var(--color-navy)]">
         <div className="mx-auto max-w-container px-4 md:px-8">
-          <div className="grid gap-12 lg:grid-cols-[1fr_minmax(260px,320px)] lg:gap-16">
+          <div className="mx-auto max-w-3xl space-y-5 border-b border-[color-mix(in_srgb,var(--color-silver)_50%,transparent)] pb-12 font-body text-[1.0625rem] leading-[1.75] text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:text-[var(--color-silver)] md:text-[1.125rem] md:leading-[1.8] lg:pb-16">
+            <p className="font-medium text-[color-mix(in_srgb,var(--color-navy)_92%,transparent)] dark:text-[var(--color-offwhite)]">
+              {page.lead}
+            </p>
+            {page.introBeforeServices?.map((para, i) => (
+              <p key={`intro-${i}`}>{para}</p>
+            ))}
+          </div>
+
+          <div className="grid gap-12 pt-12 lg:grid-cols-[1fr_minmax(260px,320px)] lg:gap-16 lg:pt-16">
             <div className="space-y-12">
               {page.sections.map((section) => (
                 <section key={section.title}>
@@ -117,7 +118,7 @@ export default async function ServiceDetailPage({
             </div>
             <aside className="h-fit rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_55%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_80%,var(--color-white))] p-6 dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_88%,black)] md:sticky md:top-28">
               <p className="font-body text-label uppercase tracking-[0.18em] text-[var(--color-cyan)]">
-                Capabilities
+                {page.capabilitiesHeading ?? "Capabilities"}
               </p>
               <ul className="mt-4 space-y-3 font-body text-body text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                 {page.capabilities.map((item) => (

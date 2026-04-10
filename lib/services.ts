@@ -29,7 +29,7 @@ export const SERVICES: readonly ServiceOffering[] = [
     slug: "asset-management",
     title: "Asset management",
     summary:
-      "Institutional portfolios, mandate design, and risk-aware allocation for sovereigns, funds, and large family offices.",
+      "SEC-licensed fund and portfolio management—preserving capital, generating consistent returns, and building long-term wealth across diversified mandates.",
     imageSrc:
       "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=88",
     imageAlt: "Institutional finance documents and strategy review",
@@ -38,86 +38,86 @@ export const SERVICES: readonly ServiceOffering[] = [
     page: {
       metaTitle: "Asset management",
       metaDescription:
-        "Institutional asset management: portfolio construction, oversight, and transparent reporting aligned to your mandate.",
+        "Licensed by the SEC as a fund and portfolio manager: diversified portfolios, financial planning, family office, and investment education for corporates, HNIs, and mass-affluent clients.",
       heroEyebrow: "Service",
       headline: "Asset management",
       lead:
-        "We build and oversee portfolios with clear investment objectives, documented risk budgets, and reporting schedules suited to institutional stakeholders—not retail defaults stretched upstream.",
+        "Licensed by the SEC as a fund and portfolio manager, our Asset Management business delivers world-class investment solutions designed to preserve capital, generate consistent returns, and build long-term wealth.",
       sections: [
         {
-          title: "Mandate-first construction",
+          title: "Diversified portfolios & research",
           paragraphs: [
-            "Every relationship starts with constraints and outcomes: liquidity, time horizon, regulatory context, and any liability-aware or policy benchmarks you require.",
-            "Implementation is staged with governance checkpoints so allocations, managers, and instruments remain traceable to the mandate you approved.",
+            "We manage diversified portfolios across Eurobond-backed investments, equities and ETFs, and alternative assets, supported by disciplined risk management and rigorous research.",
           ],
         },
         {
-          title: "Oversight and reporting",
+          title: "Aligned to every client",
           paragraphs: [
-            "Positions, exposures, and performance are monitored against pre-agreed risk and attribution frameworks. You receive narratives that connect market moves to decisions, not only month-end tables.",
-            "Where external managers or sleeves are used, we coordinate diligence, onboarding, and ongoing surveillance under a single accountability line.",
+            "Through personalized financial planning, portfolio management, private banking, family office services, and investment education, we align strategies with each client’s unique risk appetite, investment horizon, and long-term objectives. Serving corporate institutions, High Net Worth Individuals, and mass affluent clients, we combine timely market insights, technology-driven tools, and relationship-focused service to create, grow, protect, and seamlessly transfer wealth.",
           ],
         },
         {
-          title: "Who this fits",
+          title: "Partnership for the long run",
           paragraphs: [
-            "Sovereign entities, pension systems, endowments, corporates with large balance-sheet investable pools, and sophisticated family offices seeking institutional process without product sprawl.",
+            "Guided by excellence, integrity, and innovation, we partner with clients throughout their investment journey, delivering exceptional service, robust governance, and innovative solutions that drive sustainable financial success.",
           ],
         },
       ],
       capabilities: [
-        "Strategic and tactical allocation",
-        "Manager selection and oversight",
-        "Risk budgeting and attribution",
-        "Custom reporting and board-ready materials",
+        "Eurobond-backed investment",
+        "Equities & ETFs",
+        "Financial planning",
+        "Portfolio management",
+        "Family office",
+        "Investment education",
       ],
     },
   },
   {
     slug: "global-markets-trading",
-    title: "Global markets & trading",
+    title: "Global markets & brokerage",
     summary:
-      "Cross-asset execution, liquidity sourcing, and disciplined workflow across major venues—built for size, speed, and auditability.",
+      "The Group’s multi-currency treasury: brokerage, execution across local and international securities, ALM, and large-ticket liquidity when markets move.",
     imageSrc:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=88",
     imageAlt: "Market data and global trading visualization",
     titleClassName:
       "text-[var(--color-cyan)] dark:text-[var(--color-cyan)] group-hover:text-[color-mix(in_srgb,var(--color-cyan)_85%,var(--color-navy))]",
     page: {
-      metaTitle: "Global markets & trading",
+      metaTitle: "Global markets & brokerage",
       metaDescription:
-        "Global markets and trading: institutional execution, liquidity, and governance across equities, FX, and derivatives where applicable.",
+        "Global markets, trading, and brokerage: multi-currency treasury, securities execution, ALM, institutional counterparties, and high-volume trade capability.",
       heroEyebrow: "Service",
-      headline: "Global markets & trading",
+      headline: "Global markets & brokerage",
       lead:
-        "Trading is treated as a controlled function: documented workflows, clear escalation paths, and systematic capture of orders and fills so compliance and internal review can reconstruct any day.",
+        "Our Global Markets, Trading, and Brokerage division acts as the Group’s multi-currency treasury, providing brokerage services and facilitating the execution of local and international securities trades, including sovereign and corporate bonds, and Treasury Bills.",
       sections: [
         {
-          title: "Execution and liquidity",
+          title: "ALM & liquidity",
           paragraphs: [
-            "We work with trusted liquidity providers and platforms appropriate to your size and instrument set. Routing prioritizes best execution criteria you define—not generic defaults.",
-            "Large clips are staged when needed to manage market impact and information leakage, with communication protocols agreed in advance.",
+            "The division also houses the Asset and Liability Management (ALM) team, which monitors liquidity and optimizes capital deployment across the Group.",
           ],
         },
         {
-          title: "Governance and controls",
+          title: "Insights & pricing",
           paragraphs: [
-            "Pre-trade limits, approval matrices, and post-trade reconciliation are part of the standard stack. Surveillance outputs are designed to be useful to risk and compliance, not merely checkbox artifacts.",
-            "Cross-border and multi-currency programs include treasury and settlement considerations embedded in the operating model from day one.",
+            "At Aztran, we leverage a broad network of institutional counterparties to deliver real-time market insights, including pricing trends, trading flows, and market activity, ensuring competitive pricing and informed investment decisions.",
           ],
         },
         {
-          title: "Who this fits",
+          title: "Execution at scale",
           paragraphs: [
-            "Institutions that trade at meaningful scale, require multi-asset or multi-currency capability, and need an audit trail that survives regulatory or board scrutiny.",
+            "Our large-ticket execution capabilities enable us to handle high-volume trades across multiple asset classes, even during market volatility, providing liquidity and access often unavailable through traditional banking channels.",
           ],
         },
       ],
       capabilities: [
-        "Listed equities",
-        "FX and treasury-linked trades",
-        "Listed derivatives where mandated",
-        "Workflow and TCA documentation",
+        "Multi-currency treasury & brokerage",
+        "Local & international securities execution",
+        "Sovereign & corporate bonds, Treasury Bills",
+        "Asset & liability management (ALM)",
+        "Real-time market intelligence & institutional pricing",
+        "Large-ticket & high-volume execution",
       ],
     },
   },

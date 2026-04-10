@@ -104,7 +104,7 @@ export function Footer(): ReactElement {
                   href="/services/global-markets-trading"
                   className="inline-flex transition-[color,translate] hover:translate-x-1 hover:text-[var(--color-cyan)]"
                 >
-                  Global markets & trading
+                  Global markets & brokerage
                 </Link>
               </li>
               <li>

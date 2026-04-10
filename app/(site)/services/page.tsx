@@ -10,7 +10,7 @@ import { SERVICES } from "@/lib/services";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Asset management, global markets and trading, and institutional brokerage—with governance and transparency at the centre.",
+    "Asset management, global markets and brokerage, and institutional relationship coverage—with governance and transparency at the centre.",
 };
 
 export default function ServicesPage(): ReactElement {
@@ -18,7 +18,7 @@ export default function ServicesPage(): ReactElement {
     <>
       <PageHero
         title="Services"
-        subtitle="Asset management, global markets & trading, and brokerage coverage—structured for institutional mandates and regulatory scrutiny."
+        subtitle="Asset management, global markets & brokerage, and dedicated brokerage coverage—structured for institutional mandates and regulatory scrutiny."
         imageSrc="/images/hero-bg.jpg"
       />
       <section className="py-section">

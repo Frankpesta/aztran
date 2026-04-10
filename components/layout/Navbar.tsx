@@ -41,12 +41,14 @@ export function Navbar(): ReactElement {
 
   type HeaderSurface = "home-top" | "home-scroll" | "dark-glass" | "navy";
   const headerSurface: HeaderSurface = (() => {
-    if (isHome && isDarkMode) {
+    if (!isDarkMode) {
+      if (isHome && !isScrolled) return "home-top";
+      return "home-scroll";
+    }
+    if (isHome) {
       if (!isScrolled) return "dark-glass";
       return "navy";
     }
-    if (isHome && !isScrolled) return "home-top";
-    if (isHome && isScrolled) return "home-scroll";
     if (isAboutOrServices && !isScrolled) return "dark-glass";
     return "navy";
   })();
@@ -90,28 +92,14 @@ export function Navbar(): ReactElement {
           href="/"
           className="group relative z-[1] flex shrink-0 items-center transition-opacity duration-300 hover:opacity-[0.97]"
         >
-          <span
-            className={cn(
-              "inline-flex items-center rounded-xl transition-[background-color,box-shadow,backdrop-filter] duration-300",
-              brightHomeChrome &&
-                "bg-[color-mix(in_srgb,var(--color-white)_98%,transparent)] px-2.5 py-1.5 shadow-[0_4px_20px_-8px_rgba(0,31,63,0.18)] ring-1 ring-[color-mix(in_srgb,var(--color-navy)_08%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-offwhite)_92%,white)] dark:ring-[color-mix(in_srgb,var(--color-white)_18%,transparent)]",
-              !brightHomeChrome &&
-                headerSurface === "dark-glass" &&
-                "bg-[color-mix(in_srgb,var(--color-white)_26%,transparent)] px-2.5 py-1.5 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.45)] ring-1 ring-[color-mix(in_srgb,var(--color-white)_38%,transparent)] backdrop-blur-xl dark:bg-[color-mix(in_srgb,var(--color-white)_14%,transparent)] dark:ring-[color-mix(in_srgb,var(--color-white)_22%,transparent)]",
-              !brightHomeChrome &&
-                headerSurface === "navy" &&
-                "bg-[color-mix(in_srgb,var(--color-white)_97%,var(--color-offwhite))] px-2.5 py-1.5 shadow-[0_6px_28px_-10px_rgba(0,0,0,0.42)] ring-1 ring-[color-mix(in_srgb,var(--color-navy)_10%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-offwhite)_94%,white)] dark:ring-[color-mix(in_srgb,var(--color-white)_14%,transparent)]",
-            )}
-          >
-            <Image
-              src={SITE_LOGO_PATH}
-              alt={COMPANY_LEGAL_NAME}
-              width={960}
-              height={288}
-              priority
-              className="h-8 w-auto max-w-[min(82vw,280px)] object-contain object-left sm:h-9 sm:max-w-[300px] md:h-9 md:max-w-[320px] lg:h-10 lg:max-w-[360px]"
-            />
-          </span>
+          <Image
+            src={SITE_LOGO_PATH}
+            alt={COMPANY_LEGAL_NAME}
+            width={960}
+            height={288}
+            priority
+            className="h-[3.875rem] w-auto max-w-[min(90vw,380px)] object-contain object-left sm:max-w-[min(90vw,420px)] md:h-[4.375rem] md:max-w-[min(92vw,500px)] lg:max-w-[min(94vw,580px)]"
+          />
           <span className="sr-only">{COMPANY_LEGAL_NAME}</span>
         </Link>
         <div className="hidden items-center gap-4 md:flex md:gap-5 lg:gap-6">

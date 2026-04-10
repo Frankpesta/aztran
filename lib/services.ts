@@ -114,7 +114,7 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "Equities and ETFs",
+        "Listed equities",
         "FX and treasury-linked trades",
         "Listed derivatives where mandated",
         "Workflow and TCA documentation",

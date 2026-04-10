@@ -290,10 +290,13 @@ export default function AboutPage(): ReactElement {
           aria-hidden
         />
         <div className="relative mx-auto max-w-container px-4 md:px-8">
-          <AnimatedHeading as="h2" className="font-display text-h2 text-[var(--color-white)]">
+          <AnimatedHeading
+            as="h2"
+            className="font-display text-h2 font-bold tracking-[-0.02em] text-[var(--color-white)]"
+          >
             Core values
           </AnimatedHeading>
-          <p className="mt-4 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,var(--color-offwhite))]">
+          <p className="mt-4 max-w-2xl font-body text-[1.125rem] leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,var(--color-offwhite))] md:text-[1.1875rem]">
             The principles that shape how we advise, execute, and partner with every client.
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -305,10 +308,10 @@ export default function AboutPage(): ReactElement {
                 <div className="flex size-12 items-center justify-center rounded-lg border border-[color-mix(in_srgb,var(--color-cyan)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-cyan)_12%,transparent)] text-[var(--color-cyan)] transition-transform duration-500 group-hover:scale-105">
                   <v.icon className="size-6" aria-hidden />
                 </div>
-                <h3 className="mt-4 font-display text-h3 text-[var(--color-white)]">
+                <h3 className="mt-4 font-display text-h2 font-bold tracking-[-0.02em] text-[var(--color-white)]">
                   {v.title}
                 </h3>
-                <p className="mt-3 font-body text-body leading-[1.75] text-[color-mix(in_srgb,var(--color-silver)_96%,var(--color-offwhite))]">
+                <p className="mt-3 font-body text-[1.125rem] leading-[1.75] text-[color-mix(in_srgb,var(--color-silver)_96%,var(--color-offwhite))] md:text-[1.1875rem]">
                   {v.description}
                 </p>
               </article>

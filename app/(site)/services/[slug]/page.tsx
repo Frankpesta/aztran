@@ -104,7 +104,7 @@ export default async function ServiceDetailPage({
             <div className="space-y-12">
               {page.sections.map((section) => (
                 <section key={section.title}>
-                  <h2 className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
+                  <h2 className="font-display text-h2 font-bold tracking-[-0.02em] text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                     {section.title}
                   </h2>
                   <div className="mt-4 space-y-4 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] dark:text-[var(--color-silver)]">

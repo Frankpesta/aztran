@@ -107,7 +107,7 @@ export function ContactForm(): ReactElement {
           <h2 className="mt-2 font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
             Send a message
           </h2>
-          <p className="mt-3 max-w-lg font-body text-[14px] leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_68%,transparent)] dark:text-[var(--color-silver)]">
+          <p className="mt-3 max-w-lg font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_68%,transparent)] dark:text-[var(--color-silver)]">
             Your inquiry is stored securely and delivered to our team by email.
             We typically respond within two business days.
           </p>

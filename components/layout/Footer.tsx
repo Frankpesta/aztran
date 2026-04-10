@@ -1,9 +1,10 @@
 import { Mail, Phone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactElement } from "react";
 import { SocialIconLinks } from "@/components/contact/SocialIconLinks";
 import { FooterTraceArt } from "@/components/layout/FooterTraceArt";
-import { COMPANY_LEGAL_NAME } from "@/lib/brand";
+import { COMPANY_LEGAL_NAME, SITE_LOGO_PATH_ON_DARK } from "@/lib/brand";
 import {
   CONTACT_ADDRESS_LINES,
   CONTACT_EMAIL,
@@ -26,15 +27,18 @@ export function Footer(): ReactElement {
       <div className="relative mx-auto max-w-container px-4 pt-14 lg:px-8">
         <div className="mb-12 flex flex-col gap-4 border-b border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)] pb-10 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-display text-xl tracking-[0.12em] text-[var(--color-white)] md:text-2xl">
-              Aztran Global Investments
-            </p>
-            <p className="mt-1 font-body text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-cyan)]">
-              Limited
-            </p>
+            <Link href="/" className="inline-block transition-opacity hover:opacity-90">
+              <Image
+                src={SITE_LOGO_PATH_ON_DARK}
+                alt={COMPANY_LEGAL_NAME}
+                width={720}
+                height={216}
+                className="h-[4.5rem] w-auto max-w-[min(100%,440px)] object-contain object-left sm:h-20 sm:max-w-[500px] md:h-24 md:max-w-[560px] lg:h-28 lg:max-w-[600px]"
+              />
+            </Link>
             <p className="sr-only">{COMPANY_LEGAL_NAME}</p>
           </div>
-          <p className="max-w-md font-body text-[15px] leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_92%,white)]">
+          <p className="max-w-md font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_92%,white)]">
             SEC-regulated institutional platform for asset management, global markets, and brokerage—built
             for transparent governance and long-term capital partnerships.
           </p>
@@ -56,7 +60,7 @@ export function Footer(): ReactElement {
             <p className="font-body text-label font-semibold uppercase tracking-[0.2em] text-[var(--color-cyan)]">
               Quick links
             </p>
-            <ul className="mt-4 space-y-2.5 font-body text-[15px]">
+            <ul className="mt-4 space-y-2.5 font-body text-body">
               {[
                 { href: "/about", label: "About" },
                 { href: "/services", label: "Services" },
@@ -86,7 +90,7 @@ export function Footer(): ReactElement {
             <p className="font-body text-label font-semibold uppercase tracking-[0.2em] text-[var(--color-cyan)]">
               Services
             </p>
-            <ul className="mt-4 space-y-2.5 font-body text-[15px]">
+            <ul className="mt-4 space-y-2.5 font-body text-body">
               <li>
                 <Link
                   href="/services/asset-management"
@@ -119,10 +123,10 @@ export function Footer(): ReactElement {
               Contact
             </p>
             <address className="mt-4 not-italic">
-              <p className="font-body text-[15px] leading-relaxed">
+              <p className="font-body text-body leading-relaxed">
                 {CONTACT_ADDRESS_LINES.join(", ")}
               </p>
-              <p className="mt-3 font-body text-[15px]">
+              <p className="mt-3 font-body text-body">
                 <a
                   href={`tel:${CONTACT_PHONE_TEL}`}
                   className="inline-flex items-center gap-2.5 transition-colors hover:text-[var(--color-cyan)]"
@@ -134,7 +138,7 @@ export function Footer(): ReactElement {
                   {CONTACT_PHONE_DISPLAY}
                 </a>
               </p>
-              <p className="mt-2 font-body text-[15px]">
+              <p className="mt-2 font-body text-body">
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
                   className="inline-flex items-center gap-2.5 break-all transition-colors hover:text-[var(--color-cyan)]"

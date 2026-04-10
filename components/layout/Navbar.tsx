@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactElement } from "react";
@@ -10,7 +11,7 @@ import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useUiStore } from "@/store/uiStore";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { COMPANY_LEGAL_NAME } from "@/lib/brand";
+import { COMPANY_LEGAL_NAME, SITE_LOGO_PATH_ON_DARK } from "@/lib/brand";
 
 const LINKS: readonly { href: string; label: string }[] = [
   { href: "/about", label: "About" },
@@ -50,26 +51,28 @@ export function Navbar(): ReactElement {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500",
+        "fixed inset-x-0 top-0 z-50 overflow-visible transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500",
         isScrolled || !transparentHero
           ? "border-b border-[color-mix(in_srgb,var(--color-cyan)_28%,transparent)] bg-[var(--color-navy-95)] shadow-[0_8px_32px_-8px_rgba(0,0,0,0.35)] backdrop-blur-xl"
           : "border-b border-transparent bg-gradient-to-b from-[var(--color-navy)]/35 via-transparent to-transparent",
       )}
     >
       <nav
-        className="mx-auto flex h-16 max-w-container items-center justify-between px-4 md:px-8"
+        className="mx-auto flex min-h-20 h-20 max-w-container items-center justify-between overflow-visible px-4 md:min-h-24 md:h-24 md:px-8"
         aria-label="Primary"
       >
         <Link
           href="/"
-          className="group flex flex-col leading-tight transition-opacity duration-300 hover:opacity-95"
+          className="group relative z-[1] flex shrink-0 items-center transition-opacity duration-300 hover:opacity-95"
         >
-          <span className="font-display text-[10px] uppercase tracking-[0.2em] text-[var(--color-white)] sm:text-[11px] sm:tracking-[0.24em] md:text-sm md:tracking-[0.28em]">
-            Aztran Global Investments
-          </span>
-          <span className="font-body text-[9px] font-semibold uppercase tracking-[0.26em] text-[color-mix(in_srgb,var(--color-cyan)_88%,white)] sm:text-[10px]">
-            Limited
-          </span>
+          <Image
+            src={SITE_LOGO_PATH_ON_DARK}
+            alt={COMPANY_LEGAL_NAME}
+            width={960}
+            height={288}
+            priority
+            className="h-[3.5rem] w-auto max-w-[min(88vw,400px)] origin-left scale-[1.34] object-contain object-left sm:h-[3.75rem] sm:scale-[1.38] sm:max-w-[440px] md:h-16 md:scale-[1.46] md:max-w-[480px] lg:h-[4.25rem] lg:scale-[1.52] lg:max-w-[520px]"
+          />
           <span className="sr-only">{COMPANY_LEGAL_NAME}</span>
         </Link>
         <div className="hidden items-center gap-6 md:flex md:gap-8">
@@ -118,7 +121,7 @@ export function Navbar(): ReactElement {
                   exit={{ y: "-100%" }}
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="flex h-16 shrink-0 items-center justify-between px-4">
+                  <div className="flex h-20 shrink-0 items-center justify-between px-4 md:h-24">
                     <span className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-white)]">
                       Menu
                     </span>

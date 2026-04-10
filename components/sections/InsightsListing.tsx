@@ -31,12 +31,22 @@ export function InsightsListing(): ReactElement {
     return ["All", ...u];
   }, [categoryList]);
 
-  const hero = category === "All" ? featuredList?.[0] : undefined;
+  /** Prefer a featured card; otherwise spotlight the newest item so a lone published insight still renders. */
+  const hero = useMemo((): Doc<"insights"> | undefined => {
+    if (category !== "All") return undefined;
+    const featured = featuredList?.[0];
+    if (featured) return featured;
+    return results[0];
+  }, [category, featuredList, results]);
 
   const gridItems = useMemo(() => {
     if (!results.length) return [];
-    if (!hero || category !== "All") return results;
-    return results.filter((r) => r._id !== hero._id);
+    if (category !== "All") return results;
+    if (!hero) return results;
+    const withoutHero = results.filter((r) => r._id !== hero._id);
+    // Single published insight was both "hero" and only row → deduping left an empty grid.
+    if (withoutHero.length > 0) return withoutHero;
+    return [];
   }, [results, hero, category]);
 
   const loading = status === "LoadingFirstPage";
@@ -125,6 +135,18 @@ export function InsightsListing(): ReactElement {
           >
             Load more
           </Button>
+        </div>
+      ) : null}
+
+      {!loading && !hero && results.length === 0 ? (
+        <div className="rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_80%,var(--color-white))] px-8 py-14 text-center dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_90%,black)]">
+          <p className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
+            No published insights yet
+          </p>
+          <p className="mx-auto mt-4 max-w-md font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
+            When your team publishes an insight from the admin dashboard, it will appear
+            here automatically. Draft items stay private until you publish them.
+          </p>
         </div>
       ) : null}
     </div>

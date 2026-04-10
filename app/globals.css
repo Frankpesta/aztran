@@ -23,9 +23,9 @@
   --text-h1: clamp(40px, 5vw, 64px);
   --text-h2: clamp(28px, 3.5vw, 44px);
   --text-h3: clamp(20px, 2.5vw, 28px);
-  --text-body: 15px;
-  --text-label: 12px;
-  --text-caption: 11px;
+  --text-body: 16px;
+  --text-label: 13px;
+  --text-caption: 12px;
 
   --space-section: clamp(80px, 10vw, 120px);
   --space-container: 1280px;
@@ -144,6 +144,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
+    font-size: var(--text-body);
   }
   html {
     scroll-behavior: smooth;

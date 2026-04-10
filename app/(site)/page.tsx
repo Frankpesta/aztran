@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/site-metadata";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { StatsSection } from "@/components/sections/StatsSection";
 import { AboutSnippetSection } from "@/components/sections/AboutSnippetSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
@@ -18,7 +17,6 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <HeroSection />
-      <StatsSection />
       <AboutSnippetSection />
       <ServicesSection />
       <WhyChooseUsSection />

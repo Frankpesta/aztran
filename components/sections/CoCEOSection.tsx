@@ -1,16 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
 import type { ReactElement } from "react";
 import { CO_CEOS } from "@/lib/team";
 import { EASE_PREMIUM, VIEWPORT } from "@/lib/animations";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 /**
- * Featured co–managing partners: editorial layout, bios, and LinkedIn.
+ * Featured co–managing partners: editorial layout and bios.
  */
 export function CoCEOSection(): ReactElement {
   return (
@@ -62,7 +60,7 @@ export function CoCEOSection(): ReactElement {
               className="group flex flex-col overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_50%,transparent)] bg-[var(--color-white)] shadow-[0_24px_60px_-28px_color-mix(in_srgb,var(--color-navy)_28%,transparent)] dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_88%,black)]"
               aria-labelledby={`${ceo.id}-heading`}
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[5/3]">
+              <div className="relative aspect-[4/5] max-h-[min(440px,70vw)] w-full overflow-hidden sm:aspect-[3/4] sm:max-h-[480px]">
                 <Image
                   src={ceo.imageSrc}
                   alt={
@@ -71,51 +69,32 @@ export function CoCEOSection(): ReactElement {
                       : ""
                   }
                   fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  className="object-cover object-[center_12%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                   sizes="(min-width: 1024px) 50vw, 100vw"
                 />
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/50 via-transparent to-transparent opacity-80"
+                  className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/45 via-transparent to-transparent opacity-90"
                   aria-hidden
                 />
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-[var(--color-cyan)]" aria-hidden />
               </div>
               <div className="flex flex-1 flex-col p-6 sm:p-8">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <p className="font-body text-label uppercase tracking-[0.24em] text-[var(--color-cyan)]">
-                      {ceo.title}
-                    </p>
-                    <h3
-                      id={`${ceo.id}-heading`}
-                      className="mt-2 font-display text-h3 leading-snug text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
-                    >
-                      {ceo.fullName?.trim() || ceo.leadershipFocus}
-                    </h3>
-                    {ceo.fullName?.trim() ? (
-                      <p className="mt-2 font-body text-body text-[color-mix(in_srgb,var(--color-navy)_65%,transparent)] dark:text-[var(--color-silver)]">
-                        {ceo.leadershipFocus}
-                      </p>
-                    ) : null}
-                  </div>
-                  <Link
-                    href={ceo.linkedInHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 rounded-lg border border-[color-mix(in_srgb,var(--color-cyan)_40%,transparent)] px-3 py-2 font-body text-caption uppercase tracking-wider text-[var(--color-cyan)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-cyan)_12%,transparent)]"
-                    aria-label={`LinkedIn — ${ceo.fullName?.trim() || ceo.leadershipFocus}`}
+                <div>
+                  <p className="font-body text-label uppercase tracking-[0.24em] text-[var(--color-cyan)]">
+                    {ceo.title}
+                  </p>
+                  <h3
+                    id={`${ceo.id}-heading`}
+                    className="mt-2 font-display text-h3 leading-snug text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
                   >
-                    <span className="inline-flex items-center gap-2">
-                      LinkedIn
-                      <ExternalLink className="size-3.5 opacity-90" aria-hidden />
-                    </span>
-                  </Link>
+                    {ceo.fullName?.trim() || ceo.leadershipFocus}
+                  </h3>
                 </div>
                 <div className="mt-6 space-y-4 border-t border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pt-6 dark:border-[color-mix(in_srgb,var(--color-silver)_20%,transparent)]">
                   {ceo.bioParagraphs.map((para) => (
                     <p
                       key={para.slice(0, 48)}
-                      className="font-body text-[15px] leading-[1.75] text-[color-mix(in_srgb,var(--color-navy)_80%,transparent)] dark:text-[var(--color-silver)]"
+                      className="font-body text-body leading-[1.75] text-[color-mix(in_srgb,var(--color-navy)_80%,transparent)] dark:text-[var(--color-silver)]"
                     >
                       {para}
                     </p>

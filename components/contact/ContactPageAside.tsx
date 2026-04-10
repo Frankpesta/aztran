@@ -42,7 +42,7 @@ export function ContactPageAside(): ReactElement {
           Use the form or reach us through the channels below.
         </p>
 
-        <ul className="mt-10 space-y-6 font-body text-[14px] leading-relaxed text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
+        <ul className="mt-10 space-y-6 font-body text-body leading-relaxed text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
           <li className="flex gap-4">
             <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-lg bg-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] text-[var(--color-navy)] dark:text-[var(--color-cyan)]">
               <MapPin className="size-5" aria-hidden />

@@ -92,7 +92,7 @@ export default async function ServiceDetailPage({
           >
             {page.headline}
           </h1>
-          <p className="mt-6 max-w-2xl font-body text-[15px] leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,transparent)] md:text-base">
+          <p className="mt-6 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,transparent)]">
             {page.lead}
           </p>
         </div>

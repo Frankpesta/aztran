@@ -118,7 +118,7 @@ export function HeroSection(): ReactElement {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE_PREMIUM, delay: 0.45 }}
-          className="mt-7 max-w-[640px] font-body text-[15px] leading-[1.75] text-[color-mix(in_srgb,var(--color-silver)_92%,white)] md:text-[16px]"
+          className="mt-7 max-w-[640px] font-body text-body leading-[1.75] text-[color-mix(in_srgb,var(--color-silver)_92%,white)]"
         >
           Creating sustainable wealth for high net-worth individuals while optimizing returns on
           investible funds for corporates.

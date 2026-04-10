@@ -42,7 +42,7 @@ export function ContactCTABand(): ReactElement {
           Ready to Begin a Conversation?
         </motion.h2>
         <motion.p
-          className="mt-5 font-body text-[15px] leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,white)]"
+          className="mt-5 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,white)]"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={VIEWPORT}

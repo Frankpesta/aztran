@@ -131,8 +131,8 @@ export function ServiceCard({
           </span>
           <p
             className={cn(
-              "mt-4 flex-1 font-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]",
-              featured ? "text-[15px] md:text-base max-w-prose" : "text-body",
+              "mt-4 flex-1 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]",
+              featured && "max-w-prose",
             )}
           >
             {service.summary}

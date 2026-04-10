@@ -72,7 +72,7 @@ export function PageHero({
         </motion.h1>
         {subtitle ? (
           <motion.p
-            className="mx-auto mt-5 max-w-2xl font-body text-[15px] leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,white)]"
+            className="mx-auto mt-5 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,white)]"
             initial={{ opacity: 0, y: reduce ? 0 : 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE_PREMIUM, delay: 0.1 }}

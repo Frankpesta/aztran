@@ -39,7 +39,7 @@ export function Footer(): ReactElement {
             <p className="sr-only">{COMPANY_LEGAL_NAME}</p>
           </div>
           <p className="max-w-md font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_92%,white)]">
-            SEC-regulated institutional platform for asset management, global markets, and brokerage—built
+            SEC Licensed institutional platform for asset management, global markets, and brokerage—built
             for transparent governance and long-term capital partnerships.
           </p>
         </div>
@@ -49,7 +49,7 @@ export function Footer(): ReactElement {
           <div className="relative z-[1] grid gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <div className="relative rounded-xl border border-[color-mix(in_srgb,var(--color-cyan)_28%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_04%,transparent)] p-6 shadow-[inset_0_1px_0_0_color-mix(in_srgb,var(--color-cyan)_25%,transparent)] backdrop-blur-sm">
             <p className="font-body text-caption font-semibold uppercase tracking-[0.2em] text-[var(--color-cyan)]">
-              Regulated in Nigeria
+              Licensed in Nigeria
             </p>
             <p className="mt-3 font-body text-body leading-relaxed">
               {COMPANY_LEGAL_NAME} operates under Securities and Exchange Commission Nigeria oversight.
@@ -66,8 +66,9 @@ export function Footer(): ReactElement {
                 { href: "/services", label: "Services" },
                 { href: "/portfolio", label: "Portfolio" },
                 { href: "/insights", label: "Insights" },
-                { href: "/blog", label: "Blog" },
-                { href: "/market-reports", label: "Market reports" },
+                { href: "/insights/macro-report", label: "Macro Report" },
+                { href: "/insights/market-report", label: "Market Report" },
+                { href: "/insights/market-buzz", label: "Market Buzz" },
                 { href: "/contact", label: "Contact" },
               ].map((item) => (
                 <li key={item.href}>
@@ -112,7 +113,7 @@ export function Footer(): ReactElement {
                   href="/services/brokerage-services"
                   className="inline-flex transition-[color,translate] hover:translate-x-1 hover:text-[var(--color-cyan)]"
                 >
-                  Brokerage services
+                  Advisory
                 </Link>
               </li>
             </ul>

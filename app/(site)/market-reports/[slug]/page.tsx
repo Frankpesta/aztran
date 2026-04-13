@@ -396,10 +396,10 @@ export default async function MarketReportDetailPage({
 
       <div className="mx-auto mt-16 max-w-container px-4 text-center md:px-8">
         <Link
-          href="/market-reports"
+          href="/insights/market-report"
           className="font-body text-label uppercase tracking-wide text-[var(--color-cyan)]"
         >
-          ← All market reports
+          ← Market Report insights
         </Link>
       </div>
     </article>

@@ -14,8 +14,8 @@ export default function ContactPage(): ReactElement {
   return (
     <>
       <PageHero
-        title="Contact"
-        subtitle="The partnership desk coordinates introductions by appointment—with clear lines to our office in Lekki Phase 1."
+        title="Contact Us"
+        subtitle=""
         imageSrc="/images/hero-bg.jpg"
       />
       <section className="relative overflow-hidden py-section">

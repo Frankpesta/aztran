@@ -11,18 +11,34 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
+type InsightsListingProps = {
+  /** When set, lists only this Convex category and hides the “All” filter row. */
+  forcedCategory?: string;
+};
+
 /**
  * Featured hero plus category-filtered, paginated insights grid.
  */
-export function InsightsListing(): ReactElement {
+export function InsightsListing({
+  forcedCategory,
+}: InsightsListingProps): ReactElement {
   const category = useUiStore((s) => s.insightCategory);
   const setCategory = useUiStore((s) => s.setInsightCategory);
 
   const featuredList = useQuery(api.insights.getFeaturedInsights);
-  const categoryList = useQuery(api.insights.getPublishedInsightCategories);
+  const categoryList = useQuery(
+    api.insights.getPublishedInsightCategories,
+    forcedCategory !== undefined ? "skip" : {},
+  );
+  const listCategory =
+    forcedCategory !== undefined
+      ? forcedCategory
+      : category === "All"
+        ? undefined
+        : category;
   const { results, status, loadMore } = usePaginatedQuery(
     api.insights.listPublishedInsightsPaginated,
-    { category: category === "All" ? undefined : category },
+    { category: listCategory },
     { initialNumItems: 9 },
   );
 
@@ -33,21 +49,23 @@ export function InsightsListing(): ReactElement {
 
   /** Prefer a featured card; otherwise spotlight the newest item so a lone published insight still renders. */
   const hero = useMemo((): Doc<"insights"> | undefined => {
+    if (forcedCategory !== undefined) return undefined;
     if (category !== "All") return undefined;
     const featured = featuredList?.[0];
     if (featured) return featured;
     return results[0];
-  }, [category, featuredList, results]);
+  }, [forcedCategory, category, featuredList, results]);
 
   const gridItems = useMemo(() => {
     if (!results.length) return [];
+    if (forcedCategory !== undefined) return results;
     if (category !== "All") return results;
     if (!hero) return results;
     const withoutHero = results.filter((r) => r._id !== hero._id);
     // Single published insight was both "hero" and only row → deduping left an empty grid.
     if (withoutHero.length > 0) return withoutHero;
     return [];
-  }, [results, hero, category]);
+  }, [results, hero, category, forcedCategory]);
 
   const loading = status === "LoadingFirstPage";
 
@@ -55,7 +73,7 @@ export function InsightsListing(): ReactElement {
     <div>
       {loading ? (
         <Skeleton className="mb-16 h-80 w-full" />
-      ) : hero && category === "All" ? (
+      ) : hero && category === "All" && forcedCategory === undefined ? (
         <Link
           href={`/insights/${hero.slug}`}
           className="group relative mb-16 block min-h-[320px] overflow-hidden rounded-sm"
@@ -75,31 +93,33 @@ export function InsightsListing(): ReactElement {
         </Link>
       ) : null}
 
-      <div
-        className="mb-10 flex flex-wrap gap-3 border-b border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pb-6 dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)]"
-        role="tablist"
-        aria-label="Filter by category"
-      >
-        {categories.map((c: string) => {
-          const active = category === c;
-          return (
-            <button
-              key={c}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() => setCategory(c)}
-              className={`rounded-sm px-4 py-2 font-body text-label uppercase tracking-wide transition-colors ${
-                active
-                  ? "bg-[var(--color-navy)] text-[var(--color-white)] dark:bg-[var(--color-cyan)] dark:text-[var(--color-navy)]"
-                  : "text-[var(--color-navy)] hover:text-[var(--color-cyan)] dark:text-[var(--color-silver)]"
-              }`}
-            >
-              {c}
-            </button>
-          );
-        })}
-      </div>
+      {forcedCategory === undefined ? (
+        <div
+          className="mb-10 flex flex-wrap gap-3 border-b border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pb-6 dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)]"
+          role="tablist"
+          aria-label="Filter by category"
+        >
+          {categories.map((c: string) => {
+            const active = category === c;
+            return (
+              <button
+                key={c}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => setCategory(c)}
+                className={`rounded-sm px-4 py-2 font-body text-label uppercase tracking-wide transition-colors ${
+                  active
+                    ? "bg-[var(--color-navy)] text-[var(--color-white)] dark:bg-[var(--color-cyan)] dark:text-[var(--color-navy)]"
+                    : "text-[var(--color-navy)] hover:text-[var(--color-cyan)] dark:text-[var(--color-silver)]"
+                }`}
+              >
+                {c}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
 
       <AnimatePresence mode="popLayout">
         {loading ? (

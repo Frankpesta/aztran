@@ -5,9 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { useEffect, useState, type ReactElement } from "react";
-import { createPortal } from "react-dom";
-import { Menu, X } from "lucide-react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactElement,
+} from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useUiStore } from "@/store/uiStore";
 import { cn } from "@/lib/utils";
@@ -17,19 +22,80 @@ import {
   SITE_LOGO_PATH,
   SITE_LOGO_PATH_ON_DARK,
 } from "@/lib/brand";
+import {
+  ABOUT_NAV,
+  INSIGHTS_NAV,
+  SERVICES_NAV,
+} from "@/lib/site-nav";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
-const LINKS: readonly { href: string; label: string }[] = [
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/insights", label: "Insights" },
-  { href: "/blog", label: "Blog" },
-  { href: "/market-reports", label: "Reports" },
-  { href: "/contact", label: "Contact" },
-] as const;
+type MenuKey = "about" | "services" | "insights";
+
+const HOVER_CLOSE_MS = 160;
+
+function DropdownCardLink({
+  href,
+  title,
+  description,
+  emphasize,
+  brightChrome,
+}: {
+  href: string;
+  title: string;
+  description: string;
+  emphasize?: boolean;
+  brightChrome: boolean;
+}): ReactElement {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "group block rounded-xl border border-transparent px-4 py-3 transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5",
+        brightChrome
+          ? "hover:border-[color-mix(in_srgb,var(--color-navy)_12%,transparent)] hover:bg-[color-mix(in_srgb,var(--color-white)_55%,transparent)] dark:hover:border-[color-mix(in_srgb,var(--color-white)_14%,transparent)] dark:hover:bg-[color-mix(in_srgb,var(--color-navy)_55%,transparent)]"
+          : "hover:border-[color-mix(in_srgb,var(--color-cyan)_28%,transparent)] hover:bg-[color-mix(in_srgb,var(--color-cyan)_08%,transparent)]",
+      )}
+    >
+      <span
+        className={cn(
+          "font-body text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors group-hover:text-[var(--color-cyan)] md:text-[12px]",
+          emphasize && "font-bold",
+          brightChrome
+            ? "text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_92%,transparent)]"
+            : "text-[color-mix(in_srgb,var(--color-silver)_96%,white)]",
+        )}
+      >
+        {title}
+      </span>
+      <span
+        className={cn(
+          "mt-1 block font-body text-[13px] leading-snug md:text-[14px]",
+          brightChrome
+            ? "text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[color-mix(in_srgb,var(--color-silver)_88%,transparent)]"
+            : "text-[color-mix(in_srgb,var(--color-silver)_82%,white)]",
+        )}
+      >
+        {description}
+      </span>
+    </Link>
+  );
+}
 
 /**
- * Primary public navigation with scroll-aware styling and a full-screen mobile overlay.
+ * Primary public navigation with scroll-aware styling, hover card dropdowns, and mobile overlay.
  */
 export function Navbar(): ReactElement {
   useNavbarScroll();
@@ -42,6 +108,35 @@ export function Navbar(): ReactElement {
   const isAboutOrServices =
     pathname === "/about" || pathname === "/services";
   const isDarkMode = mounted && resolvedTheme === "dark";
+
+  const [hoverMenu, setHoverMenu] = useState<MenuKey | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }, []);
+
+  const scheduleClose = useCallback(() => {
+    clearCloseTimer();
+    closeTimer.current = setTimeout(() => {
+      setHoverMenu(null);
+    }, HOVER_CLOSE_MS);
+  }, [clearCloseTimer]);
+
+  const openMenu = useCallback(
+    (key: MenuKey) => {
+      clearCloseTimer();
+      setHoverMenu(key);
+    },
+    [clearCloseTimer],
+  );
+
+  useEffect(() => {
+    return () => clearCloseTimer();
+  }, [clearCloseTimer]);
 
   type HeaderSurface = "home-top" | "home-scroll" | "dark-glass" | "navy";
   const headerSurface: HeaderSurface = (() => {
@@ -68,6 +163,15 @@ export function Navbar(): ReactElement {
   }, []);
 
   useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = (): void => {
+      if (mq.matches) setOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -75,6 +179,13 @@ export function Navbar(): ReactElement {
       document.body.style.overflow = prev;
     };
   }, [open]);
+
+  const linkClass = cn(
+    "group relative inline-flex items-center gap-1 font-body text-[10px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 hover:text-[var(--color-cyan)] md:text-[11px] md:tracking-[0.16em]",
+    brightHomeChrome
+      ? "text-[color-mix(in_srgb,var(--color-navy)_70%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]"
+      : "text-[color-mix(in_srgb,var(--color-silver)_92%,white)]",
+  );
 
   return (
     <header
@@ -109,22 +220,164 @@ export function Navbar(): ReactElement {
           />
           <span className="sr-only">{COMPANY_LEGAL_NAME}</span>
         </Link>
-        <div className="hidden items-center gap-4 md:flex md:gap-5 lg:gap-6">
-          {LINKS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "group relative font-body text-[10px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 hover:text-[var(--color-cyan)] md:text-[11px] md:tracking-[0.16em]",
-                brightHomeChrome
-                  ? "text-[color-mix(in_srgb,var(--color-navy)_70%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]"
-                  : "text-[color-mix(in_srgb,var(--color-silver)_92%,white)]",
-              )}
-            >
-              {item.label}
+        <div className="hidden items-center gap-3 overflow-visible md:flex md:gap-4 lg:gap-5">
+          <div
+            className="relative"
+            onMouseEnter={() => openMenu("about")}
+            onMouseLeave={scheduleClose}
+          >
+            <Link href="/about" className={linkClass}>
+              About
+              <ChevronDown
+                className={cn(
+                  "size-3.5 shrink-0 opacity-80 transition-transform duration-200",
+                  hoverMenu === "about" && "rotate-180",
+                )}
+                aria-hidden
+              />
               <span className="nav-underline absolute bottom-[-4px] left-0 h-px w-full origin-left bg-[var(--color-cyan)]" />
             </Link>
-          ))}
+            <AnimatePresence>
+              {hoverMenu === "about" ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute left-1/2 top-full z-[100] w-[min(calc(100vw-2rem),22rem)] -translate-x-1/2 pt-3"
+                >
+                  <div
+                    className={cn(
+                      "rounded-2xl border p-2 shadow-[0_24px_60px_-24px_rgba(0,31,63,0.45)] backdrop-blur-xl",
+                      brightHomeChrome
+                        ? "border-[color-mix(in_srgb,var(--color-navy)_12%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_92%,var(--color-offwhite))] dark:border-[color-mix(in_srgb,var(--color-white)_14%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_94%,black)]"
+                        : "border-[color-mix(in_srgb,var(--color-cyan)_22%,transparent)] bg-[color-mix(in_srgb,var(--color-navy)_96%,black)]",
+                    )}
+                  >
+                    <div className="max-h-[min(70vh,28rem)] overflow-y-auto overscroll-contain pr-1">
+                      {ABOUT_NAV.map((item) => (
+                        <DropdownCardLink
+                          key={item.href}
+                          href={item.href}
+                          title={item.label}
+                          description={item.description}
+                          emphasize={item.emphasize}
+                          brightChrome={brightHomeChrome}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
+          <div
+            className="relative"
+            onMouseEnter={() => openMenu("services")}
+            onMouseLeave={scheduleClose}
+          >
+            <Link href="/services" className={linkClass}>
+              Services
+              <ChevronDown
+                className={cn(
+                  "size-3.5 shrink-0 opacity-80 transition-transform duration-200",
+                  hoverMenu === "services" && "rotate-180",
+                )}
+                aria-hidden
+              />
+              <span className="nav-underline absolute bottom-[-4px] left-0 h-px w-full origin-left bg-[var(--color-cyan)]" />
+            </Link>
+            <AnimatePresence>
+              {hoverMenu === "services" ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute left-1/2 top-full z-[100] w-[min(calc(100vw-2rem),20rem)] -translate-x-1/2 pt-3"
+                >
+                  <div
+                    className={cn(
+                      "rounded-2xl border p-2 shadow-[0_24px_60px_-24px_rgba(0,31,63,0.45)] backdrop-blur-xl",
+                      brightHomeChrome
+                        ? "border-[color-mix(in_srgb,var(--color-navy)_12%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_92%,var(--color-offwhite))] dark:border-[color-mix(in_srgb,var(--color-white)_14%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_94%,black)]"
+                        : "border-[color-mix(in_srgb,var(--color-cyan)_22%,transparent)] bg-[color-mix(in_srgb,var(--color-navy)_96%,black)]",
+                    )}
+                  >
+                    {SERVICES_NAV.map((item) => (
+                      <DropdownCardLink
+                        key={item.href}
+                        href={item.href}
+                        title={item.label}
+                        description={item.description}
+                        brightChrome={brightHomeChrome}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
+          <Link href="/portfolio" className={linkClass}>
+            Portfolio
+            <span className="nav-underline absolute bottom-[-4px] left-0 h-px w-full origin-left bg-[var(--color-cyan)]" />
+          </Link>
+
+          <div
+            className="relative"
+            onMouseEnter={() => openMenu("insights")}
+            onMouseLeave={scheduleClose}
+          >
+            <Link href="/insights" className={linkClass}>
+              Insights
+              <ChevronDown
+                className={cn(
+                  "size-3.5 shrink-0 opacity-80 transition-transform duration-200",
+                  hoverMenu === "insights" && "rotate-180",
+                )}
+                aria-hidden
+              />
+              <span className="nav-underline absolute bottom-[-4px] left-0 h-px w-full origin-left bg-[var(--color-cyan)]" />
+            </Link>
+            <AnimatePresence>
+              {hoverMenu === "insights" ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute right-0 top-full z-[100] w-[min(calc(100vw-2rem),20rem)] pt-3 md:left-1/2 md:right-auto md:-translate-x-1/2"
+                >
+                  <div
+                    className={cn(
+                      "rounded-2xl border p-2 shadow-[0_24px_60px_-24px_rgba(0,31,63,0.45)] backdrop-blur-xl",
+                      brightHomeChrome
+                        ? "border-[color-mix(in_srgb,var(--color-navy)_12%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_92%,var(--color-offwhite))] dark:border-[color-mix(in_srgb,var(--color-white)_14%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_94%,black)]"
+                        : "border-[color-mix(in_srgb,var(--color-cyan)_22%,transparent)] bg-[color-mix(in_srgb,var(--color-navy)_96%,black)]",
+                    )}
+                  >
+                    {INSIGHTS_NAV.map((item) => (
+                      <DropdownCardLink
+                        key={item.href}
+                        href={item.href}
+                        title={item.label}
+                        description={item.description}
+                        brightChrome={brightHomeChrome}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
+          <Link href="/contact" className={linkClass}>
+            Contact
+            <span className="nav-underline absolute bottom-[-4px] left-0 h-px w-full origin-left bg-[var(--color-cyan)]" />
+          </Link>
+
           <ThemeToggle
             variant="marketing"
             className={
@@ -169,60 +422,195 @@ export function Navbar(): ReactElement {
           </button>
         </div>
       </nav>
-      {mounted
-        ? createPortal(
-            <AnimatePresence>
-              {open ? (
-                <motion.div
-                  key="mobile-nav-overlay"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-label="Site navigation"
-                  className="fixed inset-0 z-[200] flex min-h-dvh flex-col bg-[#001f3f] md:hidden"
-                  initial={{ y: "-100%" }}
-                  animate={{ y: 0 }}
-                  exit={{ y: "-100%" }}
-                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div className="flex h-[4.25rem] shrink-0 items-center justify-between px-4">
-                    <span className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-white)]">
-                      Menu
-                    </span>
-                    <div className="flex items-center gap-3">
-                      <ThemeToggle variant="marketing" />
-                      <button
-                        type="button"
-                        onClick={() => setOpen(false)}
-                        aria-label="Close menu"
-                      >
-                        <X className="size-7 text-[var(--color-white)]" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col gap-0 overflow-y-auto px-6 py-8 sm:px-8">
-                    {LINKS.map((item, i) => (
-                      <motion.div
-                        key={item.href}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.05 * i, duration: 0.35 }}
-                      >
-                        <Link
-                          href={item.href}
-                          onClick={() => setOpen(false)}
-                          className="block border-b border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] py-3 font-body text-xs font-medium uppercase tracking-[0.14em] text-[color-mix(in_srgb,var(--color-silver)_94%,white)] transition-colors hover:text-[var(--color-cyan)]"
-                        >
-                          {item.label}
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>,
-            document.body,
-          )
-        : null}
+      {mounted ? (
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetContent
+            side="left"
+            showCloseButton={false}
+            overlayClassName="z-[200] bg-[color-mix(in_srgb,black_55%,transparent)] supports-backdrop-filter:backdrop-blur-sm md:hidden"
+            className={cn(
+              "z-[201] flex h-full max-h-dvh w-full flex-col gap-0 border-[color-mix(in_srgb,var(--color-cyan)_35%,transparent)] bg-[#001f3f] p-0 text-[var(--color-offwhite)] shadow-[8px_0_48px_-12px_rgba(0,0,0,0.45)] md:hidden",
+              "data-[side=left]:w-full data-[side=left]:max-w-[min(100vw-0.5rem,22rem)] data-[side=left]:sm:max-w-[min(100vw-0.5rem,22rem)]",
+            )}
+          >
+            <SheetHeader className="space-y-0 border-b border-[color-mix(in_srgb,var(--color-cyan)_22%,transparent)] bg-[color-mix(in_srgb,var(--color-navy)_88%,black)] p-4 pr-14">
+              <div className="flex items-center gap-3">
+                <Image
+                  src={SITE_LOGO_PATH_ON_DARK}
+                  alt=""
+                  width={280}
+                  height={84}
+                  className="h-9 w-auto object-contain object-left opacity-95"
+                />
+                <SheetTitle className="sr-only">Site navigation</SheetTitle>
+              </div>
+              <SheetDescription className="mt-2 font-body text-[11px] uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--color-silver)_82%,var(--color-offwhite))]">
+                Menu
+              </SheetDescription>
+              <SheetClose
+                className="absolute top-3.5 right-3 flex size-10 items-center justify-center rounded-lg border border-[color-mix(in_srgb,var(--color-white)_16%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_06%,transparent)] font-body text-[var(--color-cyan)] transition-[background-color,color,transform] hover:bg-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] hover:text-[var(--color-offwhite)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#001f3f]"
+                aria-label="Close menu"
+              >
+                <X className="size-5" strokeWidth={1.75} />
+              </SheetClose>
+            </SheetHeader>
+
+            <nav
+              className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-2 py-2"
+              aria-label="Primary mobile"
+            >
+              <MobileNavGroup
+                title="About"
+                onNavigate={() => setOpen(false)}
+                items={ABOUT_NAV.map((i) => ({
+                  href: i.href,
+                  label: i.label,
+                  description: i.description,
+                  emphasize: i.emphasize,
+                }))}
+              />
+              <MobileNavGroup
+                title="Services"
+                onNavigate={() => setOpen(false)}
+                items={SERVICES_NAV.map((i) => ({
+                  href: i.href,
+                  label: i.label,
+                  description: i.description,
+                }))}
+              />
+              <MobileNavGroup
+                title="Insights"
+                onNavigate={() => setOpen(false)}
+                items={[
+                  {
+                    href: "/insights",
+                    label: "All insights",
+                    description: "Full research library and filters.",
+                  },
+                  ...INSIGHTS_NAV.map((i) => ({
+                    href: i.href,
+                    label: i.label,
+                    description: i.description,
+                  })),
+                ]}
+              />
+
+              <div className="mt-1 space-y-1 px-1 pb-2">
+                {(
+                  [
+                    { href: "/portfolio", label: "Portfolio" },
+                    { href: "/contact", label: "Contact" },
+                  ] as const
+                ).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center rounded-xl border border-[color-mix(in_srgb,var(--color-white)_10%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_04%,transparent)] px-3 py-3 font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-offwhite)] transition-[border-color,background-color,color] hover:border-[color-mix(in_srgb,var(--color-cyan)_45%,transparent)] hover:bg-[color-mix(in_srgb,var(--color-cyan)_10%,transparent)] hover:text-[var(--color-cyan)]"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </nav>
+
+            <SheetFooter className="gap-3 border-t border-[color-mix(in_srgb,var(--color-cyan)_22%,transparent)] bg-[color-mix(in_srgb,black_25%,#001f3f)] p-4">
+              <div className="flex items-center justify-between gap-3">
+                <span className="font-body text-[10px] font-medium uppercase tracking-[0.16em] text-[color-mix(in_srgb,var(--color-silver)_75%,transparent)]">
+                  Appearance
+                </span>
+                <ThemeToggle variant="marketing" />
+              </div>
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="flex h-11 w-full items-center justify-center rounded-sm border border-[var(--color-cyan)] bg-[var(--color-cyan)] font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-navy)] shadow-[0_8px_28px_-10px_color-mix(in_srgb,var(--color-cyan)_45%,transparent)] transition-[filter,transform] hover:brightness-105 active:scale-[0.99]"
+              >
+                Get in Touch
+              </Link>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+      ) : null}
     </header>
+  );
+}
+
+type MobileNavItem = {
+  href: string;
+  label: string;
+  description?: string;
+  emphasize?: boolean;
+};
+
+function MobileNavGroup({
+  title,
+  items,
+  onNavigate,
+}: {
+  title: string;
+  items: readonly MobileNavItem[];
+  onNavigate: () => void;
+}): ReactElement {
+  const [sectionOpen, setSectionOpen] = useState(false);
+  return (
+    <Collapsible
+      open={sectionOpen}
+      onOpenChange={setSectionOpen}
+      className="border-b border-[color-mix(in_srgb,var(--color-white)_10%,transparent)]"
+    >
+      <CollapsibleTrigger className="flex w-full items-center justify-between gap-3 rounded-lg px-2 py-3.5 text-left font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-offwhite)] outline-none transition-colors hover:text-[var(--color-cyan)] focus-visible:ring-2 focus-visible:ring-[var(--color-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#001f3f] data-[state=open]:text-[var(--color-cyan)]">
+        <span className="flex items-center gap-2">
+          <span
+            className={cn(
+              "h-1 w-1 shrink-0 rounded-full bg-[var(--color-cyan)] transition-opacity",
+              sectionOpen ? "opacity-100" : "opacity-60",
+            )}
+            aria-hidden
+          />
+          {title}
+        </span>
+        <ChevronDown
+          className={cn(
+            "size-4 shrink-0 text-[var(--color-cyan)] transition-transform duration-200",
+            sectionOpen && "rotate-180",
+          )}
+          aria-hidden
+        />
+      </CollapsibleTrigger>
+      <CollapsibleContent className="overflow-hidden data-[ending-style]:h-0 data-[starting-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
+        <ul className="space-y-1 border-l border-[color-mix(in_srgb,var(--color-cyan)_35%,transparent)] pb-3 pl-3 ml-2 mr-1 mt-0.5">
+          {items.map((item) => (
+            <li key={`${item.href}-${item.label}`}>
+              <Link
+                href={item.href}
+                onClick={onNavigate}
+                className={cn(
+                  "block rounded-r-lg rounded-tl-sm py-2.5 pl-2 pr-2 transition-[background-color,color]",
+                  "hover:bg-[color-mix(in_srgb,var(--color-cyan)_08%,transparent)]",
+                  item.emphasize &&
+                    "font-bold text-[var(--color-offwhite)]",
+                )}
+              >
+                <span
+                  className={cn(
+                    "font-body text-[13px] leading-snug text-[var(--color-offwhite)]",
+                    !item.emphasize &&
+                      "font-medium text-[color-mix(in_srgb,var(--color-offwhite)_96%,white)]",
+                  )}
+                >
+                  {item.label}
+                </span>
+                {item.description ? (
+                  <span className="mt-0.5 block font-body text-[12px] leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_72%,var(--color-offwhite))]">
+                    {item.description}
+                  </span>
+                ) : null}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </CollapsibleContent>
+    </Collapsible>
   );
 }

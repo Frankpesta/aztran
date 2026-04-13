@@ -153,10 +153,10 @@ export default async function BlogArticlePage({ params }: PageProps): Promise<Re
 
       <div className="mx-auto mt-16 max-w-container px-4 text-center md:px-8">
         <Link
-          href="/blog"
+          href="/insights"
           className="font-body text-label uppercase tracking-wide text-[var(--color-cyan)]"
         >
-          ← Back to blog
+          ← Back to insights
         </Link>
       </div>
     </article>

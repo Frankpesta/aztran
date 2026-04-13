@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
 import { PageHero } from "@/components/layout/PageHero";
+import { BoardSection } from "@/components/sections/BoardSection";
 import { CoCEOSection } from "@/components/sections/CoCEOSection";
 import { ContactCTABand } from "@/components/sections/ContactCTABand";
 import { AnimatedHeading } from "@/components/ui/AnimatedHeading";
@@ -71,7 +72,10 @@ export default function AboutPage(): ReactElement {
         imageSrc="/images/hero-bg.jpg"
       />
 
-      <section className="relative overflow-hidden py-section">
+      <section
+        id="about-us"
+        className="relative overflow-hidden py-section scroll-mt-[calc(4.75rem+1rem)]"
+      >
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.4] dark:opacity-[0.22]"
           style={{
@@ -112,7 +116,12 @@ export default function AboutPage(): ReactElement {
 
       <CoCEOSection />
 
-      <section className="relative overflow-hidden border-t border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[var(--color-offwhite)] py-section dark:border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_96%,black)]">
+      <BoardSection />
+
+      <section
+        id="company-history"
+        className="relative overflow-hidden border-t border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[var(--color-offwhite)] py-section scroll-mt-[calc(4.75rem+1rem)] dark:border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_96%,black)]"
+      >
         <div
           className="pointer-events-none absolute -right-24 top-1/4 size-[420px] rounded-full bg-[color-mix(in_srgb,var(--color-cyan)_12%,transparent)] blur-[120px]"
           aria-hidden
@@ -123,7 +132,7 @@ export default function AboutPage(): ReactElement {
         />
 
         <div className="relative mx-auto max-w-container px-4 md:px-8">
-          <SectionLabel>Company story</SectionLabel>
+          <SectionLabel>Company&apos;s History</SectionLabel>
           <AnimatedHeading
             as="h2"
             className="mt-4 max-w-3xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
@@ -150,7 +159,7 @@ export default function AboutPage(): ReactElement {
                     capital formation for Nigeria&apos;s economy.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    {["SEC-licensed", "Portfolio & funds", "Institutional focus"].map(
+                    {["SEC Licensed", "Portfolio & funds", "Institutional focus"].map(
                       (tag) => (
                         <span
                           key={tag}
@@ -229,7 +238,10 @@ export default function AboutPage(): ReactElement {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-section">
+      <section
+        id="mission-vision"
+        className="relative overflow-hidden py-section scroll-mt-[calc(4.75rem+1rem)]"
+      >
         <div
           className="pointer-events-none absolute inset-0 opacity-50 dark:opacity-35"
           style={{
@@ -280,7 +292,10 @@ export default function AboutPage(): ReactElement {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[var(--color-navy)] py-section text-[var(--color-offwhite)] dark:border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)]">
+      <section
+        id="core-values"
+        className="relative overflow-hidden border-t border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[var(--color-navy)] py-section scroll-mt-[calc(4.75rem+1rem)] text-[var(--color-offwhite)] dark:border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)]"
+      >
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
@@ -320,9 +335,12 @@ export default function AboutPage(): ReactElement {
         </div>
       </section>
 
-      <section className="py-section">
+      <section
+        id="regulatory-compliance"
+        className="py-section scroll-mt-[calc(4.75rem+1rem)]"
+      >
         <div className="mx-auto max-w-container px-4 md:px-8">
-          <SectionLabel>Regulatory & compliance</SectionLabel>
+          <SectionLabel>Regulatory and Compliance</SectionLabel>
           <AnimatedHeading as="h2" className="mt-4 max-w-3xl font-display text-h2">
             Securities and Exchange Commission Nigeria
           </AnimatedHeading>
@@ -332,7 +350,7 @@ export default function AboutPage(): ReactElement {
               aria-hidden
             />
             <p className="pl-2 font-body text-body leading-[1.85] text-[color-mix(in_srgb,var(--color-navy)_82%,transparent)] dark:text-[var(--color-silver)]">
-              {COMPANY_LEGAL_NAME} is duly regulated by the Securities and Exchange
+              {COMPANY_LEGAL_NAME} is duly licensed by the Securities and Exchange
               Commission Nigeria (SEC), the apex regulatory authority overseeing
               Nigeria&apos;s capital market. Our operations adhere strictly to all
               compliance, transparency, and investor protection requirements as mandated by

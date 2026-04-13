@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
 const HEADLINE = ["Trading", "Investments", "Capital"] as const;
 
 const TRUST_PILLS = [
-  "SEC-regulated",
+  "SEC Licensed",
   "Institutional grade",
   "Nigeria · Global markets",
 ] as const;

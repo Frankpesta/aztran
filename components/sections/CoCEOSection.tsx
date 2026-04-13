@@ -12,7 +12,10 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
  */
 export function CoCEOSection(): ReactElement {
   return (
-    <section className="relative overflow-hidden border-y border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_55%,var(--color-offwhite))] py-section dark:border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_92%,black)]">
+    <section
+      id="leadership"
+      className="relative scroll-mt-[calc(4.75rem+1rem)] overflow-hidden border-y border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_55%,var(--color-offwhite))] py-section dark:border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_92%,black)]"
+    >
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-25"
         style={{
@@ -29,7 +32,6 @@ export function CoCEOSection(): ReactElement {
           viewport={VIEWPORT}
           transition={{ duration: 0.65, ease: EASE_PREMIUM }}
           className="mt-4 max-w-3xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
-          id="co-managing-partners"
         >
           Co–managing partner leadership
         </motion.h2>

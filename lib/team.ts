@@ -48,6 +48,22 @@ export const CO_CEOS: readonly CoCEOProfile[] = [
 ];
 
 /**
+ * Non-executive director profile for the About page board (`BoardSection`).
+ * Portrait: `/public/assets/quam.jpeg` → `/assets/quam.jpeg`.
+ */
+export const NON_EXECUTIVE_DIRECTOR_BOARD = {
+  id: "quam-ajibola-laguda",
+  fullName: "Quam Ajibola Laguda",
+  title: "Non-Executive Director/Partner",
+  imageSrc: "/assets/quam.jpeg",
+  bioParagraphs: [
+    "Quam is an accomplished, results-driven, and visionary professional, an entrepreneur and financial consultant with over two decades of diversified experience across global financial markets, international bonds and money management. He is a dynamic project leader with a strong track record of creating value through strategic partnerships, particularly within international finance markets spanning Africa and Europe. He has a proven record of excellence in portfolio investment management, stock market analysis, and market forecasting with deep expertise in fixed income securities, including Eurobonds and domestic bonds. Quam has consistently excelled in leading cross-functional teams and advising clients on financial markets and money management strategies, often managing multiple client portfolios simultaneously.",
+    "As Chief Executive Officer of Alman Partners Ltd, he has demonstrated strong capability in global market analysis, strategic decision-making, and effective capital deployment. Known for his ability to adapt and perform in fast-paced environments, he combines strategic insight with disciplined execution.",
+    "Academically, Quam began his education at King\u2019s College before earning a degree in Industrial Relations and Personnel Management from the University of Lagos. He later obtained an MBA with distinction from Lagos Business School (LBS) and holds several professional certificates.",
+  ],
+} as const;
+
+/**
  * Optional additional leadership tiles (e.g. committee chairs). Empty until real profiles are ready.
  */
 export const TEAM_MEMBERS: TeamMember[] = [];

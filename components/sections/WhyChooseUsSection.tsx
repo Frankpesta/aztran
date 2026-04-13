@@ -22,8 +22,8 @@ type WhyItem = {
 
 const ITEMS: readonly WhyItem[] = [
   {
-    title: "SEC-Regulated",
-    body: "Aztran Global Investments Limited is fully regulated by the Securities and Exchange Commission Nigeria, ensuring complete compliance and safeguarding your investments.",
+    title: "SEC Licensed",
+    body: "Aztran Global Investments Limited is fully licensed by the Securities and Exchange Commission Nigeria, ensuring complete compliance and safeguarding your investments.",
     icon: BadgeCheck,
   },
   {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactElement } from "react";
@@ -108,6 +109,17 @@ export default async function ServiceDetailPage({
                   <h2 className="font-display text-h2 font-bold tracking-[-0.02em] text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                     {section.title}
                   </h2>
+                  {section.imageSrc ? (
+                    <div className="relative mt-6 aspect-[16/10] w-full overflow-hidden rounded-xl border border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_90%,var(--color-white))] shadow-[0_20px_50px_-36px_color-mix(in_srgb,var(--color-navy)_22%,transparent)] dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_92%,black)]">
+                      <Image
+                        src={section.imageSrc}
+                        alt={section.imageAlt ?? section.title}
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 1024px) 640px, 100vw"
+                      />
+                    </div>
+                  ) : null}
                   <div className="mt-4 space-y-4 font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] dark:text-[var(--color-silver)]">
                     {section.paragraphs?.map((p, i) => (
                       <p key={`${section.title}-p-${i}`}>{p}</p>

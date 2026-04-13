@@ -105,10 +105,20 @@ export function ResearchShowcaseSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{ duration: 0.65, ease: EASE_PREMIUM }}
-              className="mt-4 font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
+              className="mt-4 max-w-3xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
             >
-              Insights, desk reports, and commentary in one stream
+              Research from our desk—briefs, reports, and timely notes in one place
             </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT}
+              transition={{ duration: 0.55, ease: EASE_PREMIUM, delay: 0.06 }}
+              className="mt-5 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] dark:text-[var(--color-silver)]"
+            >
+              Follow macro and market insight cards, structured desk reports, and shorter
+              commentary as we publish—no need to jump between sections to see what is new.
+            </motion.p>
           </div>
         </div>
 
@@ -119,7 +129,7 @@ export function ResearchShowcaseSection({
         ) : items.length > 0 ? (
           <div className="mt-12">
             <MarqueeRow
-              label="Latest research"
+              label="Recently published"
               href="/insights"
               durationClass="animate-marquee-slow"
             >
@@ -133,11 +143,10 @@ export function ResearchShowcaseSection({
         ) : (
           <div className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_85%,var(--color-white))] px-8 py-14 text-center dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_90%,black)]">
             <p className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
-              Research highlights on the way
+              Coming soon
             </p>
-            <p className="mx-auto mt-4 max-w-lg font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
-              Macro briefs, market wraps, desk PDFs, and blog posts will surface here as
-              they are published. Explore the full library on the insights hub.
+            <p className="mx-auto mt-3 max-w-sm font-body text-body text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
+              Check back shortly for updates.
             </p>
             <Link
               href="/insights"

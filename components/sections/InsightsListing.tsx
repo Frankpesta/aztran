@@ -271,11 +271,10 @@ export function InsightsListing({
       {emptyMerged ? (
         <div className="rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_80%,var(--color-white))] px-8 py-14 text-center dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_90%,black)]">
           <p className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
-            Nothing published in this tab yet
+            Coming soon
           </p>
-          <p className="mx-auto mt-4 max-w-md font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
-            When your team publishes matching content from the admin dashboard, it will show
-            here. Drafts stay private until you publish.
+          <p className="mx-auto mt-3 max-w-sm font-body text-body text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
+            Check back shortly for updates.
           </p>
         </div>
       ) : null}
@@ -283,24 +282,10 @@ export function InsightsListing({
       {emptyInsightsOnly ? (
         <div className="rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_80%,var(--color-white))] px-8 py-14 text-center dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_90%,black)]">
           <p className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
-            {forcedCategory !== undefined
-              ? `No ${forcedCategory} insights yet`
-              : "No published insights yet"}
+            Coming soon
           </p>
-          <p className="mx-auto mt-4 max-w-md font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
-            {forcedCategory !== undefined ? (
-              <>
-                When your team publishes an insight with category{" "}
-                <span className="font-medium">{forcedCategory}</span> from the admin
-                dashboard, it will appear here. Draft items stay private until you publish
-                them.
-              </>
-            ) : (
-              <>
-                When your team publishes an insight from the admin dashboard, it will
-                appear here automatically. Draft items stay private until you publish them.
-              </>
-            )}
+          <p className="mx-auto mt-3 max-w-sm font-body text-body text-[color-mix(in_srgb,var(--color-navy)_62%,transparent)] dark:text-[var(--color-silver)]">
+            Check back shortly for updates.
           </p>
         </div>
       ) : null}

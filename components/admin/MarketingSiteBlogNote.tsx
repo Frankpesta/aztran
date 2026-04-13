@@ -9,15 +9,15 @@ export function MarketingSiteBlogNote(): ReactElement {
       <p className="font-medium text-amber-200/95">Marketing site note</p>
       <p className="mt-1.5">
         Blog posts publish to{" "}
-        <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">/blog/[slug]</code>{" "}
-        (the main nav points visitors to{" "}
-        <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">/insights</code>{" "}
-        instead). The homepage research strip and{" "}
+        <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">/blog/[slug]</code> and
+        are listed together on{" "}
         <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
           /insights/market-buzz
-        </code>{" "}
-        only list Insights (admin → Insights) with category Market Buzz—not this blog
-        collection.
+        </code>
+        . The main nav highlights{" "}
+        <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">/insights</code>; the
+        homepage research strip mixes insights, desk reports, and blog posts as they are
+        published.
       </p>
     </div>
   );

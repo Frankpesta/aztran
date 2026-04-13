@@ -10,46 +10,61 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
-export function BlogListing(): ReactElement {
+export function BlogListing({
+  hideCategoryTabs = false,
+}: {
+  /** When true, lists all published posts with no category filter row (e.g. `/insights/market-buzz`). */
+  hideCategoryTabs?: boolean;
+} = {}): ReactElement {
   const category = useUiStore((s) => s.blogCategory);
   const setCategory = useUiStore((s) => s.setBlogCategory);
 
-  const categoryList = useQuery(api.blogPosts.getPublishedBlogCategories);
+  const categoryList = useQuery(
+    api.blogPosts.getPublishedBlogCategories,
+    hideCategoryTabs ? "skip" : {},
+  );
   const { results, status, loadMore } = usePaginatedQuery(
     api.blogPosts.listPublishedBlogPostsPaginated,
-    { category: category === "All" ? undefined : category },
+    hideCategoryTabs
+      ? {}
+      : { category: category === "All" ? undefined : category },
     { initialNumItems: 9 },
   );
 
-  const categories = useMemo(() => ["All", ...(categoryList ?? [])], [categoryList]);
+  const categories = useMemo(
+    () => (hideCategoryTabs ? [] : ["All", ...(categoryList ?? [])]),
+    [hideCategoryTabs, categoryList],
+  );
   const loading = status === "LoadingFirstPage";
 
   return (
     <div>
-      <div
-        className="mb-10 flex flex-wrap gap-3 border-b border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pb-6 dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)]"
-        role="tablist"
-      >
-        {categories.map((c) => {
-          const active = category === c;
-          return (
-            <button
-              key={c}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() => setCategory(c)}
-              className={`rounded-sm px-4 py-2 font-body text-label uppercase tracking-wide transition-colors ${
-                active
-                  ? "bg-[var(--color-navy)] text-[var(--color-white)] dark:bg-[var(--color-cyan)] dark:text-[var(--color-navy)]"
-                  : "text-[var(--color-navy)] hover:text-[var(--color-cyan)] dark:text-[var(--color-silver)]"
-              }`}
-            >
-              {c}
-            </button>
-          );
-        })}
-      </div>
+      {!hideCategoryTabs ? (
+        <div
+          className="mb-10 flex flex-wrap gap-3 border-b border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pb-6 dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)]"
+          role="tablist"
+        >
+          {categories.map((c) => {
+            const active = category === c;
+            return (
+              <button
+                key={c}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => setCategory(c)}
+                className={`rounded-sm px-4 py-2 font-body text-label uppercase tracking-wide transition-colors ${
+                  active
+                    ? "bg-[var(--color-navy)] text-[var(--color-white)] dark:bg-[var(--color-cyan)] dark:text-[var(--color-navy)]"
+                    : "text-[var(--color-navy)] hover:text-[var(--color-cyan)] dark:text-[var(--color-silver)]"
+                }`}
+              >
+                {c}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
 
       <AnimatePresence mode="popLayout">
         {loading ? (

@@ -2,8 +2,6 @@ import { query } from "./_generated/server";
 import { v } from "convex/values";
 
 const MACRO = "Macro Report";
-const MARKET = "Market Report";
-const BUZZ = "Market Buzz";
 
 /**
  * Public marketing feeds that merge insights, blog posts, and structured market reports.
@@ -41,57 +39,39 @@ export const getMergedResearchFeed = query({
   },
 });
 
+/** Structured desk reports only (matches `/insights/market-report`). */
 export const getMergedMarketLaneFeed = query({
   args: { limit: v.number() },
   handler: async (ctx, { limit }) => {
     const cap = Math.min(Math.max(limit, 1), 150);
-    const takeEach = Math.min(cap * 2, 300);
-    const [ins, reps] = await Promise.all([
-      ctx.db
-        .query("insights")
-        .withIndex("by_status_referenceDate", (q) => q.eq("status", "published"))
-        .order("desc")
-        .filter((f) => f.eq(f.field("category"), MARKET))
-        .take(takeEach),
-      ctx.db
-        .query("marketReports")
-        .withIndex("by_status_and_date", (q) => q.eq("status", "published"))
-        .order("desc")
-        .take(takeEach),
-    ]);
-    const items = [
-      ...ins.map((doc) => ({ kind: "insight" as const, ref: doc.referenceDate, doc })),
-      ...reps.map((doc) => ({ kind: "marketReport" as const, ref: doc.reportDate, doc })),
-    ];
-    items.sort((a, b) => b.ref.localeCompare(a.ref));
-    return items.slice(0, cap);
+    const reps = await ctx.db
+      .query("marketReports")
+      .withIndex("by_status_and_date", (q) => q.eq("status", "published"))
+      .order("desc")
+      .take(cap);
+    return reps.map((doc) => ({
+      kind: "marketReport" as const,
+      ref: doc.reportDate,
+      doc,
+    }));
   },
 });
 
+/** Blog posts only (matches `/insights/market-buzz`). */
 export const getMergedBuzzLaneFeed = query({
   args: { limit: v.number() },
   handler: async (ctx, { limit }) => {
     const cap = Math.min(Math.max(limit, 1), 150);
-    const takeEach = Math.min(cap * 2, 300);
-    const [ins, blogs] = await Promise.all([
-      ctx.db
-        .query("insights")
-        .withIndex("by_status_referenceDate", (q) => q.eq("status", "published"))
-        .order("desc")
-        .filter((f) => f.eq(f.field("category"), BUZZ))
-        .take(takeEach),
-      ctx.db
-        .query("blogPosts")
-        .withIndex("by_status_referenceDate", (q) => q.eq("status", "published"))
-        .order("desc")
-        .take(takeEach),
-    ]);
-    const items = [
-      ...ins.map((doc) => ({ kind: "insight" as const, ref: doc.referenceDate, doc })),
-      ...blogs.map((doc) => ({ kind: "blog" as const, ref: doc.referenceDate, doc })),
-    ];
-    items.sort((a, b) => b.ref.localeCompare(a.ref));
-    return items.slice(0, cap);
+    const blogs = await ctx.db
+      .query("blogPosts")
+      .withIndex("by_status_referenceDate", (q) => q.eq("status", "published"))
+      .order("desc")
+      .take(cap);
+    return blogs.map((doc) => ({
+      kind: "blog" as const,
+      ref: doc.referenceDate,
+      doc,
+    }));
   },
 });
 

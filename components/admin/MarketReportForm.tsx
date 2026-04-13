@@ -232,12 +232,13 @@ export function MarketReportForm({
       <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-100">
         <p className="font-semibold text-amber-200">Where this appears on the site</p>
         <p className="mt-2 text-amber-100/90">
-          Published market reports are listed at{" "}
-          <span className="font-mono text-xs">/market-reports</span> and open at{" "}
-          <span className="font-mono text-xs">/market-reports/[slug]</span>. The{" "}
-          <span className="font-mono text-xs">/insights/market-report</span> hub is the{" "}
-          <strong>Insights</strong> lane (category &quot;Market Report&quot;), not this
-          collection—use the Insights admin form for those cards.
+          Published reports are listed at{" "}
+          <span className="font-mono text-xs">/insights/market-report</span> and open at{" "}
+          <span className="font-mono text-xs">/market-reports/[slug]</span> (the{" "}
+          <span className="font-mono text-xs">/market-reports</span> index redirects to that
+          listing). Short <strong>insight</strong> briefs with category &quot;Market
+          Report&quot; live in the main <span className="font-mono text-xs">/insights</span>{" "}
+          hub only—use Insights admin for those.
         </p>
       </div>
 

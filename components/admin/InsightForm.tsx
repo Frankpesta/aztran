@@ -374,20 +374,23 @@ export function InsightForm({
         <p className="mt-1.5">
           Use <strong className="text-white/90">Macro Report</strong>,{" "}
           <strong className="text-white/90">Market Report</strong>, or{" "}
-          <strong className="text-white/90">Market Buzz</strong> so this insight appears on
-          the homepage research strip and on{" "}
+          <strong className="text-white/90">Market Buzz</strong> for grouping on the homepage
+          strip and on the main{" "}
+          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">/insights</code> hub
+          tabs. Only{" "}
+          <strong className="text-white/90">Macro Report</strong> also has a dedicated URL:{" "}
           <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
             /insights/macro-report
           </code>
-          ,{" "}
-          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
+          . <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
             /insights/market-report
-          </code>
-          , or{" "}
+          </code>{" "}
+          lists structured desk reports (Market Reports admin);{" "}
           <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
             /insights/market-buzz
-          </code>
-          . Spelling must match exactly. Legacy categories below remain for older posts.
+          </code>{" "}
+          lists blog posts. Spelling must match exactly. Legacy categories remain for older
+          posts.
         </p>
       </div>
 

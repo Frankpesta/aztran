@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
 import { PageHero } from "@/components/layout/PageHero";
-import { InsightsListing } from "@/components/sections/InsightsListing";
-import { INSIGHT_CATEGORIES } from "@/lib/site-nav";
+import { MarketReportsListing } from "@/components/sections/MarketReportsListing";
 
 export const metadata: Metadata = {
   title: "Market Report",
@@ -16,7 +15,7 @@ export default function MarketReportInsightsPage(): ReactElement {
       <PageHero title="Market Report" imageSrc="/images/hero-bg.jpg" />
       <section className="py-section">
         <div className="mx-auto max-w-container px-4 md:px-8">
-          <InsightsListing forcedCategory={INSIGHT_CATEGORIES.marketReport} />
+          <MarketReportsListing />
         </div>
       </section>
     </>

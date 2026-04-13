@@ -21,6 +21,7 @@ import type * as insights from "../insights.js";
 import type * as marketReports from "../marketReports.js";
 import type * as portfolio from "../portfolio.js";
 import type * as recaptchaActions from "../recaptchaActions.js";
+import type * as researchFeed from "../researchFeed.js";
 import type * as seed from "../seed.js";
 import type * as slugHelpers from "../slugHelpers.js";
 import type * as staff from "../staff.js";
@@ -52,6 +53,7 @@ declare const fullApi: ApiFromModules<{
   marketReports: typeof marketReports;
   portfolio: typeof portfolio;
   recaptchaActions: typeof recaptchaActions;
+  researchFeed: typeof researchFeed;
   seed: typeof seed;
   slugHelpers: typeof slugHelpers;
   staff: typeof staff;

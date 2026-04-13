@@ -4,14 +4,13 @@ import { useQuery } from "convex/react";
 import { useMemo, type ReactElement, type ReactNode } from "react";
 import Link from "next/link";
 import { api } from "@/convex/_generated/api";
-import type { Doc } from "@/convex/_generated/dataModel";
+import type { ResearchFeedItem } from "@/types/research-feed";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { InsightCard } from "@/components/ui/InsightCard";
+import { ResearchFeedCard } from "@/components/ui/ResearchFeedCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EASE_PREMIUM, VIEWPORT } from "@/lib/animations";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { INSIGHT_CATEGORIES } from "@/lib/site-nav";
 
 function MarqueeRow({
   label,
@@ -54,31 +53,18 @@ function MarqueeCardShell({ children }: { children: ReactNode }): ReactElement {
 }
 
 /**
- * Auto-scrolling rows by insight category (macro, market report, market buzz).
+ * Single auto-scrolling row mixing insights, blog posts, and structured market reports.
  */
 export function ResearchShowcaseSection({
   homepage = false,
 }: {
   homepage?: boolean;
 } = {}): ReactElement {
-  /** `getHomeInsights` is on every deployment; filter client-side so the page works before `getHomeInsightsByCategory` is pushed. */
-  const homeInsights = useQuery(api.insights.getHomeInsights, { limit: 96 });
+  const feed = useQuery(api.researchFeed.getMergedResearchFeed, { limit: 36 });
 
-  const { macro, market, buzz } = useMemo(() => {
-    const rows = homeInsights ?? [];
-    const pick = (category: string): Doc<"insights">[] =>
-      rows
-        .filter((i) => i.category === category)
-        .sort((a, b) => b.referenceDate.localeCompare(a.referenceDate))
-        .slice(0, 8);
-    return {
-      macro: pick(INSIGHT_CATEGORIES.macroReport),
-      market: pick(INSIGHT_CATEGORIES.marketReport),
-      buzz: pick(INSIGHT_CATEGORIES.marketBuzz),
-    };
-  }, [homeInsights]);
+  const items = useMemo((): ResearchFeedItem[] => feed ?? [], [feed]);
 
-  const loading = homeInsights === undefined;
+  const loading = feed === undefined;
 
   return (
     <section
@@ -121,79 +107,44 @@ export function ResearchShowcaseSection({
               transition={{ duration: 0.65, ease: EASE_PREMIUM }}
               className="mt-4 font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
             >
-              Insights across macro, markets, and buzz
+              Insights, desk reports, and commentary in one stream
             </motion.h2>
           </div>
         </div>
 
         {loading ? (
-          <div className="mt-12 space-y-8">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <Skeleton key={i} className="h-40 w-full rounded-2xl" />
-            ))}
+          <div className="mt-12">
+            <Skeleton className="h-40 w-full rounded-2xl" />
+          </div>
+        ) : items.length > 0 ? (
+          <div className="mt-12">
+            <MarqueeRow
+              label="Latest research"
+              href="/insights"
+              durationClass="animate-marquee-slow"
+            >
+              {items.map((item) => (
+                <MarqueeCardShell key={`${item.kind}-${item.doc._id}`}>
+                  <ResearchFeedCard item={item} className="h-full" />
+                </MarqueeCardShell>
+              ))}
+            </MarqueeRow>
           </div>
         ) : (
-          <div className="mt-12 space-y-12">
-            {macro.length > 0 ? (
-              <MarqueeRow
-                label="Macro Report"
-                href="/insights/macro-report"
-                durationClass="animate-marquee-slow"
-              >
-                {macro.map((item: Doc<"insights">) => (
-                  <MarqueeCardShell key={item._id}>
-                    <InsightCard insight={item} className="h-full" />
-                  </MarqueeCardShell>
-                ))}
-              </MarqueeRow>
-            ) : null}
-            {market.length > 0 ? (
-              <MarqueeRow
-                label="Market Report"
-                href="/insights/market-report"
-                durationClass="animate-marquee-medium"
-              >
-                {market.map((item: Doc<"insights">) => (
-                  <MarqueeCardShell key={item._id}>
-                    <InsightCard insight={item} className="h-full" />
-                  </MarqueeCardShell>
-                ))}
-              </MarqueeRow>
-            ) : null}
-            {buzz.length > 0 ? (
-              <MarqueeRow
-                label="Market Buzz"
-                href="/insights/market-buzz"
-                durationClass="animate-marquee-fast"
-              >
-                {buzz.map((item: Doc<"insights">) => (
-                  <MarqueeCardShell key={item._id}>
-                    <InsightCard insight={item} className="h-full" />
-                  </MarqueeCardShell>
-                ))}
-              </MarqueeRow>
-            ) : null}
-            {!loading &&
-            macro.length === 0 &&
-            market.length === 0 &&
-            buzz.length === 0 ? (
-              <div className="rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_85%,var(--color-white))] px-8 py-14 text-center dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_90%,black)]">
-                <p className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
-                  Research highlights on the way
-                </p>
-                <p className="mx-auto mt-4 max-w-lg font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
-                  Macro reports, market wraps, and desk commentary will rotate through this
-                  showcase as new briefs are published. In the meantime, the insights hub
-                  holds our full research library.
-                </p>
-                <Link
-                  href="/insights"
-                  className="mt-8 inline-flex items-center gap-1 font-body text-label font-semibold uppercase tracking-wide text-[var(--color-cyan)] transition-[gap,color] hover:gap-2"
-                >
-                  Explore insights →
-                </Link>
-              </div>
-            ) : null}
+          <div className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_85%,var(--color-white))] px-8 py-14 text-center dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_90%,black)]">
+            <p className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
+              Research highlights on the way
+            </p>
+            <p className="mx-auto mt-4 max-w-lg font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
+              Macro briefs, market wraps, desk PDFs, and blog posts will surface here as
+              they are published. Explore the full library on the insights hub.
+            </p>
+            <Link
+              href="/insights"
+              className="mt-8 inline-flex items-center gap-1 font-body text-label font-semibold uppercase tracking-wide text-[var(--color-cyan)] transition-[gap,color] hover:gap-2"
+            >
+              Explore insights →
+            </Link>
           </div>
         )}
       </div>

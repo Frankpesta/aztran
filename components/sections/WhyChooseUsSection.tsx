@@ -78,17 +78,10 @@ export function WhyChooseUsSection({
         </>
       ) : null}
       <div className="relative z-[1] mx-auto max-w-container px-4 md:px-8">
-        <SectionLabel>Why choose us</SectionLabel>
-        <motion.h2
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT}
-          transition={{ duration: 0.6, ease: EASE_PREMIUM }}
-          className="mt-4 max-w-2xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
-        >
-          Five reasons institutions and investors choose Aztran.
-        </motion.h2>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <SectionLabel className="normal-case tracking-[0.12em]">
+          Why Aztran
+        </SectionLabel>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ITEMS.map((item, i) => (
             <motion.article
               key={item.title}

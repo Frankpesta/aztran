@@ -1,15 +1,5 @@
 import type { Id } from "@/convex/_generated/dataModel";
 
-export const INSIGHT_CATEGORIES = [
-  "Inflation",
-  "Fixed Income",
-  "Equities",
-  "FX",
-  "Commodities",
-  "Economic Update",
-  "Strategy",
-] as const;
-
 export const BLOG_CATEGORIES = [
   "Market Buzz",
   "Company News",

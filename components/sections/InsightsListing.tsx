@@ -161,11 +161,24 @@ export function InsightsListing({
       {!loading && !hero && results.length === 0 ? (
         <div className="rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_80%,var(--color-white))] px-8 py-14 text-center dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_90%,black)]">
           <p className="font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
-            No published insights yet
+            {forcedCategory !== undefined
+              ? `No ${forcedCategory} insights yet`
+              : "No published insights yet"}
           </p>
           <p className="mx-auto mt-4 max-w-md font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
-            When your team publishes an insight from the admin dashboard, it will appear
-            here automatically. Draft items stay private until you publish them.
+            {forcedCategory !== undefined ? (
+              <>
+                When your team publishes an insight with category{" "}
+                <span className="font-medium">{forcedCategory}</span> from the admin
+                dashboard, it will appear here. Draft items stay private until you publish
+                them.
+              </>
+            ) : (
+              <>
+                When your team publishes an insight from the admin dashboard, it will
+                appear here automatically. Draft items stay private until you publish them.
+              </>
+            )}
           </p>
         </div>
       ) : null}

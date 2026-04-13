@@ -4,7 +4,13 @@ import { useMutation, useQuery } from "convex/react";
 import slugify from "slugify";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { useCallback, useEffect, useState, type ReactElement } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactElement,
+} from "react";
 import { toast } from "sonner";
 import type { GenericId } from "convex/values";
 import { api } from "@/convex/_generated/api";
@@ -38,10 +44,11 @@ import { ChevronDown, Plus, Trash2 } from "lucide-react";
 import { useConvexStaffSessionReady } from "@/hooks/useConvexStaffSessionReady";
 import { useRecaptchaGate } from "@/hooks/useRecaptchaGate";
 import { Switch } from "@/components/ui/switch";
+import { estimateInsightReadMinutes } from "@/lib/content-form-defaults";
 import {
-  estimateInsightReadMinutes,
   INSIGHT_CATEGORIES,
-} from "@/lib/content-form-defaults";
+  INSIGHT_CATEGORY_ADMIN_OPTIONS,
+} from "@/lib/site-nav";
 
 type StorageId = GenericId<"_storage">;
 
@@ -97,7 +104,7 @@ function emptyForm(): FormState {
     slug: "",
     referenceDate: today,
     displayDate: "",
-    category: INSIGHT_CATEGORIES[0],
+    category: INSIGHT_CATEGORIES.macroReport,
     tags: [],
     tagInput: "",
     sources: [],
@@ -211,6 +218,14 @@ export function InsightForm({
   );
 
   const previewCover = liveCoverUrl ?? coverUrl ?? null;
+
+  const categorySelectOptions = useMemo(() => {
+    const cur = form.category.trim();
+    if (cur && !INSIGHT_CATEGORY_ADMIN_OPTIONS.includes(cur)) {
+      return [cur, ...INSIGHT_CATEGORY_ADMIN_OPTIONS];
+    }
+    return [...INSIGHT_CATEGORY_ADMIN_OPTIONS];
+  }, [form.category]);
 
   const set = useCallback(<K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((f) => ({ ...f, [key]: value }));
@@ -354,6 +369,28 @@ export function InsightForm({
         ) : null}
       </div>
 
+      <div className="rounded-lg border border-cyan-500/25 bg-cyan-500/5 px-4 py-3 font-body text-[13px] leading-relaxed text-white/80">
+        <p className="font-medium text-cyan-200/95">Public site mapping</p>
+        <p className="mt-1.5">
+          Use <strong className="text-white/90">Macro Report</strong>,{" "}
+          <strong className="text-white/90">Market Report</strong>, or{" "}
+          <strong className="text-white/90">Market Buzz</strong> so this insight appears on
+          the homepage research strip and on{" "}
+          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
+            /insights/macro-report
+          </code>
+          ,{" "}
+          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
+            /insights/market-report
+          </code>
+          , or{" "}
+          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
+            /insights/market-buzz
+          </code>
+          . Spelling must match exactly. Legacy categories below remain for older posts.
+        </p>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2">
         <div className="md:col-span-2">
           <Label htmlFor="title">Title</Label>
@@ -412,8 +449,8 @@ export function InsightForm({
             <SelectTrigger className="mt-2">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
-              {INSIGHT_CATEGORIES.map((c) => (
+            <SelectContent className="max-h-[min(24rem,70vh)]">
+              {categorySelectOptions.map((c) => (
                 <SelectItem key={c} value={c}>
                   {c}
                 </SelectItem>

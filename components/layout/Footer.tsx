@@ -97,7 +97,7 @@ export function Footer(): ReactElement {
                   href="/services/asset-management"
                   className="inline-flex transition-[color,translate] hover:translate-x-1 hover:text-[var(--color-cyan)]"
                 >
-                  Asset management
+                  Asset Management
                 </Link>
               </li>
               <li>
@@ -105,7 +105,7 @@ export function Footer(): ReactElement {
                   href="/services/global-markets-trading"
                   className="inline-flex transition-[color,translate] hover:translate-x-1 hover:text-[var(--color-cyan)]"
                 >
-                  Global markets & brokerage
+                  Global Markets &amp; Brokerage
                 </Link>
               </li>
               <li>

@@ -16,11 +16,7 @@ export const metadata: Metadata = {
 export default function ServicesPage(): ReactElement {
   return (
     <>
-      <PageHero
-        title="Services"
-        subtitle="Asset management, global markets & brokerage, and dedicated brokerage coverage—structured for institutional mandates and regulatory scrutiny."
-        imageSrc="/images/hero-bg.jpg"
-      />
+      <PageHero title="Services" imageSrc="/images/hero-bg.jpg" />
       <section className="py-section">
         <div className="mx-auto max-w-container px-4 md:px-8">
           <SectionLabel>What we offer</SectionLabel>

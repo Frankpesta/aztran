@@ -13,11 +13,7 @@ export const metadata: Metadata = {
 export default function MarketBuzzInsightsPage(): ReactElement {
   return (
     <>
-      <PageHero
-        title="Market Buzz"
-        subtitle="Quick takes, movers, and what our desk is watching—lightweight updates between deeper reports."
-        imageSrc="/images/hero-bg.jpg"
-      />
+      <PageHero title="Market Buzz" imageSrc="/images/hero-bg.jpg" />
       <section className="py-section">
         <div className="mx-auto max-w-container px-4 md:px-8">
           <InsightsListing forcedCategory={INSIGHT_CATEGORIES.marketBuzz} />

@@ -66,11 +66,7 @@ const CORE_VALUES = [
 export default function AboutPage(): ReactElement {
   return (
     <>
-      <PageHero
-        title="About us"
-        subtitle="A financial services group specializing in portfolio management and strategic trading—licensed by the Securities and Exchange Commission Nigeria."
-        imageSrc="/images/hero-bg.jpg"
-      />
+      <PageHero title="About us" imageSrc="/images/hero-bg.jpg" />
 
       <section
         id="about-us"

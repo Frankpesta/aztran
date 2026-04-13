@@ -7,6 +7,28 @@ export const INSIGHT_CATEGORIES = {
   marketBuzz: "Market Buzz",
 } as const;
 
+/** Legacy `insights.category` values so older documents remain editable in admin. */
+export const LEGACY_INSIGHT_CATEGORIES = [
+  "Inflation",
+  "Fixed Income",
+  "Equities",
+  "FX",
+  "Commodities",
+  "Economic Update",
+  "Strategy",
+] as const;
+
+/**
+ * Insight editor dropdown: public IA lanes first (must match strings above exactly),
+ * then legacy options.
+ */
+export const INSIGHT_CATEGORY_ADMIN_OPTIONS: readonly string[] = [
+  INSIGHT_CATEGORIES.macroReport,
+  INSIGHT_CATEGORIES.marketReport,
+  INSIGHT_CATEGORIES.marketBuzz,
+  ...LEGACY_INSIGHT_CATEGORIES,
+];
+
 export type AboutNavItem = {
   href: string;
   label: string;
@@ -69,7 +91,7 @@ export const SERVICES_NAV: readonly ServiceNavItem[] = [
   },
   {
     href: "/services/global-markets-trading",
-    label: "Global Market and Brokerage",
+    label: "Global Markets & Brokerage",
     description:
       "Government & sovereign paper, global and local equities, ETFs, OTC, and brokerage.",
   },

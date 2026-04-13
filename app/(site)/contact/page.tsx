@@ -13,11 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage(): ReactElement {
   return (
     <>
-      <PageHero
-        title="Contact Us"
-        subtitle=""
-        imageSrc="/images/hero-bg.jpg"
-      />
+      <PageHero title="Contact Us" imageSrc="/images/hero-bg.jpg" />
       <section className="relative overflow-hidden py-section">
         <div
           className="pointer-events-none absolute inset-0 dark:opacity-40"

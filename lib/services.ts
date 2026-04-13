@@ -35,7 +35,7 @@ export type ServiceOffering = {
 export const SERVICES: readonly ServiceOffering[] = [
   {
     slug: "asset-management",
-    title: "Asset management",
+    title: "Asset Management",
     summary:
       "SEC Licensed fund and portfolio management—preserving capital, generating consistent returns, and building long-term wealth across diversified mandates.",
     imageSrc:
@@ -44,17 +44,17 @@ export const SERVICES: readonly ServiceOffering[] = [
     titleClassName:
       "text-[var(--color-navy)] group-hover:text-[color-mix(in_srgb,var(--color-navy)_45%,var(--color-cyan))] dark:text-[var(--color-offwhite)] dark:group-hover:text-[var(--color-cyan)]",
     page: {
-      metaTitle: "Asset management",
+      metaTitle: "Asset Management",
       metaDescription:
         "SEC Licensed asset management: USD and NGN bond-backed strategies, portfolio investing, alternatives, portfolio management, family office, and investment education.",
       heroEyebrow: "Service",
-      headline: "Asset management",
-      capabilitiesHeading: "Our solutions & services",
+      headline: "Asset Management",
+      capabilitiesHeading: "Our Solutions & Services",
       lead:
         "Licensed by the SEC as a fund and portfolio manager, we build institutional-grade portfolios that blend local and global fixed income, disciplined public-market investing, and carefully selected alternatives—governed by clear mandates, transparent reporting, and a long-term partnership mindset.",
       sections: [
         {
-          title: "USD bond-backed investment",
+          title: "USD Bond-Backed Investment",
           imageSrc: "/images/debt-equity.jpeg",
           imageAlt: "Global bond markets and dollar-denominated fixed income",
           paragraphs: [
@@ -63,7 +63,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "NGN bond-backed investment",
+          title: "NGN Bond-Backed Investment",
           imageSrc:
             "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Nigerian naira fixed income and domestic bond allocation",
@@ -73,7 +73,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Portfolio investing",
+          title: "Portfolio Investing",
           imageSrc: "/images/portfolio.jpeg",
           imageAlt: "Portfolio strategy and diversified allocation",
           paragraphs: [
@@ -82,7 +82,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Alternative investment",
+          title: "Alternative Investment",
           imageSrc:
             "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Alternative investments and private market opportunities",
@@ -92,7 +92,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Portfolio management",
+          title: "Portfolio Management",
           imageSrc:
             "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Institutional portfolio management and reporting",
@@ -102,7 +102,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Family office",
+          title: "Family Office",
           imageSrc:
             "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Family office advisory and consolidated wealth view",
@@ -112,7 +112,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Investment education",
+          title: "Investment Education",
           imageSrc:
             "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Investment education and client workshops",
@@ -123,19 +123,19 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "USD bond-backed investment",
-        "NGN bond-backed investment",
-        "Portfolio investing",
-        "Alternative investment",
-        "Portfolio management",
-        "Family office",
-        "Investment education",
+        "USD Bond-Backed Investment",
+        "NGN Bond-Backed Investment",
+        "Portfolio Investing",
+        "Alternative Investment",
+        "Portfolio Management",
+        "Family Office",
+        "Investment Education",
       ],
     },
   },
   {
     slug: "global-markets-trading",
-    title: "Global markets & brokerage",
+    title: "Global Markets & Brokerage",
     summary:
       "The Group’s multi-currency treasury: brokerage, execution across local and international securities, ALM, and large-ticket liquidity when markets move.",
     imageSrc:
@@ -143,13 +143,13 @@ export const SERVICES: readonly ServiceOffering[] = [
     imageAlt: "Market data and global trading visualization",
     titleClassName:
       "text-[var(--color-cyan)] dark:text-[var(--color-cyan)] group-hover:text-[color-mix(in_srgb,var(--color-cyan)_85%,var(--color-navy))]",
-       page: {
-      metaTitle: "Global markets & brokerage",
+    page: {
+      metaTitle: "Global Markets & Brokerage",
       metaDescription:
         "Global markets and brokerage: government securities, sovereign bonds and Treasury Bills, local and global equities, ETFs including derivatives and commodities, OTC markets, and full-service brokerage.",
       heroEyebrow: "Service",
-      headline: "Global markets & brokerage",
-      capabilitiesHeading: "Our solutions & services",
+      headline: "Global Markets & Brokerage",
+      capabilitiesHeading: "Our Solutions & Services",
       lead:
         "Our Global Markets, Trading, and Brokerage division is the Group’s multi-currency execution and liquidity hub—connecting clients to government and sovereign paper, listed and OTC equity markets, exchange-traded structures, and high-touch brokerage coverage backed by real-time market intelligence.",
       introBeforeServices: [
@@ -157,7 +157,7 @@ export const SERVICES: readonly ServiceOffering[] = [
       ],
       sections: [
         {
-          title: "Government securities",
+          title: "Government Securities",
           imageSrc:
             "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Government securities and sovereign debt instruments",
@@ -167,7 +167,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Sovereign (bond and Treasury Bills)",
+          title: "Sovereign (Bond and Treasury Bills)",
           imageSrc:
             "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Sovereign bonds and Treasury Bill allocation",
@@ -177,7 +177,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Equities (global and local)",
+          title: "Equities (Global and Local)",
           imageSrc: "/images/home1.jpeg",
           imageAlt: "Global and local equity markets execution",
           paragraphs: [
@@ -186,7 +186,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "ETFs (derivatives and commodities)",
+          title: "ETFs (Derivatives and Commodities)",
           imageSrc: "/images/structure.jpeg",
           imageAlt: "ETFs, derivatives, and commodities market access",
           paragraphs: [
@@ -195,7 +195,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "OTC market",
+          title: "OTC Market",
           imageSrc:
             "https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Over-the-counter trading and negotiated liquidity",
@@ -205,7 +205,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Brokerage services",
+          title: "Brokerage Services",
           imageSrc:
             "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Institutional brokerage and client coverage",
@@ -216,12 +216,12 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "Government securities",
-        "Sovereign (bond and Treasury Bills)",
-        "Equities (global and local)",
-        "ETFs (derivatives and commodities)",
-        "OTC market",
-        "Brokerage services",
+        "Government Securities",
+        "Sovereign (Bond and Treasury Bills)",
+        "Equities (Global and Local)",
+        "ETFs (Derivatives and Commodities)",
+        "OTC Market",
+        "Brokerage Services",
       ],
     },
   },
@@ -240,12 +240,12 @@ export const SERVICES: readonly ServiceOffering[] = [
         "Advisory: debt and equity capital management, structured finance, and portfolio investing—capital raising, tailored funding structures, and disciplined portfolio strategies.",
       heroEyebrow: "Service",
       headline: "Advisory",
-      capabilitiesHeading: "What we offer",
+      capabilitiesHeading: "What We Offer",
       lead:
         "Our advisory practice helps clients raise and manage capital, structure complex financing, and invest with discipline—from the right mix of debt and equity through tailored structured solutions to long-term portfolio outcomes.",
       sections: [
         {
-          title: "Debt & equity capital management",
+          title: "Debt & Equity Capital Management",
           imageSrc: "/images/debt-equity.jpeg",
           imageAlt: "Debt and equity capital management",
           paragraphs: [
@@ -253,7 +253,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Structured finance",
+          title: "Structured Finance",
           imageSrc: "/images/structure.jpeg",
           imageAlt: "Structured finance and tailored funding",
           paragraphs: [
@@ -261,7 +261,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Portfolio investing",
+          title: "Portfolio Investing",
           imageSrc: "/images/portfolio.jpeg",
           imageAlt: "Portfolio investing and diversification",
           paragraphs: [
@@ -270,12 +270,12 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "Debt & equity capital management",
-        "Structured finance",
-        "Portfolio investing",
-        "Capital raising & investor sourcing",
-        "Asset-backed & project finance structures",
-        "Research-driven portfolio construction",
+        "Debt & Equity Capital Management",
+        "Structured Finance",
+        "Portfolio Investing",
+        "Capital Raising & Investor Sourcing",
+        "Asset-Backed & Project Finance Structures",
+        "Research-Driven Portfolio Construction",
       ],
     },
   },

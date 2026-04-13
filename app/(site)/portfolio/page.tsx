@@ -15,11 +15,7 @@ export const metadata: Metadata = {
 export default function PortfolioPage(): ReactElement {
   return (
     <>
-      <PageHero
-        title="Investment Portfolio"
-        subtitle="A representative view of active work, realised outcomes, and pipeline review."
-        imageSrc="/images/hero-bg.jpg"
-      />
+      <PageHero title="Investment Portfolio" imageSrc="/images/hero-bg.jpg" />
       <PortfolioStatsSection />
       <PortfolioFeaturedSection />
       <PortfolioDealsGrid />

@@ -352,6 +352,23 @@ export function BlogForm({
         ) : null}
       </div>
 
+      <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 px-4 py-3 font-body text-[13px] leading-relaxed text-white/80">
+        <p className="font-medium text-amber-200/95">Marketing site note</p>
+        <p className="mt-1.5">
+          Blog posts publish to{" "}
+          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">/blog/[slug]</code>{" "}
+          (the main nav points visitors to{" "}
+          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">/insights</code>{" "}
+          instead). The homepage research strip and{" "}
+          <code className="rounded bg-black/30 px-1 py-0.5 text-[12px]">
+            /insights/market-buzz
+          </code>{" "}
+          only list <strong className="text-white/90">Insights</strong> (admin → Insights)
+          with category <strong className="text-white/90">Market Buzz</strong>—not this blog
+          collection.
+        </p>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2">
         <div className="md:col-span-2">
           <Label htmlFor="btitle">Title</Label>

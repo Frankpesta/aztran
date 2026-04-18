@@ -136,11 +136,11 @@ export default async function InsightArticlePage({
 
       {coverUrl ? (
         <div className="mx-auto mt-10 max-w-[900px] px-4">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_35%,transparent)] shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-navy)_35%,transparent)]">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_35%,transparent)] bg-[color-mix(in_srgb,var(--color-offwhite)_92%,var(--color-white))] shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--color-navy)_35%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_94%,black)]">
             <ConvexStorageImage
               src={coverUrl}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-contain object-center"
               priority
             />
           </div>

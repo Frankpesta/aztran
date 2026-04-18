@@ -53,7 +53,7 @@ export function PageHero({
                 src={imageSrc}
                 alt=""
                 fill
-                className="object-cover brightness-[1.08] contrast-[1.08] saturate-[1.12] opacity-90"
+                className="object-contain object-center brightness-[1.08] contrast-[1.08] saturate-[1.12] opacity-90"
                 sizes="100vw"
                 priority
               />

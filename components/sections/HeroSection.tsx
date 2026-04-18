@@ -74,7 +74,7 @@ export function HeroSection(): ReactElement {
                 priority={i === 0}
                 sizes="100vw"
                 unoptimized={isRemoteHeroImage(slide.src)}
-                className="object-cover object-center brightness-[0.98] contrast-[1.04] saturate-[1.06] dark:brightness-[0.92] dark:contrast-[1.05] dark:saturate-[1.05]"
+                className="object-contain object-center brightness-[0.98] contrast-[1.04] saturate-[1.06] dark:brightness-[0.92] dark:contrast-[1.05] dark:saturate-[1.05]"
               />
             </div>
           </div>

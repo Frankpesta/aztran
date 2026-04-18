@@ -1,6 +1,6 @@
 /** Public contact details for marketing pages and mailto/Google Mail links. */
 
-export const CONTACT_EMAIL = "investments@aztranlimited.com";
+export const CONTACT_EMAIL = "info@aztranlimited.com";
 
 /** Opens Gmail compose in the browser (requires user to be signed into Gmail). */
 export const CONTACT_EMAIL_GMAIL_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}`;

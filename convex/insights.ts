@@ -66,6 +66,9 @@ const insightPatchArgs = v.object({
   updatedBy: v.optional(v.string()),
 });
 
+const MACRO_REPORT_CATEGORY = "Macro Report";
+const LEGACY_MACRO_INFLATION_CATEGORY = "Inflation";
+
 export const listPublishedInsightsPaginated = query({
   args: {
     paginationOpts: paginationOptsValidator,
@@ -77,7 +80,16 @@ export const listPublishedInsightsPaginated = query({
       .withIndex("by_status_referenceDate", (iq) => iq.eq("status", "published"))
       .order("desc");
     if (category && category !== "All") {
-      q = q.filter((f) => f.eq(f.field("category"), category));
+      if (category === MACRO_REPORT_CATEGORY) {
+        q = q.filter((f) =>
+          f.or(
+            f.eq(f.field("category"), MACRO_REPORT_CATEGORY),
+            f.eq(f.field("category"), LEGACY_MACRO_INFLATION_CATEGORY),
+          ),
+        );
+      } else {
+        q = q.filter((f) => f.eq(f.field("category"), category));
+      }
     }
     return await q.paginate(paginationOpts);
   },

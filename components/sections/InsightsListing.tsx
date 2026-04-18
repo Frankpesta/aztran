@@ -8,14 +8,11 @@ import { api } from "@/convex/_generated/api";
 import { InsightCard } from "@/components/ui/InsightCard";
 import { ResearchFeedCard } from "@/components/ui/ResearchFeedCard";
 import { useUiStore, type InsightHubTab } from "@/store/uiStore";
-import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import type { ResearchFeedItem } from "@/types/research-feed";
 
 const HUB_TABS: readonly { id: InsightHubTab; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "insights", label: "Insights" },
   { id: "macro_report", label: "Macro Report" },
   { id: "market_report", label: "Market Report" },
   { id: "market_buzz", label: "Market Buzz" },
@@ -27,7 +24,7 @@ type InsightsListingProps = {
 };
 
 /**
- * Insights hub: tabbed All / Insights / lane filters; optional forced category for sub-routes.
+ * Insights hub: Macro Report, Market Report, and Market Buzz; optional forced category for sub-routes.
  */
 export function InsightsListing({
   forcedCategory,
@@ -45,13 +42,6 @@ export function InsightsListing({
     [setHubTab, setResearchFeedLimit],
   );
 
-  const featuredList = useQuery(api.insights.getFeaturedInsights);
-  const mergedAll = useQuery(
-    api.researchFeed.getMergedResearchFeed,
-    forcedCategory === undefined && hubTab === "all"
-      ? { limit: researchFeedLimit }
-      : "skip",
-  );
   const mergedMarket = useQuery(
     api.researchFeed.getMergedMarketLaneFeed,
     forcedCategory === undefined && hubTab === "market_report"
@@ -71,57 +61,31 @@ export function InsightsListing({
       : "skip",
   );
 
-  const insightPaginatedArgs =
-    forcedCategory !== undefined
-      ? { category: forcedCategory }
-      : hubTab === "insights"
-        ? {}
-        : ("skip" as const);
-
   const { results, status, loadMore } = usePaginatedQuery(
     api.insights.listPublishedInsightsPaginated,
-    insightPaginatedArgs,
+    forcedCategory !== undefined ? { category: forcedCategory } : "skip",
     { initialNumItems: 9 },
   );
 
-  const insightResults =
-    forcedCategory !== undefined || hubTab === "insights" ? results : [];
-
-  const hero = useMemo((): Doc<"insights"> | undefined => {
-    if (forcedCategory !== undefined) return undefined;
-    if (hubTab !== "insights") return undefined;
-    const featured = featuredList?.[0];
-    if (featured) return featured;
-    return insightResults[0];
-  }, [forcedCategory, hubTab, featuredList, insightResults]);
-
-  const gridInsightItems = useMemo(() => {
-    if (!insightResults.length) return [];
-    if (forcedCategory !== undefined) return insightResults;
-    if (hubTab !== "insights") return [];
-    if (!hero) return insightResults;
-    const withoutHero = insightResults.filter((r) => r._id !== hero._id);
-    if (withoutHero.length > 0) return withoutHero;
-    return [];
-  }, [insightResults, hero, hubTab, forcedCategory]);
+  const insightResults = forcedCategory !== undefined ? (results ?? []) : [];
 
   const mergedItems: ResearchFeedItem[] | undefined = useMemo(() => {
     if (forcedCategory !== undefined) return undefined;
-    if (hubTab === "all") return mergedAll;
     if (hubTab === "market_report") return mergedMarket;
     if (hubTab === "market_buzz") return mergedBuzz;
     if (hubTab === "macro_report") return macroFeed;
     return undefined;
-  }, [forcedCategory, hubTab, mergedAll, mergedMarket, mergedBuzz, macroFeed]);
+  }, [forcedCategory, hubTab, mergedMarket, mergedBuzz, macroFeed]);
 
   const loadingMerged =
     forcedCategory === undefined &&
-    (hubTab === "all" || hubTab === "market_report" || hubTab === "market_buzz" || hubTab === "macro_report") &&
+    (hubTab === "market_report" ||
+      hubTab === "market_buzz" ||
+      hubTab === "macro_report") &&
     mergedItems === undefined;
 
   const loadingInsights =
-    (forcedCategory !== undefined || hubTab === "insights") &&
-    status === "LoadingFirstPage";
+    forcedCategory !== undefined && status === "LoadingFirstPage";
 
   const loading = loadingMerged || loadingInsights;
 
@@ -129,49 +93,23 @@ export function InsightsListing({
 
   const canLoadMoreMerged =
     showHubTabs &&
-    (hubTab === "all" ||
-      hubTab === "market_report" ||
-      hubTab === "market_buzz" ||
-      hubTab === "macro_report") &&
     mergedItems !== undefined &&
     mergedItems.length >= researchFeedLimit;
 
   const emptyMerged =
     !loadingMerged &&
     mergedItems !== undefined &&
-    mergedItems.length === 0 &&
-    (hubTab === "all" ||
-      hubTab === "market_report" ||
-      hubTab === "market_buzz" ||
-      hubTab === "macro_report");
+    mergedItems.length === 0;
 
   const emptyInsightsOnly =
     !loadingInsights &&
-    (forcedCategory !== undefined || hubTab === "insights") &&
-    !hero &&
+    forcedCategory !== undefined &&
     insightResults.length === 0;
 
   return (
     <div>
       {loadingInsights ? (
         <Skeleton className="mb-16 h-80 w-full" />
-      ) : hero && hubTab === "insights" && forcedCategory === undefined ? (
-        <Link
-          href={`/insights/${hero.slug}`}
-          className="group relative mb-16 block min-h-[320px] overflow-hidden rounded-sm"
-        >
-          <div className="h-full min-h-[320px] w-full bg-[var(--color-navy)]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy-80)] to-transparent" />
-          <div className="absolute bottom-0 left-0 p-8 text-[var(--color-white)] md:p-12">
-            <p className="font-body text-label uppercase tracking-[0.25em] text-[var(--color-cyan)]">
-              {hero.category}
-            </p>
-            <h2 className="mt-2 max-w-2xl font-display text-h2">{hero.title}</h2>
-            <p className="mt-4 font-body text-label uppercase tracking-wide text-[var(--color-cyan)]">
-              Read insight →
-            </p>
-          </div>
-        </Link>
       ) : null}
 
       {showHubTabs ? (
@@ -209,9 +147,9 @@ export function InsightsListing({
               <Skeleton key={i} className="h-72 rounded-sm" />
             ))}
           </div>
-        ) : hubTab === "insights" || forcedCategory !== undefined ? (
+        ) : forcedCategory !== undefined ? (
           <motion.div layout className="grid gap-6 md:grid-cols-3">
-            {gridInsightItems.map((insight: Doc<"insights">) => (
+            {insightResults.map((insight: Doc<"insights">) => (
               <motion.div
                 key={insight._id}
                 layout
@@ -240,9 +178,7 @@ export function InsightsListing({
         )}
       </AnimatePresence>
 
-      {forcedCategory === undefined &&
-      hubTab === "insights" &&
-      status === "CanLoadMore" ? (
+      {forcedCategory !== undefined && status === "CanLoadMore" ? (
         <div className="mt-10 flex justify-center">
           <Button
             type="button"

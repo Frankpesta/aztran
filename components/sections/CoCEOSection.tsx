@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import type { ReactElement } from "react";
 import { CO_CEOS } from "@/lib/team";
 import { EASE_PREMIUM, VIEWPORT } from "@/lib/animations";
+import { ExpandableBio } from "@/components/ui/ExpandableBio";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 /**
@@ -92,15 +93,8 @@ export function CoCEOSection(): ReactElement {
                     {ceo.fullName?.trim() || ceo.leadershipFocus}
                   </h3>
                 </div>
-                <div className="mt-6 space-y-4 border-t border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pt-6 dark:border-[color-mix(in_srgb,var(--color-silver)_20%,transparent)]">
-                  {ceo.bioParagraphs.map((para, pi) => (
-                    <p
-                      key={`${ceo.id}-bio-${pi}`}
-                      className="font-body text-body leading-[1.75] text-[color-mix(in_srgb,var(--color-navy)_90%,transparent)] dark:text-[var(--color-silver)]"
-                    >
-                      {para}
-                    </p>
-                  ))}
+                <div className="mt-6 border-t border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pt-6 dark:border-[color-mix(in_srgb,var(--color-silver)_20%,transparent)]">
+                  <ExpandableBio bioId={ceo.id} paragraphs={ceo.bioParagraphs} />
                 </div>
               </div>
             </motion.article>

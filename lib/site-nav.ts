@@ -87,19 +87,19 @@ export const SERVICES_NAV: readonly ServiceNavItem[] = [
     href: "/services/asset-management",
     label: "Asset Management",
     description:
-      "USD & NGN bond-backed mandates, portfolio and alternative investing, family office, and education.",
+      "USD & NGN backed mandates, portfolio and alternative investing, family office, and education.",
   },
   {
     href: "/services/global-markets-trading",
     label: "Global Markets & Brokerage",
     description:
-      "Government & sovereign paper, global and local equities, ETFs, OTC, and brokerage.",
+      "Government securities, global and local equities, ETFs, OTC, and brokerage.",
   },
   {
     href: "/services/brokerage-services",
     label: "Advisory",
     description:
-      "Debt & equity capital, structured finance, and portfolio investing.",
+      "Debt and equity capital markets, structured finance, and portfolio investing.",
   },
 ] as const;
 
@@ -119,7 +119,7 @@ export const INSIGHTS_NAV: readonly InsightNavItem[] = [
   },
   {
     href: "/insights/market-report",
-    label: "Market Report (Daily/Monthly)",
+    label: "Market Report",
     description: "Daily and monthly market wraps and flow.",
     category: INSIGHT_CATEGORIES.marketReport,
   },

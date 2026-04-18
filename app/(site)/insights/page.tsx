@@ -6,7 +6,7 @@ import { InsightsListing } from "@/components/sections/InsightsListing";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Data-driven research cards on macro, fixed income, equities, and strategy from Aztran Global Investments.",
+    "Macro reports, market reports, and market buzz from Aztran Global Investments.",
 };
 
 export default function InsightsPage(): ReactElement {

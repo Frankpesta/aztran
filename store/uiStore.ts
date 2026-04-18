@@ -2,8 +2,6 @@ import { create } from "zustand";
 
 /** Main `/insights` hub tabs (sub-routes use `forcedCategory` instead). */
 export type InsightHubTab =
-  | "all"
-  | "insights"
   | "macro_report"
   | "market_report"
   | "market_buzz";
@@ -34,7 +32,7 @@ export const useUiStore = create<UiState>((set) => ({
   setPortfolioFilter: (portfolioFilter) => set({ portfolioFilter }),
   insightCategory: "All",
   setInsightCategory: (insightCategory) => set({ insightCategory }),
-  insightHubTab: "all",
+  insightHubTab: "macro_report",
   setInsightHubTab: (insightHubTab) => set({ insightHubTab }),
   researchFeedLimit: 18,
   setResearchFeedLimit: (researchFeedLimit) => set({ researchFeedLimit }),

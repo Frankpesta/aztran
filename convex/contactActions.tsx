@@ -58,11 +58,11 @@ export const deliverContactEmails = internalAction({
 
     const resendKey = process.env.RESEND_API_KEY;
     const from = process.env.RESEND_FROM_EMAIL;
-    /** Primary inbox for new contact submissions (defaults to investments@aztranlimited.com). */
+    /** Primary inbox for new contact submissions (defaults to info@aztranlimited.com). */
     const notifyInbox =
       process.env.CONTACT_NOTIFICATION_EMAIL?.trim() ||
       process.env.RESEND_TEAM_EMAIL?.trim() ||
-      "investments@aztranlimited.com";
+      "info@aztranlimited.com";
     if (!resendKey || !from) {
       throw new Error("Missing Resend configuration");
     }

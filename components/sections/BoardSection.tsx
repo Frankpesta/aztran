@@ -6,6 +6,7 @@ import type { ReactElement } from "react";
 import { CO_CEOS, NON_EXECUTIVE_DIRECTOR_BOARD } from "@/lib/team";
 import { EASE_PREMIUM, VIEWPORT } from "@/lib/animations";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { ExpandableBio } from "@/components/ui/ExpandableBio";
 import { cn } from "@/lib/utils";
 
 type BoardProfile = {
@@ -116,15 +117,8 @@ export function BoardSection(): ReactElement {
                 <p className="mt-2 font-display text-h3 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
                   {profile.displayName}
                 </p>
-                <div className="mt-6 space-y-4 border-t border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pt-6 dark:border-[color-mix(in_srgb,var(--color-silver)_20%,transparent)]">
-                  {profile.bioParagraphs.map((para, pi) => (
-                    <p
-                      key={`${profile.id}-bio-${pi}`}
-                      className="font-body text-body leading-[1.75] text-[color-mix(in_srgb,var(--color-navy)_90%,transparent)] dark:text-[var(--color-silver)]"
-                    >
-                      {para}
-                    </p>
-                  ))}
+                <div className="mt-6 border-t border-[color-mix(in_srgb,var(--color-silver)_45%,transparent)] pt-6 dark:border-[color-mix(in_srgb,var(--color-silver)_20%,transparent)]">
+                  <ExpandableBio bioId={profile.id} paragraphs={profile.bioParagraphs} />
                 </div>
               </div>
             </motion.article>

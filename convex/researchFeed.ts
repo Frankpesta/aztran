@@ -2,6 +2,7 @@ import { query } from "./_generated/server";
 import { v } from "convex/values";
 
 const MACRO = "Macro Report";
+const LEGACY_MACRO_INFLATION = "Inflation";
 
 /**
  * Public marketing feeds that merge insights, blog posts, and structured market reports.
@@ -84,7 +85,12 @@ export const getMacroInsightsFeed = query({
       .query("insights")
       .withIndex("by_status_referenceDate", (q) => q.eq("status", "published"))
       .order("desc")
-      .filter((f) => f.eq(f.field("category"), MACRO))
+      .filter((f) =>
+        f.or(
+          f.eq(f.field("category"), MACRO),
+          f.eq(f.field("category"), LEGACY_MACRO_INFLATION),
+        ),
+      )
       .take(cap);
     return rows.map((doc) => ({ kind: "insight" as const, ref: doc.referenceDate, doc }));
   },

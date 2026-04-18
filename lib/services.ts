@@ -46,7 +46,7 @@ export const SERVICES: readonly ServiceOffering[] = [
     page: {
       metaTitle: "Asset Management",
       metaDescription:
-        "SEC Licensed asset management: USD and NGN bond-backed strategies, portfolio investing, alternatives, portfolio management, family office, and investment education.",
+        "SEC Licensed asset management: USD and NGN backed strategies, portfolio investing, alternatives, portfolio management, family office, and investment education.",
       heroEyebrow: "Service",
       headline: "Asset Management",
       capabilitiesHeading: "Our Solutions & Services",
@@ -54,19 +54,19 @@ export const SERVICES: readonly ServiceOffering[] = [
         "Licensed by the SEC as a fund and portfolio manager, we build institutional-grade portfolios that blend local and global fixed income, disciplined public-market investing, and carefully selected alternatives—governed by clear mandates, transparent reporting, and a long-term partnership mindset.",
       sections: [
         {
-          title: "USD Bond-Backed Investment",
+          title: "USD Backed Investment",
           imageSrc: "/images/debt-equity.jpeg",
-          imageAlt: "Global bond markets and dollar-denominated fixed income",
+          imageAlt: "Global fixed income and dollar-denominated mandates",
           paragraphs: [
-            "Our USD bond-backed strategies focus on high-quality sovereign, quasi-sovereign, and investment-grade corporate paper traded in international markets. We stress liquidity, issuer resilience, and clarity of cash flows so clients can access dollar income and duration management without sacrificing governance.",
+            "Our USD backed strategies focus on high-quality sovereign, quasi-sovereign, and investment-grade corporate paper traded in international markets. We stress liquidity, issuer resilience, and clarity of cash flows so clients can access dollar income and duration management without sacrificing governance.",
             "Position sizing, FX considerations, and reinvestment policy are aligned to each client’s liability profile and risk budget—whether the objective is stable coupon income, defensive capital preservation, or measured participation in global rate cycles.",
           ],
         },
         {
-          title: "NGN Bond-Backed Investment",
+          title: "NGN Backed Investment",
           imageSrc:
             "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=88",
-          imageAlt: "Nigerian naira fixed income and domestic bond allocation",
+          imageAlt: "Nigerian naira fixed income and domestic allocation",
           paragraphs: [
             "We deploy naira-denominated government and high-grade corporate bonds within a framework that respects the shape of the local yield curve, auction calendars, and reinvestment risk. The aim is dependable income and predictable principal behaviour in the context of Nigeria’s macro and fiscal cycle.",
             "Credit work is complemented by duration and liquidity discipline—so portfolios remain investable through volatile rate episodes while staying true to each mandate’s investment policy statement.",
@@ -123,8 +123,8 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "USD Bond-Backed Investment",
-        "NGN Bond-Backed Investment",
+        "USD Backed Investment",
+        "NGN Backed Investment",
         "Portfolio Investing",
         "Alternative Investment",
         "Portfolio Management",
@@ -146,34 +146,24 @@ export const SERVICES: readonly ServiceOffering[] = [
     page: {
       metaTitle: "Global Markets & Brokerage",
       metaDescription:
-        "Global markets and brokerage: government securities, sovereign bonds and Treasury Bills, local and global equities, ETFs including derivatives and commodities, OTC markets, and full-service brokerage.",
+        "Global markets and brokerage: government securities (bonds and Treasury Bills), local and global equities, ETFs including derivatives and commodities, OTC markets, and full-service brokerage.",
       heroEyebrow: "Service",
       headline: "Global Markets & Brokerage",
       capabilitiesHeading: "Our Solutions & Services",
       lead:
-        "Our Global Markets, Trading, and Brokerage division is the Group’s multi-currency execution and liquidity hub—connecting clients to government and sovereign paper, listed and OTC equity markets, exchange-traded structures, and high-touch brokerage coverage backed by real-time market intelligence.",
+        "Our Global Markets, Trading, and Brokerage division is the Group’s multi-currency execution and liquidity hub—connecting clients to government securities, listed and OTC equity markets, exchange-traded structures, and high-touch brokerage coverage backed by real-time market intelligence.",
       introBeforeServices: [
         "Asset and Liability Management (ALM) sits alongside trading, monitoring liquidity and capital deployment across the Group. Through a deep network of institutional counterparties, we deliver pricing, flow colour, and execution quality—even when markets gap or volatility spikes.",
       ],
       sections: [
         {
-          title: "Government Securities",
+          title: "Government Securities (Bond and Treasury Bills)",
           imageSrc:
             "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=88",
-          imageAlt: "Government securities and sovereign debt instruments",
+          imageAlt: "Government securities, bonds, and Treasury Bills",
           paragraphs: [
-            "We facilitate access to Federal Government of Nigeria (FGN) and other sovereign-eligible instruments where permitted, with emphasis on transparency of pricing, settlement discipline, and regulatory compliance. Our process integrates auction calendars, secondary-market liquidity, and duration management so treasuries and funds can deploy naira and hard-currency government risk with clarity.",
-            "Whether the mandate is income, liability matching, or balance-sheet defensiveness, we help clients interpret curve positioning and reinvestment risk before tickets are crossed.",
-          ],
-        },
-        {
-          title: "Sovereign (Bond and Treasury Bills)",
-          imageSrc:
-            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=88",
-          imageAlt: "Sovereign bonds and Treasury Bill allocation",
-          paragraphs: [
-            "Sovereign bonds and Treasury Bills remain core building blocks for institutional cash and duration. We support end-to-end workflow—from indication and order placement through settlement and corporate actions—with clear communication around yields, day-count conventions, and roll schedules.",
-            "For international sovereign exposure, we align execution with custodial rails and investment-policy constraints, ensuring every trade is deliberate, sized, and documented.",
+            "We facilitate access to Federal Government of Nigeria (FGN) bonds and Treasury Bills and other eligible government instruments where permitted—with emphasis on transparency of pricing, settlement discipline, and regulatory compliance. Bonds and Treasury Bills remain core building blocks for institutional cash and duration; our process integrates auction calendars, secondary-market liquidity, and duration management so treasuries and funds can deploy naira and hard-currency government risk with clarity.",
+            "We support end-to-end workflow—from indication and order placement through settlement and corporate actions—with clear communication around yields, day-count conventions, and roll schedules. Where international exposure is accessed through permitted channels, we align execution with custodial rails and investment-policy constraints, ensuring every trade is deliberate, sized, and documented.",
           ],
         },
         {
@@ -216,8 +206,7 @@ export const SERVICES: readonly ServiceOffering[] = [
         },
       ],
       capabilities: [
-        "Government Securities",
-        "Sovereign (Bond and Treasury Bills)",
+        "Government Securities (Bond and Treasury Bills)",
         "Equities (Global and Local)",
         "ETFs (Derivatives and Commodities)",
         "OTC Market",
@@ -229,7 +218,7 @@ export const SERVICES: readonly ServiceOffering[] = [
     slug: "brokerage-services",
     title: "Advisory",
     summary:
-      "Debt and equity capital management, structured finance, and research-driven portfolio investing for businesses and institutional clients.",
+      "Debt and equity capital markets, structured finance, and portfolio investing for businesses and institutional clients.",
     imageSrc: "/images/debt-equity.jpeg",
     imageAlt: "Advisory and capital markets concept",
     titleClassName:
@@ -237,7 +226,7 @@ export const SERVICES: readonly ServiceOffering[] = [
     page: {
       metaTitle: "Advisory",
       metaDescription:
-        "Advisory: debt and equity capital management, structured finance, and portfolio investing—capital raising, tailored funding structures, and disciplined portfolio strategies.",
+        "Advisory: debt and equity capital markets, structured finance, and portfolio investing—capital raising, tailored funding structures, and disciplined portfolio strategies.",
       heroEyebrow: "Service",
       headline: "Advisory",
       capabilitiesHeading: "What We Offer",
@@ -245,9 +234,9 @@ export const SERVICES: readonly ServiceOffering[] = [
         "Our advisory practice helps clients raise and manage capital, structure complex financing, and invest with discipline—from the right mix of debt and equity through tailored structured solutions to long-term portfolio outcomes.",
       sections: [
         {
-          title: "Debt & Equity Capital Management",
+          title: "Debt and Equity Capital Market",
           imageSrc: "/images/debt-equity.jpeg",
-          imageAlt: "Debt and equity capital management",
+          imageAlt: "Debt and equity capital markets",
           paragraphs: [
             "We support businesses in raising and managing capital through both debt and equity financing. Our approach focuses on structuring the right mix of funding to optimize growth, maintain financial stability, and align with long-term strategic goals. From sourcing investors to negotiating terms, we ensure efficient capital deployment and sustainable financial performance.",
           ],
@@ -265,17 +254,32 @@ export const SERVICES: readonly ServiceOffering[] = [
           imageSrc: "/images/portfolio.jpeg",
           imageAlt: "Portfolio investing and diversification",
           paragraphs: [
-            "We offer disciplined, research-driven portfolio investment strategies tailored to preserve and grow capital over time. Through active management and a focus on diversification, we construct resilient portfolios aligned with each client’s risk profile and investment horizon. Our approach combines market intelligence with rigorous analysis to deliver consistent, risk-adjusted returns.",
+            "We offer disciplined portfolio investment strategies tailored to preserve and grow capital over time. Through active management and a focus on diversification, we construct resilient portfolios aligned with each client’s risk profile and investment horizon. Our approach combines market intelligence with rigorous analysis to deliver consistent, risk-adjusted returns.",
+          ],
+        },
+        {
+          title: "Capital Raising & Investor Sourcing",
+          imageSrc: "/images/debt-equity.jpeg",
+          imageAlt: "Capital raising and investor sourcing",
+          paragraphs: [
+            "We help clients articulate the investment case, identify aligned investors, and manage process—from early conversations through documentation and closing. The objective is efficient capital formation with terms that fit the business model and stakeholder expectations.",
+          ],
+        },
+        {
+          title: "Asset-Backed & Project Finance Structures",
+          imageSrc: "/images/structure.jpeg",
+          imageAlt: "Asset-backed and project finance",
+          paragraphs: [
+            "Where cash flows or assets can support tailored structures, we design financing that matches project life, risk allocation, and repayment profiles—coordination between legal, operational, and financial workstreams so execution stays coherent from mandate to drawdown.",
           ],
         },
       ],
       capabilities: [
-        "Debt & Equity Capital Management",
+        "Debt and Equity Capital Market",
         "Structured Finance",
         "Portfolio Investing",
         "Capital Raising & Investor Sourcing",
         "Asset-Backed & Project Finance Structures",
-        "Research-Driven Portfolio Construction",
       ],
     },
   },

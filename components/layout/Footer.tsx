@@ -64,7 +64,6 @@ export function Footer(): ReactElement {
               {[
                 { href: "/about", label: "About" },
                 { href: "/services", label: "Services" },
-                { href: "/portfolio", label: "Portfolio" },
                 { href: "/insights", label: "Insights" },
                 { href: "/insights/macro-report", label: "Macro Report" },
                 { href: "/insights/market-report", label: "Market Report" },

@@ -320,10 +320,12 @@ export function Navbar(): ReactElement {
             </AnimatePresence>
           </div>
 
+          {/* Portfolio temporarily hidden
           <Link href="/portfolio" className={linkClass}>
             Portfolio
             <span className="nav-underline absolute bottom-[-4px] left-0 h-px w-full origin-left bg-[var(--color-cyan)]" />
           </Link>
+          */}
 
           <div
             className="relative"
@@ -498,7 +500,7 @@ export function Navbar(): ReactElement {
               <div className="mt-1 space-y-1 px-1 pb-2">
                 {(
                   [
-                    { href: "/portfolio", label: "Portfolio" },
+                    // { href: "/portfolio", label: "Portfolio" },
                     { href: "/contact", label: "Contact" },
                   ] as const
                 ).map((item) => (

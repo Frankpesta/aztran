@@ -34,7 +34,7 @@ export function CoCEOSection(): ReactElement {
           transition={{ duration: 0.65, ease: EASE_PREMIUM }}
           className="mt-4 max-w-3xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
         >
-          Co–managing partner leadership
+          Co-Managing Partners
         </motion.h2>
                <motion.p
           initial={{ opacity: 0, y: 16 }}

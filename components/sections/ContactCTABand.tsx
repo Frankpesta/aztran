@@ -99,7 +99,7 @@ export function ContactCTABand({
           viewport={VIEWPORT}
           transition={{ duration: 0.55, delay: 0.12 }}
         >
-          Our office coordinates introductory briefings and diligence sessions by appointment.
+          Contact us to schedule an introductory briefing or a diligence session.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : 10 }}

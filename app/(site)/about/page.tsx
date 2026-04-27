@@ -13,7 +13,6 @@ import {
   Handshake,
   Heart,
   Lightbulb,
-  Quote,
   Scale,
   Shield,
   Target,
@@ -94,17 +93,19 @@ export default function AboutPage(): ReactElement {
         <div className="relative mx-auto max-w-container px-4 md:px-8">
           <div className="mx-auto max-w-3xl rounded-2xl border border-[color-mix(in_srgb,var(--color-silver)_38%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_88%,var(--color-offwhite))] p-8 shadow-[0_28px_80px_-40px_color-mix(in_srgb,var(--color-navy)_35%,transparent)] backdrop-blur-sm dark:border-[color-mix(in_srgb,var(--color-silver)_18%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_94%,black)] md:p-12">
             <SectionLabel className="justify-center md:justify-start">Who we are</SectionLabel>
-            <AnimatedHeading
-              as="h2"
-              className="mx-auto mt-5 max-w-2xl text-center font-display text-h2 text-[var(--color-navy)] md:mx-0 md:text-left dark:text-[var(--color-offwhite)]"
-            >
-              A financial services group specializing in portfolio management and strategic
-              trading.
-            </AnimatedHeading>
             <div className="mx-auto mt-8 h-px max-w-xs bg-gradient-to-r from-transparent via-[var(--color-cyan)] to-transparent opacity-80 md:mx-0" />
             <p className="mx-auto mt-8 max-w-2xl text-center font-body text-body leading-[1.85] text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] md:text-left dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]">
-              We serve institutions and investors who expect depth in markets, discipline in
-              execution, and transparency in how capital is deployed.
+              Aztran Limited is an investment firm licensed by the Securities and Exchange
+              Commission as a fund and portfolio manager. It was born out of the need to create
+              sustainable wealth for high net-worth individuals while optimizing returns on
+              investible funds for corporates (private and government). The need to create deep
+              capital formation for the Nigerian economy that would address the nation&apos;s
+              infrastructure challenge remains an overarching purpose for us.
+            </p>
+            <p className="mx-auto mt-6 max-w-2xl text-center font-body text-body leading-[1.85] text-[color-mix(in_srgb,var(--color-navy)_78%,transparent)] md:text-left dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]">
+              We combine deep market expertise, innovative solutions, and a client-focused
+              approach to deliver exceptional value in trading, investments, and advisory
+              services.
             </p>
           </div>
         </div>
@@ -144,35 +145,11 @@ export default function AboutPage(): ReactElement {
           <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-14">
             <aside className="lg:col-span-5">
               <div className="sticky top-28 space-y-6">
-                <div className="relative overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--color-cyan)_38%,transparent)] bg-[color-mix(in_srgb,var(--color-cyan)_08%,var(--color-white))] p-8 shadow-[0_20px_50px_-28px_color-mix(in_srgb,var(--color-navy)_22%,transparent)] dark:border-[color-mix(in_srgb,var(--color-cyan)_28%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_92%,black)]">
-                  <Quote
-                    className="size-10 text-[var(--color-cyan)] opacity-90"
-                    aria-hidden
-                  />
-                  <p className="mt-4 font-display text-[clamp(1.15rem,2.2vw,1.45rem)] italic leading-snug text-[var(--color-navy)] dark:text-[var(--color-offwhite)]">
-                    Creating sustainable wealth for high net-worth individuals while
-                    optimizing returns on investible funds for corporates—and deepening
-                    capital formation for Nigeria&apos;s economy.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {["SEC Licensed", "Portfolio & funds", "Institutional focus"].map(
-                      (tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-[color-mix(in_srgb,var(--color-cyan)_35%,transparent)] bg-[color-mix(in_srgb,var(--color-white)_70%,transparent)] px-3 py-1 font-body text-caption uppercase tracking-wider text-[var(--color-navy)] dark:border-[color-mix(in_srgb,var(--color-cyan)_25%,transparent)] dark:bg-[color-mix(in_srgb,var(--color-navy)_80%,transparent)] dark:text-[var(--color-silver)]"
-                        >
-                          {tag}
-                        </span>
-                      ),
-                    )}
-                  </div>
-                </div>
-
                 <ol className="relative space-y-0 border-l border-[color-mix(in_srgb,var(--color-cyan)_45%,transparent)] pl-6 font-body text-caption uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--color-navy)_55%,transparent)] dark:text-[var(--color-silver)]">
                   {[
-                    "Mandate & licensing",
-                    "Markets & execution",
-                    "Partnership & values",
+                    "Mandate & Licensing",
+                    "Markets & Execution",
+                    "Partnership & Values",
                   ].map((step, i) => (
                     <li key={step} className="relative pb-8 last:pb-0">
                       <span className="absolute -left-[calc(0.25rem+5px)] top-1.5 size-2.5 rounded-full border-2 border-[var(--color-cyan)] bg-[var(--color-offwhite)] dark:bg-[var(--color-navy)]" />
@@ -305,7 +282,7 @@ export default function AboutPage(): ReactElement {
             as="h2"
             className="font-display text-h2 font-bold tracking-[-0.02em] text-[var(--color-white)]"
           >
-            Core values
+            Core Values
           </AnimatedHeading>
           <p className="mt-4 max-w-2xl font-body text-[1.125rem] leading-relaxed text-[color-mix(in_srgb,var(--color-silver)_95%,var(--color-offwhite))] md:text-[1.1875rem]">
             The principles that shape how we advise, execute, and partner with every client.

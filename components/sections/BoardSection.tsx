@@ -69,7 +69,7 @@ export function BoardSection(): ReactElement {
           transition={{ duration: 0.65, ease: EASE_PREMIUM }}
           className="mt-4 max-w-3xl font-display text-h2 text-[var(--color-navy)] dark:text-[var(--color-offwhite)]"
         >
-          Board of directors
+          Board of Directors
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -78,9 +78,9 @@ export function BoardSection(): ReactElement {
           transition={{ duration: 0.6, ease: EASE_PREMIUM, delay: 0.05 }}
           className="mt-4 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_82%,transparent)] dark:text-[var(--color-silver)]"
         >
-          Our board brings together the firm&apos;s co–managing partners and independent
-          non-executive leadership with deep markets, governance, and capital markets
-          experience.
+          Our board consists of seasoned investment professionals with more than 50 years of
+          combined experience and deep expertise in global and local markets, risk management,
+          and governance.
         </motion.p>
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:items-start">

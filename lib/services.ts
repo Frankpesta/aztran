@@ -46,7 +46,7 @@ export const SERVICES: readonly ServiceOffering[] = [
     page: {
       metaTitle: "Asset Management",
       metaDescription:
-        "SEC Licensed asset management: USD and NGN backed strategies, portfolio investing, alternatives, portfolio management, family office, and investment education.",
+        "SEC Licensed asset management: USD and NGN backed strategies, alternatives, portfolio management, family office, and education investing.",
       heroEyebrow: "Service",
       headline: "Asset Management",
       capabilitiesHeading: "Our Solutions & Services",
@@ -58,8 +58,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           imageSrc: "/images/debt-equity.jpeg",
           imageAlt: "Global fixed income and dollar-denominated mandates",
           paragraphs: [
-            "Our USD backed strategies focus on high-quality sovereign, quasi-sovereign, and investment-grade corporate paper traded in international markets. We stress liquidity, issuer resilience, and clarity of cash flows so clients can access dollar income and duration management without sacrificing governance.",
-            "Position sizing, FX considerations, and reinvestment policy are aligned to each client’s liability profile and risk budget—whether the objective is stable coupon income, defensive capital preservation, or measured participation in global rate cycles.",
+            "Our USD backed strategies focus on high-quality sovereign and investment-grade corporate paper traded in international markets. We focus on liquidity, issuer resilience, and clarity of cash flows so clients can access dollar income and duration management without sacrificing governance.",
           ],
         },
         {
@@ -68,27 +67,7 @@ export const SERVICES: readonly ServiceOffering[] = [
             "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Nigerian naira fixed income and domestic allocation",
           paragraphs: [
-            "We deploy naira-denominated government and high-grade corporate bonds within a framework that respects the shape of the local yield curve, auction calendars, and reinvestment risk. The aim is dependable income and predictable principal behaviour in the context of Nigeria’s macro and fiscal cycle.",
-            "Credit work is complemented by duration and liquidity discipline—so portfolios remain investable through volatile rate episodes while staying true to each mandate’s investment policy statement.",
-          ],
-        },
-        {
-          title: "Portfolio Investing",
-          imageSrc: "/images/portfolio.jpeg",
-          imageAlt: "Portfolio strategy and diversified allocation",
-          paragraphs: [
-            "Portfolio investing at Aztran begins with a documented strategic asset allocation and evolves through tactical tilts grounded in research—not noise. We combine top-down macro views with bottom-up security selection to build diversified sleeves across equities, fixed income, and cash equivalents where appropriate.",
-            "Rebalancing, risk budgeting, and performance attribution are embedded in the process, giving committees and principals a clear line of sight from positioning to outcomes.",
-          ],
-        },
-        {
-          title: "Alternative Investment",
-          imageSrc:
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88",
-          imageAlt: "Alternative investments and private market opportunities",
-          paragraphs: [
-            "We introduce alternatives where they genuinely improve the efficient frontier: private credit, real-asset exposures, and other non-traditional return streams that can diversify public-market beta and extend duration of capital when liquidity terms are understood and accepted.",
-            "Every sleeve is subject to concentration limits, liquidity ladders, and operational due diligence—so “alternative” never means opaque.",
+            "Our NGN strategies focus on high-yield government securities, top-tier bank placements, commercial paper, and blue-chip risk assets within the local market.",
           ],
         },
         {
@@ -97,8 +76,16 @@ export const SERVICES: readonly ServiceOffering[] = [
             "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Institutional portfolio management and reporting",
           paragraphs: [
-            "Day-to-day portfolio management covers trade implementation, cash management, corporate actions, and exception handling with institutional rigor. We operate to pre-agreed guidelines, escalation paths, and reporting calendars suited to boards, investment committees, and family principals.",
-            "Risk is monitored continuously—interest-rate, credit, liquidity, and operational—so adjustments are deliberate, documented, and communicated in language stakeholders can act on.",
+            "This begins with a risk profile assessment that then dovetails into strategic asset allocation and evolves through tactical tilts grounded in research. We combine top-down macro analysis with bottom-up securities selection to build a well-diversified portfolio that aligns risk appetite with return objectives.",
+          ],
+        },
+        {
+          title: "Alternative Investment",
+          imageSrc:
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88",
+          imageAlt: "Alternative investments and private market opportunities",
+          paragraphs: [
+            "Beyond the traditional asset space, we explore opportunities through a sector-agnostic approach that exposes us to the real economy, taking advantage of untapped opportunities within the real sector.",
           ],
         },
         {
@@ -112,24 +99,22 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Investment Education",
+          title: "Education Investing",
           imageSrc:
             "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=88",
-          imageAlt: "Investment education and client workshops",
+          imageAlt: "Education investing and long-term planning",
           paragraphs: [
-            "We believe informed clients make better decisions. Our investment education program translates markets, instruments, and portfolio mechanics into plain language—through briefings, workshops, and tailored sessions for boards, treasuries, and next-generation family members.",
-            "Content is practical, not promotional: how rates affect bond prices, how to read attribution, what alternatives can and cannot do, and how to evaluate risk in a full portfolio context.",
+            "Build a dedicated fund for a child’s education through consistent, long-term investing. We design each plan with a clear timeline and growth strategy, helping you accumulate capital steadily while staying aligned with future academic goals. It’s a structured, forward-looking approach that turns early planning into lasting opportunity.",
           ],
         },
       ],
       capabilities: [
         "USD Backed Investment",
         "NGN Backed Investment",
-        "Portfolio Investing",
-        "Alternative Investment",
         "Portfolio Management",
+        "Alternative Investment",
         "Family Office",
-        "Investment Education",
+        "Education Investing",
       ],
     },
   },
@@ -151,7 +136,7 @@ export const SERVICES: readonly ServiceOffering[] = [
       headline: "Global Markets & Brokerage",
       capabilitiesHeading: "Our Solutions & Services",
       lead:
-        "Our Global Markets, Trading, and Brokerage division is the Group’s multi-currency execution and liquidity hub—connecting clients to government securities, listed and OTC equity markets, exchange-traded structures, and high-touch brokerage coverage backed by real-time market intelligence.",
+        "Our Global Markets, Trading, and Brokerage division is the Group’s multi-currency execution and liquidity hub, connecting clients to fixed income securities, listed and OTC equity markets, exchange-traded structures, and high-touch brokerage coverage backed by real-time market intelligence.",
       introBeforeServices: [
         "Asset and Liability Management (ALM) sits alongside trading, monitoring liquidity and capital deployment across the Group. Through a deep network of institutional counterparties, we deliver pricing, flow colour, and execution quality—even when markets gap or volatility spikes.",
       ],
@@ -195,13 +180,12 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Brokerage Services",
+          title: "Brokerage Service",
           imageSrc:
             "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1600&q=88",
           imageAlt: "Institutional brokerage and client coverage",
           paragraphs: [
-            "Brokerage is the full relationship layer: account structure, documentation, limits, research distribution, and escalation when markets or issuers move. You receive named coverage who understand your mandates and can coordinate across asset classes without fragmenting the dialogue.",
-            "From onboarding through day-to-day tickets, we align process with your investment policy and operational reality—so execution is fast where it should be, and controlled where it must be.",
+            "Our brokerage service gives you a simple, reliable way to manage your investments. We handle your account setup, support your trades, and provide a single point of contact who understands your needs.",
           ],
         },
       ],
@@ -210,7 +194,7 @@ export const SERVICES: readonly ServiceOffering[] = [
         "Equities (Global and Local)",
         "ETFs (Derivatives and Commodities)",
         "OTC Market",
-        "Brokerage Services",
+        "Brokerage Service",
       ],
     },
   },
@@ -231,7 +215,7 @@ export const SERVICES: readonly ServiceOffering[] = [
       headline: "Advisory",
       capabilitiesHeading: "What We Offer",
       lead:
-        "Our advisory practice helps clients raise and manage capital, structure complex financing, and invest with discipline—from the right mix of debt and equity through tailored structured solutions to long-term portfolio outcomes.",
+        "Our advisory arm helps clients raise and manage capital, structure complex financing, and invest with discipline—from the right mix of debt and equity through tailored structured solutions to long-term portfolio outcomes.",
       sections: [
         {
           title: "Debt and Equity Capital Market",
@@ -254,7 +238,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           imageSrc: "/images/portfolio.jpeg",
           imageAlt: "Portfolio investing and diversification",
           paragraphs: [
-            "We offer disciplined portfolio investment strategies tailored to preserve and grow capital over time. Through active management and a focus on diversification, we construct resilient portfolios aligned with each client’s risk profile and investment horizon. Our approach combines market intelligence with rigorous analysis to deliver consistent, risk-adjusted returns.",
+            "We offer disciplined portfolio investment advisory tailored to preserve and grow capital over time. Our recommendations are aligned with each client’s risk profile and investment horizon, combining thoughtful diversification with ongoing market insight to support consistent, risk-aware returns.",
           ],
         },
         {

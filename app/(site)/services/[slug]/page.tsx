@@ -94,7 +94,12 @@ export default async function ServiceDetailPage({
       <article className="border-b border-[color-mix(in_srgb,var(--color-silver)_55%,transparent)] bg-[var(--color-white)] py-section dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:bg-[var(--color-navy)]">
         <div className="mx-auto max-w-container px-4 md:px-8">
           <div className="mx-auto max-w-3xl space-y-5 border-b border-[color-mix(in_srgb,var(--color-silver)_50%,transparent)] pb-12 font-body text-[1.0625rem] leading-[1.75] text-[color-mix(in_srgb,var(--color-navy)_88%,transparent)] dark:border-[color-mix(in_srgb,var(--color-silver)_22%,transparent)] dark:text-[var(--color-silver)] md:text-[1.125rem] md:leading-[1.8] lg:pb-16">
-            <p className="font-medium text-[color-mix(in_srgb,var(--color-navy)_92%,transparent)] dark:text-[var(--color-offwhite)]">
+            <p
+              className={cn(
+                service.slug !== "global-markets-trading" &&
+                  "font-medium text-[color-mix(in_srgb,var(--color-navy)_92%,transparent)] dark:text-[var(--color-offwhite)]",
+              )}
+            >
               {page.lead}
             </p>
             {page.introBeforeServices?.map((para, i) => (

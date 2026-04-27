@@ -46,7 +46,7 @@ export const SERVICES: readonly ServiceOffering[] = [
     page: {
       metaTitle: "Asset Management",
       metaDescription:
-        "SEC Licensed asset management: USD and NGN backed strategies, alternatives, portfolio management, family office, and education investing.",
+        "SEC Licensed asset management: USD and NGN backed strategies, alternatives, portfolio management, family office, and goal-based investing.",
       heroEyebrow: "Service",
       headline: "Asset Management",
       capabilitiesHeading: "Our Solutions & Services",
@@ -99,12 +99,12 @@ export const SERVICES: readonly ServiceOffering[] = [
           ],
         },
         {
-          title: "Education Investing",
+          title: "Goal-Based Investing",
           imageSrc:
             "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=88",
-          imageAlt: "Education investing and long-term planning",
+          imageAlt: "Goal-based investing and milestone planning",
           paragraphs: [
-            "Build a dedicated fund for a child’s education through consistent, long-term investing. We design each plan with a clear timeline and growth strategy, helping you accumulate capital steadily while staying aligned with future academic goals. It’s a structured, forward-looking approach that turns early planning into lasting opportunity.",
+            "Build a dedicated fund towards a cherished goal—whether it's a child's education, homeownership, travel, or other important life milestones. Each plan is structured around a clear timeline and tailored growth strategy, ensuring your investments remain aligned with your objectives. With a disciplined, forward-looking approach, you can steadily accumulate capital and turn future plans into tangible outcomes.",
           ],
         },
       ],
@@ -114,7 +114,7 @@ export const SERVICES: readonly ServiceOffering[] = [
         "Portfolio Management",
         "Alternative Investment",
         "Family Office",
-        "Education Investing",
+        "Goal-Based Investing",
       ],
     },
   },
@@ -238,7 +238,7 @@ export const SERVICES: readonly ServiceOffering[] = [
           imageSrc: "/images/portfolio.jpeg",
           imageAlt: "Portfolio investing and diversification",
           paragraphs: [
-            "We offer disciplined portfolio investment advisory tailored to preserve and grow capital over time. Our recommendations are aligned with each client’s risk profile and investment horizon, combining thoughtful diversification with ongoing market insight to support consistent, risk-aware returns.",
+            "Our approach focuses on identifying and investing in high-quality, scalable opportunities particularly within the real sector.",
           ],
         },
         {

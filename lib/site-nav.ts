@@ -87,7 +87,7 @@ export const SERVICES_NAV: readonly ServiceNavItem[] = [
     href: "/services/asset-management",
     label: "Asset Management",
     description:
-      "USD & NGN backed mandates, portfolio and alternative investing, family office, and education.",
+      "USD & NGN backed mandates, portfolio and alternative investing, family office, and goal-based investing.",
   },
   {
     href: "/services/global-markets-trading",

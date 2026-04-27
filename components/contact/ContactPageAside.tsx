@@ -66,35 +66,21 @@ export function ContactPageAside(): ReactElement {
               {CONTACT_PHONE_DISPLAY}
             </a>
           </li>
-          <li className="flex items-start gap-4">
+          <li className="flex items-center gap-4">
             <a
               href={CONTACT_EMAIL_GMAIL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-lg bg-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] text-[var(--color-navy)] transition-[background,color,transform] hover:scale-105 hover:bg-[color-mix(in_srgb,var(--color-cyan)_28%,transparent)] hover:text-[var(--color-cyan)] dark:text-[var(--color-cyan)] dark:hover:text-[var(--color-offwhite)]"
-              aria-label={`Compose an email to ${CONTACT_EMAIL} in Gmail`}
+              className="group flex items-center gap-4"
+              aria-label={`Email ${CONTACT_EMAIL} (opens Gmail compose)`}
             >
-              <Mail className="size-5" aria-hidden />
-            </a>
-            <div className="flex flex-col gap-2">
-              <a
-                href={CONTACT_EMAIL_GMAIL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-2 font-medium text-[var(--color-navy)] transition-colors hover:text-[var(--color-cyan)] dark:text-[var(--color-offwhite)]"
-              >
-                <span>Open in Gmail</span>
-                <span className="rounded-md border border-[color-mix(in_srgb,var(--color-cyan)_45%,transparent)] px-2 py-0.5 font-body text-caption uppercase tracking-wide text-[var(--color-cyan)]">
-                  Web
-                </span>
-              </a>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="w-fit font-mono text-[13px] text-[color-mix(in_srgb,var(--color-navy)_65%,transparent)] underline-offset-2 hover:text-[var(--color-cyan)] hover:underline dark:text-[var(--color-silver)]"
-              >
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] text-[var(--color-navy)] transition-[background,color,transform] group-hover:scale-105 group-hover:bg-[color-mix(in_srgb,var(--color-cyan)_28%,transparent)] group-hover:text-[var(--color-cyan)] dark:text-[var(--color-cyan)] dark:group-hover:text-[var(--color-offwhite)]">
+                <Mail className="size-5" aria-hidden />
+              </span>
+              <span className="font-mono text-[13px] font-medium text-[var(--color-navy)] underline-offset-2 transition-colors group-hover:text-[var(--color-cyan)] group-hover:underline dark:text-[var(--color-offwhite)]">
                 {CONTACT_EMAIL}
-              </a>
-            </div>
+              </span>
+            </a>
           </li>
           <li className="flex gap-4">
             <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-lg bg-[color-mix(in_srgb,var(--color-cyan)_14%,transparent)] text-[var(--color-navy)] dark:text-[var(--color-cyan)]">

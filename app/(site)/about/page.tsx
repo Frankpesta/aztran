@@ -137,76 +137,22 @@ export default function AboutPage(): ReactElement {
           >
             Licensed for funds and portfolio management
           </AnimatedHeading>
-          <p className="mt-4 max-w-2xl font-body text-body leading-relaxed text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[var(--color-silver)]">
-            From mandate to markets: how we think about capital, clients, and Nigeria&apos;s
-            long-term growth.
-          </p>
 
-          <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-14">
-            <aside className="lg:col-span-5">
-              <div className="sticky top-28 space-y-6">
-                <ol className="relative space-y-0 border-l border-[color-mix(in_srgb,var(--color-cyan)_45%,transparent)] pl-6 font-body text-caption uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--color-navy)_55%,transparent)] dark:text-[var(--color-silver)]">
-                  {[
-                    "Mandate & Licensing",
-                    "Markets & Execution",
-                    "Partnership & Values",
-                  ].map((step, i) => (
-                    <li key={step} className="relative pb-8 last:pb-0">
-                      <span className="absolute -left-[calc(0.25rem+5px)] top-1.5 size-2.5 rounded-full border-2 border-[var(--color-cyan)] bg-[var(--color-offwhite)] dark:bg-[var(--color-navy)]" />
-                      <span className="text-[var(--color-cyan)]">{String(i + 1).padStart(2, "0")}</span>
-                      <span className="mt-1 block font-body text-caption normal-case leading-snug tracking-normal text-[color-mix(in_srgb,var(--color-navy)_82%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]">
-                        {step}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </aside>
-
-            <div className="lg:col-span-7">
-              <div className="relative pl-5 before:absolute before:left-0 before:top-2 before:h-[calc(100%-0.5rem)] before:w-px before:bg-gradient-to-b before:from-[var(--color-cyan)] before:via-[color-mix(in_srgb,var(--color-cyan)_35%,transparent)] before:to-transparent md:pl-8">
-                <div className="max-w-3xl space-y-6 font-body text-body leading-[1.9] text-[color-mix(in_srgb,var(--color-navy)_85%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_90%,transparent)]">
-                  <p>
-                    Aztran Limited is an investment firm licensed by the Securities and
-                    Exchange Commission as a fund and portfolio manager. It was born out of
-                    the need to create sustainable wealth for high net-worth individuals
-                    while optimizing returns on investible funds for corporates (private and
-                    government). The need to create deep capital formation for the Nigerian
-                    economy that would address the nation&apos;s infrastructure challenge
-                    remains an overarching purpose for us.
-                  </p>
-                  <p>
-                    It is our firm belief that creating sustainable wealth generation
-                    platforms within the financial services industry would be pivotal to
-                    unlocking long-term capital that exists in Nigeria—which would be
-                    essential in addressing the challenge of capital formation that continues
-                    to challenge our economy.
-                  </p>
-                  <p>
-                    We combine deep market expertise, innovative solutions, and a
-                    client-focused approach to deliver exceptional value in trading,
-                    investments, and advisory services. With a young, dynamic team of
-                    highly knowledgeable partners, we bring a fresh perspective to financial
-                    solutions while upholding global standards of excellence.
-                  </p>
-                  <p>
-                    Our leadership team combines over three decades of collective
-                    experience across global financial markets to deliver unparalleled
-                    value to clients.
-                  </p>
-                  <p>
-                    Our mission is to empower individuals and institutions with the tools,
-                    insights, and strategies needed to achieve financial growth and
-                    sustainability.
-                  </p>
-                  <p>
-                    Guided by our commitment to integrity, empathy, excellence, innovation,
-                    collaboration and responsibility, we create long-lasting partnerships
-                    that optimise value for our stakeholders.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div className="mt-14 max-w-3xl space-y-6 font-body text-body leading-[1.9] text-[color-mix(in_srgb,var(--color-navy)_85%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_90%,transparent)]">
+            <p>
+              Aztran Limited is an investment firm licensed by the Securities and Exchange
+              Commission as a fund and portfolio manager. It was born out of the need to
+              create sustainable wealth for high net-worth individuals while optimizing
+              returns on investible funds for corporates (private and government). The need
+              to create deep capital formation for the Nigerian economy that would address
+              the nation&apos;s infrastructure challenge remains an overarching purpose for
+              us.
+            </p>
+            <p>
+              We combine deep market expertise, innovative solutions, and a client-focused
+              approach to deliver exceptional value in trading, investments, and advisory
+              services.
+            </p>
           </div>
         </div>
       </section>

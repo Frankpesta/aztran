@@ -87,32 +87,18 @@ export function ContactCTABand({
         >
           Ready to Begin a Conversation?
         </motion.h2>
-        <motion.p
-          className={cn(
-            "mt-5 font-body text-body leading-relaxed",
-            airy
-              ? "text-[color-mix(in_srgb,var(--color-navy)_72%,transparent)] dark:text-[color-mix(in_srgb,var(--color-offwhite)_88%,transparent)]"
-              : "text-[color-mix(in_srgb,var(--color-silver)_95%,white)]",
-          )}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={VIEWPORT}
-          transition={{ duration: 0.55, delay: 0.12 }}
-        >
-          Contact us to schedule an introductory briefing or a diligence session.
-        </motion.p>
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
-          transition={{ duration: 0.55, ease: EASE_PREMIUM, delay: 0.2 }}
+          transition={{ duration: 0.55, ease: EASE_PREMIUM, delay: 0.14 }}
           className="mt-10"
         >
           <Link
             href="/contact"
-            className="marketing-cta-primary inline-flex rounded-md bg-[var(--color-cyan)] px-10 py-3.5 font-body text-label uppercase tracking-[0.12em] text-[var(--color-navy)] shadow-[0_14px_40px_-14px_color-mix(in_srgb,var(--color-cyan)_50%,transparent)]"
+            className="marketing-cta-primary inline-flex rounded-md bg-[var(--color-cyan)] px-10 py-3.5 font-body text-[0.8125rem] font-semibold tracking-[0.06em] text-[var(--color-navy)] shadow-[0_14px_40px_-14px_color-mix(in_srgb,var(--color-cyan)_50%,transparent)]"
           >
-            Contact the Firm
+            Contact Us
           </Link>
         </motion.div>
       </motion.div>
